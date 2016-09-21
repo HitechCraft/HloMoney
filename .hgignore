@@ -7,3 +7,5 @@ HloMoney.Core/obj/
 HloMoney.DAL/obj/
 HloMoney.BL/obj/
 HloMoney.Ninjector/obj/
+HloMoney.Ninjector/bin/
+HloMoney.Core/bin/

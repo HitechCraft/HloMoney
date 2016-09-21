@@ -12,7 +12,7 @@
         {
             Bind(typeof(IProjector<,>)).To(typeof(BaseMapper<,>));
 
-            Bind(typeof(IProjector<JsonVkResponse, UserInfoViewModel>)).To(typeof(JsonVkResponseToUserInfoViewModel));
+            Bind(typeof(IProjector<JsonVkResponse, UserInfo>)).To(typeof(JsonVkResponseToUserInfoMapper));
         }
     }
 }

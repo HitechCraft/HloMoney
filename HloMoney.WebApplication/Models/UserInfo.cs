@@ -3,7 +3,7 @@
     using System;
     using Core.Models.Enum;
 
-    public class UserInfoViewModel
+    public class UserInfo
     {
         public int Id { get; set; }
 

@@ -34,6 +34,9 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
@@ -65,19 +68,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DI\BaseContainer.cs" />
+    <Compile Include="DI\IContainer.cs" />
     <Compile Include="Extentions\StringExtentions.cs" />
     <Compile Include="Helper\VkApiHelper.cs" />
-    <Compile Include="System\Json.cs" />
-    <Compile Include="System\WebClient.cs" />
+    <Compile Include="Projector\BaseProjector.cs" />
+    <Compile Include="Projector\IProjector.cs" />
+    <Compile Include="Web\Json.cs" />
+    <Compile Include="Web\WebClient.cs" />
     <Compile Include="Models\Json\JsonVkUserInfo.cs" />
     <Compile Include="Models\Json\JsonVkResponse.cs" />
     <Compile Include="Models\Enum\VkUserStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebRequestExecutor.cs" />
+    <Compile Include="Web\WebRequestExecutor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

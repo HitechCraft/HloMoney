@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using HloMoney.Core.Helper;
-
-namespace HloMoney.WebApplication.Controllers
+﻿namespace HloMoney.WebApplication.Controllers
 {
-    public class HomeController : Controller
+    using System.Web.Mvc;
+    using Core.DI;
+    using Core.Helper;
+    using Core.Models.Json;
+    using Models;
+    using System.Linq;
+
+    public class HomeController : BaseController
     {
+        public HomeController(IContainer container) : base(container)
+        {
+        }
+
+        [Authorize]
         public ActionResult Index()
         {
-            var test = VkApiHelper.GetUserInfo("73549291");
+            var test = this.UserInfo;
 
             return View();
         }
