@@ -16,7 +16,7 @@
         [Authorize]
         public ActionResult Index()
         {
-            var test = this.UserInfo;
+            var test = this.CurrentUser;
 
             return View();
         }

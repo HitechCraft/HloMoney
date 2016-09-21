@@ -234,6 +234,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Ninject\Current\CurrentUser.cs" />
+    <Compile Include="Ninject\Current\ICurrentUser.cs" />
     <Compile Include="Ninject\WebAppModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

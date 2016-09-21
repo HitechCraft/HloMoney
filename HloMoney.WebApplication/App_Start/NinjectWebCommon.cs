@@ -10,8 +10,8 @@ namespace HloMoney.WebApplication.App_Start
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
-    using Ninject;
-    using Ninject.Web.Common;
+    using global::Ninject;
+    using global::Ninject.Web.Common;
 
     public static class NinjectWebCommon 
     {

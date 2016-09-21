@@ -1,4 +1,6 @@
-﻿namespace HloMoney.WebApplication.Controllers
+﻿using HloMoney.WebApplication.Ninject.Current;
+
+namespace HloMoney.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using Core.DI;
@@ -13,9 +15,7 @@
     {
         #region Private Fields
 
-        private UserInfo _userInfo;
-
-        private ApplicationDbContext _context;
+        private ICurrentUser _currentUser;
 
         #endregion
 
@@ -23,31 +23,16 @@
 
         public IContainer Container { get; set; }
 
-        public UserInfo UserInfo => _userInfo ?? (_userInfo = GetUserInfo());
-
-        public ApplicationDbContext Context => _context ?? (_context = new ApplicationDbContext());
+        public ICurrentUser CurrentUser { get; set; }
 
         #endregion
 
         public BaseController(IContainer container)
         {
-            Container = container;
+            this.Container = container;
+            this.CurrentUser = this.Container.Resolve<ICurrentUser>();
         }
-
-        private UserInfo GetUserInfo()
-        {
-            var user = this.Context.Users.Find(User != null ? User.Identity.GetUserId() : "0");
-
-            if (user != null)
-            {
-                var userVkLogin = user.Logins.FirstOrDefault(x => x.LoginProvider == "Vkontakte");
-
-                return Project<JsonVkResponse, UserInfo>(VkApiHelper.GetUserInfo(userVkLogin != null ? userVkLogin.ProviderKey : "0").response.First());
-            }
-
-            return null;
-        }
-
+        
         public TResult Project<TSource, TResult>(TSource source)
         {
             return Container.Resolve<IProjector<TSource, TResult>>().Project(source);
