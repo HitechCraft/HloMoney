@@ -1,8 +1,7 @@
 ﻿using HloMoney.Core.Extentions;
 using HloMoney.Core.Models.Json;
-using HloMoney.Core.System;
 
-namespace HloMoney.Core
+namespace HloMoney.Core.Web
 {
     public static class WebRequestExecutor
     {

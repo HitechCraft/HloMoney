@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
     using Core.DI;
+    using Core.Projector;
 
     public class BaseController : Controller
     {
@@ -10,6 +11,11 @@
         public BaseController(IContainer container)
         {
             this.Container = container;
+        }
+
+        public TResult Project<TSource, TResult>(TSource source)
+        {
+            return this.Container.Resolve<IProjector<TSource, TResult>>().Project(source);
         }
     }
 }

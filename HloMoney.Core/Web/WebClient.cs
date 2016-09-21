@@ -1,8 +1,8 @@
-﻿namespace HloMoney.Core.System
-{
-    using global::System.Net;
-    using global::System.Text;
+﻿using System.Net;
+using System.Text;
 
+namespace HloMoney.Core.Web
+{
     internal class WebClient
     {
         private static readonly global::System.Net.WebClient Client = CreateDefaultWebClient();

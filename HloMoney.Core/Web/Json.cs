@@ -1,7 +1,7 @@
-﻿namespace HloMoney.Core.System
-{
-    using global::System.Web.Script.Serialization;
+﻿using System.Web.Script.Serialization;
 
+namespace HloMoney.Core.Web
+{
     internal class Json
     {
         private static readonly JavaScriptSerializer Serializer = new JavaScriptSerializer();
