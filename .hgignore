@@ -1,0 +1,8 @@
+syntax: glob
+.vs/
+packages/
+HloMoney.WebApplication/bin/
+HloMoney.WebApplication/obj/
+HloMoney.Core/obj/
+HloMoney.DAL/obj/
+HloMoney.BL/obj/

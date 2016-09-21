@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HloMoney.WebApplication", "HloMoney.WebApplication\HloMoney.WebApplication.csproj", "{CEEC81B3-D420-4B24-94EF-024B0CFF9176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HloMoney.DAL", "HloMoney.DAL\HloMoney.DAL.csproj", "{4C1D8FB6-D946-4FD1-B647-86591E1346B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HloMoney.BL", "HloMoney.BL\HloMoney.BL.csproj", "{2BE612BD-01B6-4B86-8457-ED3F718BADE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HloMoney.Core", "HloMoney.Core\HloMoney.Core.csproj", "{FF77630A-FFA3-464A-B2AA-43616AA83ACC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEEC81B3-D420-4B24-94EF-024B0CFF9176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEEC81B3-D420-4B24-94EF-024B0CFF9176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEEC81B3-D420-4B24-94EF-024B0CFF9176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEEC81B3-D420-4B24-94EF-024B0CFF9176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C1D8FB6-D946-4FD1-B647-86591E1346B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1D8FB6-D946-4FD1-B647-86591E1346B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1D8FB6-D946-4FD1-B647-86591E1346B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1D8FB6-D946-4FD1-B647-86591E1346B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE612BD-01B6-4B86-8457-ED3F718BADE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE612BD-01B6-4B86-8457-ED3F718BADE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE612BD-01B6-4B86-8457-ED3F718BADE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE612BD-01B6-4B86-8457-ED3F718BADE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF77630A-FFA3-464A-B2AA-43616AA83ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF77630A-FFA3-464A-B2AA-43616AA83ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF77630A-FFA3-464A-B2AA-43616AA83ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF77630A-FFA3-464A-B2AA-43616AA83ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
