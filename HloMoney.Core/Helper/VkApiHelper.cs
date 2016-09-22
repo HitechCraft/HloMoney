@@ -1,8 +1,10 @@
-﻿using HloMoney.Core.Models.Json;
-using HloMoney.Core.Web;
-
-namespace HloMoney.Core.Helper
+﻿namespace HloMoney.Core.Helper
 {
+    using System;
+    using System.Linq;
+    using Models.Json;
+    using Web;
+
     public static class VkApiHelper
     {
         public static string AppId => "5636156";
@@ -17,6 +19,22 @@ namespace HloMoney.Core.Helper
         {
             return WebRequestExecutor.GetVkUserInfoResponse($"{ApiBaseUrl}method/users.get", userIds, UserInfoFields,
                 ApiVersion);
+        }
+
+        public static string GetUserName(string userId)
+        {
+            try
+            {
+                var userInfo =
+                    WebRequestExecutor.GetVkUserInfoResponse($"{ApiBaseUrl}method/users.get", userId, UserInfoFields,
+                        ApiVersion).response.First();
+
+                return $"{userInfo.first_name} {userInfo.last_name}";
+            }
+            catch (Exception)
+            {
+                return String.Empty;
+            }
         }
     }
 }

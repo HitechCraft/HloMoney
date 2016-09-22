@@ -11,7 +11,8 @@ namespace HloMoney.Core.Web
                 $"{url}"
                 .AddParam("user_ids", userIds)
                 .AddParam("fields", fields)
-                .AddParam("v", version);
+                .AddParam("v", version)
+                .AddParam("lang", "ru");
 
             return WebClient.GetResponseJson<JsonVkUserInfo>(request);
         }

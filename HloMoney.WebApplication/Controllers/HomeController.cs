@@ -12,12 +12,9 @@
         public HomeController(IContainer container) : base(container)
         {
         }
-
-        [Authorize]
+        
         public ActionResult Index()
         {
-            var test = this.CurrentUser;
-
             return View();
         }
 

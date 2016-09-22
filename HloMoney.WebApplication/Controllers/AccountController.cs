@@ -1,4 +1,6 @@
-﻿namespace HloMoney.WebApplication.Controllers
+﻿using HloMoney.Core.Helper;
+
+namespace HloMoney.WebApplication.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -335,12 +337,26 @@
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
-                case SignInStatus.Failure:
                 default:
-                    // If the user does not have an account, then prompt the user to create an account
-                    ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+
+                    var user = new ApplicationUser
+                    {
+                        UserName = VkApiHelper.GetUserName(loginInfo.Login.ProviderKey), Email = loginInfo.Email
+                    };
+                    var createUser = await UserManager.CreateAsync(user);
+
+                    if (createUser.Succeeded)
+                    {
+                        createUser = await UserManager.AddLoginAsync(user.Id, info.Login);
+                        if (createUser.Succeeded)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            return RedirectToLocal(returnUrl);
+                        }
+                    }
+
+                    return RedirectToLocal(returnUrl);
             }
         }
 

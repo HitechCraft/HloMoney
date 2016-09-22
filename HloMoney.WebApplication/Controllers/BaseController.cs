@@ -1,15 +1,9 @@
-﻿using HloMoney.WebApplication.Ninject.Current;
-
-namespace HloMoney.WebApplication.Controllers
+﻿namespace HloMoney.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using Core.DI;
     using Core.Projector;
-    using System.Linq;
-    using Core.Helper;
-    using Core.Models.Json;
-    using Models;
-    using Microsoft.AspNet.Identity;
+    using Ninject.Current;
 
     public class BaseController : Controller
     {
