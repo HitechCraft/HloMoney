@@ -1,0 +1,23 @@
+﻿@using Microsoft.Owin.Security
+
+@{
+    Layout = null;
+    ViewBag.Title = "Auth";
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+}
+
+@using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "VkAuth" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" class="btn btn-default" id="Vkontakte" name="provider" value="Vkontakte" title="Log in using your Vkontakte account">
+}
+
+@Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript">
+    $(document)
+        .on('ready',
+            function() {
+                $('#VkAuth').submit();
+            });
+</script>
