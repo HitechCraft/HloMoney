@@ -3,9 +3,6 @@
     using System.Web.Mvc;
     using Core.DI;
     using Core.Helper;
-    using Core.Models.Json;
-    using Models;
-    using System.Linq;
 
     public class HomeController : BaseController
     {

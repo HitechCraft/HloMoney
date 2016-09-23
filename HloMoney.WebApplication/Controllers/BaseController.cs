@@ -1,4 +1,7 @@
-﻿namespace HloMoney.WebApplication.Controllers
+﻿using HloMoney.BL.CQRS.Command.Base;
+using HloMoney.BL.CQRS.Query.Base;
+
+namespace HloMoney.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using Core.DI;
@@ -17,6 +20,10 @@
 
         public IContainer Container { get; set; }
 
+        public ICommandExecutor CommandExecutor { get; set; }
+
+        public IQueryExecutor QueryExecutor { get; set; }
+
         public ICurrentUser CurrentUser { get; set; }
 
         #endregion
@@ -24,6 +31,9 @@
         public BaseController(IContainer container)
         {
             this.Container = container;
+            this.CommandExecutor = this.Container.Resolve<ICommandExecutor>();
+            this.QueryExecutor = this.Container.Resolve<IQueryExecutor>();
+
             this.CurrentUser = this.Container.Resolve<ICurrentUser>();
         }
         
