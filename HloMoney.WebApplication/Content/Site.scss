@@ -1,4 +1,8 @@
-﻿body {
+﻿html, body {
+    min-width: 767px;
+}
+
+body {
     padding-bottom: 20px;
     color: #2c3e50;
 }
@@ -37,6 +41,16 @@ a {
 
 .user {
     &-avatar {
+        display: inline-block;
+        width: 128px;
+        height: 128px;
+        border-radius: 88px;
+        border: 2px solid #16a085;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        margin-right: 15px;
+
         &-mini {
             width: 55px;
             height: 55px;
@@ -63,6 +77,7 @@ a {
 }
 
 .navbar {
+    background: #2c3e50;
 
     &-nav {
         li {
@@ -91,33 +106,33 @@ a {
 .nav {
     li {
         a {
-            color: #000;
+            color: #fff;
 
             &:hover {
-                background: #fff;
-                color: #1967be;
+                background-color: transparent;
+                color: #16a085;
             }
 
             &:focus {
-                background: #fff;
-                color: #1967be;
+                background-color: transparent;
+                color: #16a085;
             }
         }
     }
 
     .open {
         a {
-            background: #fff;
-            color: #1967be;
+            background-color: transparent;
+            color: #16a085;
 
             &:hover {
-                background: #fff;
-                color: #1967be;
+                background-color: transparent;
+                color: #16a085;
             }
 
             &:focus {
-                background: #fff;
-                color: #1967be;
+                background-color: transparent;
+                color: #16a085;
             }
         }
     }
@@ -131,7 +146,16 @@ a {
         background-position: center;
         width: 100%;
         height: 300px;
-        margin-top: -50px;
+    }
+}
+
+.project {
+    &-status {
+        &:after {
+            clear: both;
+            content: " ";
+            display: table;
+        }
     }
 }
 
@@ -149,5 +173,47 @@ a {
 
     .value {
         display: block;
+    }
+}
+
+.lottery {
+    &-current {
+        text-align: center;
+
+        h2 {
+            font-size: 50px;
+            font-weight: bold;
+            margin-top: 55px;
+            margin-bottom: 35px;
+        }
+
+        .state {
+            h4 {
+                margin-bottom: 0px;
+            }
+
+            .time-left {
+                font-size: 70px;
+            }
+        }
+
+        .btn {
+            margin: 45px 0;
+            font-size: 35px;
+        }
+
+        .members {
+
+            h3 {
+                margin-bottom: 30px;
+                font-weight: bold;
+            }
+
+            &:after {
+                clear: both;
+                content: " ";
+                display: table;
+            }
+        }
     }
 }

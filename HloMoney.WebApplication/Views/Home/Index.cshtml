@@ -1,4 +1,5 @@
-﻿@{
+﻿@using HloMoney.Core.Models.Json
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -6,7 +7,7 @@
     <div class="logo"></div>
 </div>
 
-<div>
+<div class="project-status">
     <div class="stats">
         <span class="title">78</span>
         <span class="value">Розыгрышей</span>
@@ -29,5 +30,24 @@
     </div>
 </div>
 
-<div class="row">
+<div class="lottery-current">
+    <h2>Идет розыгрыш!</h2>
+    <div class="state">
+        <h4>Окончание через</h4>
+        <span class="time-left">12:09:33</span>
+    </div>
+    <a href="#" class="btn btn-primary btn-lg">Принять участие</a>
+    <div class="members">
+        <h3>Эти люди уже приняли участие!</h3>
+        <div>
+            @if (ViewBag.Members != null && ViewBag.Members.Count > 0)
+            {
+                foreach (JsonVkResponse member in ViewBag.Members)
+                {
+                    <div class="user-avatar" style="background-image: url('@member.photo_200_orig')" title="@($"{member.first_name} {member.last_name}")">
+                    </div>
+                }
+            }
+        </div>
+    </div>
 </div>

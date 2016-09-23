@@ -15,6 +15,8 @@
         
         public ActionResult Index()
         {
+            ViewBag.Members = VkApiHelper.GetUserInfo("354747, 3345662 , 5367774, 2546432").response;
+
             return View();
         }
 
