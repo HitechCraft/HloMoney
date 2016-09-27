@@ -47,9 +47,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HloMoney.BL\HloMoney.BL.csproj">
+      <Project>{2BE612BD-01B6-4B86-8457-ED3F718BADE6}</Project>
+      <Name>HloMoney.BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HloMoney.Core\HloMoney.Core.csproj">
       <Project>{ff77630a-ffa3-464a-b2aa-43616aa83acc}</Project>
       <Name>HloMoney.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HloMoney.DAL\HloMoney.DAL.csproj">
+      <Project>{4C1D8FB6-D946-4FD1-B647-86591E1346B4}</Project>
+      <Name>HloMoney.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

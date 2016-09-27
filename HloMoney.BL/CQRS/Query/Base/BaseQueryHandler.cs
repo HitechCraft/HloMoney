@@ -10,7 +10,7 @@
 
     #endregion
 
-    public abstract class BaseQueryHandler<TQuery, TResult> : IQueryHandler<TQuery, TResult>
+    public abstract class BaseQueryHandler<TQuery, TResult> : IQueryHandler<TQuery, TResult> where TQuery : IQuery<TResult>
     {
         private readonly IContainer _container;
 
@@ -23,12 +23,7 @@
         {
             return _container.Resolve<IRepository<TEntity>>();
         }
-
-        public IProjector<TEntity, TResult> GetProjector<TEntity, TResult>()
-        {
-            return _container.Resolve<IProjector<TEntity, TResult>>();
-        }
-
+        
         public abstract TResult Handle(TQuery command);
     }
 }

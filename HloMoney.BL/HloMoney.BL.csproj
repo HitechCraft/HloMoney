@@ -40,7 +40,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CQRS\Command\Base\BaseCommandExecutor.cs" />
+    <Compile Include="CQRS\Command\Base\BaseCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Base\ICommandExecutor.cs" />
+    <Compile Include="CQRS\Command\Base\ICommandHandler.cs" />
+    <Compile Include="CQRS\Query\Base\BaseQueryExecutor.cs" />
+    <Compile Include="CQRS\Query\Base\BaseQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Base\IQuery.cs" />
+    <Compile Include="CQRS\Query\Base\IQueryExecutor.cs" />
+    <Compile Include="CQRS\Query\Base\IQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Entity\EntityQuery.cs" />
+    <Compile Include="CQRS\Query\Entity\EntityQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\HloMoney.Core\HloMoney.Core.csproj">
+      <Project>{FF77630A-FFA3-464A-B2AA-43616AA83ACC}</Project>
+      <Name>HloMoney.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HloMoney.DAL\HloMoney.DAL.csproj">
+      <Project>{4C1D8FB6-D946-4FD1-B647-86591E1346B4}</Project>
+      <Name>HloMoney.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

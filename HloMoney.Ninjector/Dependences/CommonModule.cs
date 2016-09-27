@@ -16,7 +16,6 @@
             Bind(typeof(ICommandHandler<>)).To(typeof(BaseCommandHandler<>));
 
             Bind(typeof(IQueryExecutor)).To(typeof(BaseQueryExecutor));
-            Bind(typeof(IQueryHandler<,>)).To(typeof(EntityQueryHandler<,>));
         }
     }
 }

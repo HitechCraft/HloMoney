@@ -15,9 +15,9 @@
             this._container = container;
         }
 
-        public TResult Execute<TResult, TQuery>(TQuery command)
+        public TResult Execute<TResult>(IQuery<TResult> command) where TResult : class
         {
-            var handler = this._container.Resolve<IQueryHandler<TQuery, TResult>>();
+            var handler = this._container.Resolve<IQueryHandler<IQuery<TResult>, TResult>>();
 
             return handler.Handle(command);
         }

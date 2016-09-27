@@ -24,10 +24,13 @@
         {
             var entityRep = _container.Resolve<IRepository<TEntity>>();
 
+            var entity = entityRep.GetEntity(query.Id);
+
             if (query.Projector == null)
                 throw new Exception("Для получения объекта необходима проекция сущностей");
 
-            return query.Projector.Project(entityRep.GetEntity(query.Id));
+
+            return query.Projector.Project(entity);
         }
     }
 }

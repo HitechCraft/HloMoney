@@ -2,6 +2,6 @@
 {
     public interface IQueryExecutor
     {
-        TResult Execute<TResult, TQuery>(TQuery query);
+        TResult Execute<TResult>(IQuery<TResult> query) where TResult : class;
     }
 }
