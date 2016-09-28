@@ -1,6 +1,6 @@
 ﻿@using HloMoney.Core.Models.Json
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Главная";
 }
 
 <div class="jumbotron header">
@@ -14,40 +14,18 @@
     </div>
     <div class="stats">
         <span class="title">1200</span>
-        <span class="value">Пользователей</span>
+        <span class="value">Участников</span>
     </div>
     <div class="stats">
         <span class="title">133</span>
-        <span class="value">Онлайн</span>
+        <span class="value">На сайте</span>
     </div>
     <div class="stats">
         <span class="title">43255</span>
         <span class="value">Сумма выплат</span>
     </div>
-    <div class="stats">
-        <span class="title">5000</span>
-        <span class="value">Глобал</span>
-    </div>
 </div>
 
 <div class="lottery-current">
-    <h2>Идет розыгрыш!</h2>
-    <div class="state">
-        <h4>Окончание через</h4>
-        <span class="time-left">12:09:33</span>
-    </div>
-    <a href="#" class="btn btn-primary btn-lg">Принять участие</a>
-    <div class="members">
-        <h3>Эти люди уже приняли участие!</h3>
-        <div>
-            @if (ViewBag.Members != null && ViewBag.Members.Count > 0)
-            {
-                foreach (JsonVkResponse member in ViewBag.Members)
-                {
-                    <div class="user-avatar" style="background-image: url('@member.photo_200_orig')" title="@($"{member.first_name} {member.last_name}")">
-                    </div>
-                }
-            }
-        </div>
-    </div>
+    @Html.Action("Current", "Contest")
 </div>

@@ -39,6 +39,10 @@
             mapping.Map(x => x.Type)
                 .Column("Type")
                 .CustomType<ContestType>();
+
+            mapping.Map(x => x.Status)
+                .Column("Status")
+                .CustomType<ContestStatus>();
         }
     }
 }

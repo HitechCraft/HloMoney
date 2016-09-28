@@ -1,0 +1,56 @@
+﻿@using HloMoney.Core.Models.Json
+@model HloMoney.WebApplication.Models.ContestViewModel
+    
+@if (Model != null)
+{
+    <h2>Идет розыгрыш!</h2>
+    <div class="state">
+        <h4>Окончание через</h4>
+        <span id="time-left" class="time-left"></span>
+    </div>
+    <a href="#" class="btn btn-default btn-lg">Принять участие</a>
+    <div class="members">
+        @Html.Action("Members", "Contest", new { id = Model.Id })
+    </div>
+
+    <script type="text/javascript">
+        $(document).on('ready', function () {
+            setInterval(function() {
+                setTime();
+            }, 1000);
+        });
+
+        function setTime() {
+
+            var now = moment();
+            var end = moment('@Model.EndTime', 'DD.MM.YYYY hh:mm:ss');
+
+            var d = moment.duration(end.diff(now), 'milliseconds');
+
+            var hours = Math.floor(d.asHours());
+            var mins = Math.floor(d.asMinutes()) - hours * 60;
+            var sec = Math.floor(d.asSeconds()) - hours * 3600 - mins * 60;
+
+            var timeString = "";
+
+            if (hours > 0) {
+                timeString += hours + " ч. ";
+            }
+
+            if (mins > 0) {
+                timeString += mins + " мин. ";
+            }
+
+            if (sec > 0) {
+                timeString += sec + " сек. ";
+            }
+            
+            $('#time-left').text('');
+            $('#time-left').text(timeString === "" ? "0 сек." : timeString);
+        }
+    </script>
+}
+else
+{
+    <h2>Текущих розыгрышей нет!</h2>
+}

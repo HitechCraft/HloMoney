@@ -74,6 +74,7 @@
     <Compile Include="Entity\Lottery\Contest.cs" />
     <Compile Include="Extentions\StringExtentions.cs" />
     <Compile Include="Helper\VkApiHelper.cs" />
+    <Compile Include="Models\Enum\ContestStatus.cs" />
     <Compile Include="Models\Enum\ContestType.cs" />
     <Compile Include="Projector\BaseProjector.cs" />
     <Compile Include="Projector\Extentions\ProjectorExtentions.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Repository\Specification\Composite\AndSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\NotSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\OrSpecification.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestIsEndedSpec.cs" />
     <Compile Include="Repository\Specification\ISpecification.cs" />
     <Compile Include="Web\Json.cs" />
     <Compile Include="Web\WebClient.cs" />

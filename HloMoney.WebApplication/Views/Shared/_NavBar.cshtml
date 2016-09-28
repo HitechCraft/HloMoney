@@ -2,15 +2,15 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <span class="glyphicon glyphicon-th-list"></span>
             </button>
+            <a class="navbar-brand" href="#">HLOMONEY</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Как участвовать?", "FAQ", "Home")</li>
                 <li>@Html.ActionLink("Отзывы", "Comments", "Home")</li>
+                <li><a href="https://vk.com/publichlomoney" target="_blank">Группа ВК</a></li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

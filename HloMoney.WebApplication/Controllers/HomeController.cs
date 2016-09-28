@@ -18,17 +18,6 @@ namespace HloMoney.WebApplication.Controllers
         
         public ActionResult Index()
         {
-            var entity =
-                new EntityQueryHandler<Contest, ContestViewModel>(this.Container)
-                .Handle(new EntityQuery
-                    <Contest, ContestViewModel>()
-                {
-                    Id = 1,
-                    Projector = this.Container.Resolve<IProjector<Contest, ContestViewModel>>()
-                });
-
-            ViewBag.Members = VkApiHelper.GetUserInfo("354747, 3345662 , 5367774, 2546432").response;
-
             return View();
         }
 

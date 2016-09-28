@@ -1,9 +1,8 @@
-﻿using System;
-
-namespace HloMoney.Core.Entity
+﻿namespace HloMoney.Core.Entity
 {
     using Base;
     using Models.Enum;
+    using System;
 
     public class Contest : BaseEntity<Contest>
     {
@@ -14,6 +13,8 @@ namespace HloMoney.Core.Entity
         public virtual byte[] Image { get; set; }
 
         public virtual ContestType Type { get; set; }
+
+        public virtual ContestStatus Status { get; set; }
 
         public virtual DateTime EndTime { get; set; }
     }

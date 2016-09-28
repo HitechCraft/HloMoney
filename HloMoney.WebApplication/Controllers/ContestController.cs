@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HloMoney.BL.CQRS.Command;
 using HloMoney.BL.CQRS.Query.Entity;
 using HloMoney.Core.DI;
 using HloMoney.Core.Entity;
 using HloMoney.Core.Helper;
+using HloMoney.Core.Models.Enum;
 using HloMoney.Core.Projector;
+using HloMoney.Core.Repository.Specification;
+using HloMoney.WebApplication.Mapper;
 using HloMoney.WebApplication.Models;
 
 namespace HloMoney.WebApplication.Controllers
@@ -35,6 +39,63 @@ namespace HloMoney.WebApplication.Controllers
                 return View(vm);
             }
             catch (Exception e)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Current()
+        {
+            try
+            {
+                var vm = new EntityListQueryHandler<Contest, ContestViewModel>(this.Container)
+                    .Handle(new EntityListQuery<Contest, ContestViewModel>
+                    {
+                        Specification = !new ContestIsEndedSpec(),
+                        Projector = this.Container.Resolve<IProjector<Contest, ContestViewModel>>()
+                    }).First();
+
+                return PartialView("_Contest", vm);
+            }
+            catch (Exception e)
+            {
+                return PartialView("_Contest");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Members(int id)
+        {
+            ViewBag.Members = VkApiHelper.GetUserInfo("354747, 3345662 , 5367774, 2546432").response;
+
+            return PartialView("_Members");
+        }
+
+        [HttpGet]
+        public ActionResult CheckAvailable(int id)
+        {
+            try
+            {
+                var vm = new EntityQueryHandler<Contest, ContestViewModel>(this.Container)
+                    .Handle(new EntityQuery<Contest, ContestViewModel>
+                    {
+                        Id = id,
+                        Projector = this.Container.Resolve<IProjector<Contest, ContestViewModel>>()
+                    });
+
+                if (vm.EndTime < DateTime.Now && vm.Status == ContestStatus.Actual)
+                {
+                    this.CommandExecutor.Execute(new ContestSetStatusCommand()
+                    {
+                        Id = id,
+                        Status = ContestStatus.Ended
+                    });
+                }
+
+                return RedirectToAction("Details", new { id = vm.Id });
+            }
+            catch (Exception)
             {
                 return HttpNotFound();
             }

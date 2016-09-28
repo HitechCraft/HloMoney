@@ -1,12 +1,14 @@
 ﻿@import 'media';
+@import 'variables';
 
 html, body {
     min-width: 767px;
 }
 
 body {
+    background-color: $white-color;
     padding-bottom: 20px;
-    color: #2c3e50;
+    color: $blue-color;
 }
 
 .body {
@@ -31,12 +33,12 @@ a {
     outline: none;
 
     &:hover {
-        background: #fff;
+        background:$white-color;
         color: #1967be;
     }
 
     &:focus {
-        background: #fff;
+        background:$white-color;
         color: #1967be;
     }
 }
@@ -47,7 +49,7 @@ a {
         width: 128px;
         height: 128px;
         border-radius: 88px;
-        border: 2px solid #2c3e50;
+        border: 2px solid $blue-color;
         background-position: center;
         background-repeat: no-repeat;
         background-size: auto 100%;
@@ -57,7 +59,7 @@ a {
             width: 55px;
             height: 55px;
             border-radius: 50px;
-            border: 2px solid #2c3e50;
+            border: 2px solid $blue-color;
             background-position: center;
             background-repeat: no-repeat;
             background-size: auto 100%;
@@ -79,7 +81,16 @@ a {
 }
 
 .navbar {
-    background: #2c3e50;
+    background: $white-color;
+    color: $blue-color;
+    font-weight: bold;
+
+    &-brand {
+        padding: 26px 33px 22px 17px;
+        font-size: 29px;
+        height: 69px;
+        color: $blue-color;
+    }
 
     &-nav {
         li {
@@ -108,16 +119,16 @@ a {
 .nav {
     li {
         a {
-            color: #fff;
+            color: $blue-color;
 
             &:hover {
                 background-color: transparent;
-                color: #16a085;
+                color: $green-color;
             }
 
             &:focus {
                 background-color: transparent;
-                color: #16a085;
+                color: $green-color;
             }
         }
     }
@@ -125,34 +136,38 @@ a {
     .open {
         a {
             background-color: transparent;
-            color: #16a085;
+            color: $blue-color;
 
             &:hover {
                 background-color: transparent;
-                color: #16a085;
+                color: $green-color;
             }
 
             &:focus {
                 background-color: transparent;
-                color: #16a085;
+                color: $green-color;
             }
         }
     }
 }
 
 .header {
-    background: #fff;
+    background: $white-color;
+    margin-top: -60px;
 
     .logo {
         background: url(./Images/logo.png) no-repeat;
         background-position: center;
+        background-size: 100%;
         width: 100%;
-        height: 300px;
+        height: 460px;
     }
 }
 
 .project {
     &-status {
+        margin-top: -130px;
+
         &:after {
             clear: both;
             content: " ";
@@ -163,7 +178,7 @@ a {
 
 .stats {
     float: left;
-    width: 20%;
+    width: 25%;
     text-align: center;
     font-size: 25px;
 
@@ -230,7 +245,7 @@ a {
                 margin-bottom: 0px;
             }
 
-            .time-left {
+            #time-left {
                 font-size: 70px;
             }
         }

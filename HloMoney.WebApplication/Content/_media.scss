@@ -1,4 +1,54 @@
-﻿@media(max-width: 998px) {
+﻿@media(max-width: 768px) {
+    .navbar {
+        background: #2c3e50 !important;
+
+        &-toggle {
+            border: 1px solid #fff;
+            padding: 10px 14px;
+            color: #fff;
+        }
+
+        &-brand {
+            padding: 19px 33px 19px 16px !important;
+            height: 59px !important;
+            color: #fff !important;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+
+    .nav {
+        li {
+            a {
+                color: #fff !important;
+            }
+        }
+
+        .open {
+            a {
+                background-color: transparent;
+                color: #fff !important;
+            }
+        }
+
+        .dropdown {
+            background: #3a5269;
+
+            ul {
+                li {
+                    a {
+                        padding: 15px 25px !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 769px) and (max-width: 998px) {
+
     .lottery {
         &-image {
             width: 100%;
@@ -19,7 +69,7 @@
     }
 }
 
-@media(min-width: 998px) and (max-width: 1200px) {
+@media(min-width: 999px) and (max-width: 1200px) {
     .lottery {
         &-image {
             max-width: 460px;

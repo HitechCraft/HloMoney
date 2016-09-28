@@ -1,13 +1,12 @@
-﻿using HloMoney.DAL.Repository;
-using HloMoney.DAL.UnitOfWork;
-
-namespace HloMoney.Ninjector.Dependences
+﻿namespace HloMoney.Ninjector.Dependences
 {
     using Core.DI;
     using Ninject.Modules;
     using BL.CQRS.Command.Base;
     using BL.CQRS.Query.Base;
-    using BL.CQRS.Query.Entity;
+    using BL.CQRS.Command;
+    using DAL.Repository;
+    using DAL.UnitOfWork;
 
     public class CommonModule : NinjectModule
     {
@@ -17,6 +16,7 @@ namespace HloMoney.Ninjector.Dependences
         
             Bind(typeof(ICommandExecutor)).To(typeof(BaseCommandExecutor));
             Bind(typeof(ICommandHandler<>)).To(typeof(BaseCommandHandler<>));
+            Bind(typeof(ICommandHandler<ContestSetStatusCommand>)).To(typeof(ContestSetStatusCommandHandler));
 
             Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>));
             Bind(typeof(IUnitOfWork)).To(typeof(NHibernateUnitOfWork));
