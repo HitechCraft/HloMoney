@@ -31,7 +31,11 @@
             mapping.Map(x => x.Image)
                 .Column("Image")
                 .Not.Nullable();
-            
+
+            mapping.Map(x => x.EndTime)
+                .Column("EndTime")
+                .Not.Nullable();
+
             mapping.Map(x => x.Type)
                 .Column("Type")
                 .CustomType<ContestType>();

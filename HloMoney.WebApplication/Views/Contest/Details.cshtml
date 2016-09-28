@@ -1,0 +1,44 @@
+﻿@using HloMoney.Core.Models.Json
+@model HloMoney.WebApplication.Models.ContestViewModel
+@{
+    ViewBag.Title = "Конкурс #" + Model.Id;
+}
+
+<h1 class="page-title">@ViewBag.Title <a href="#" class="btn btn-success btn-lg lottery-part">Участвовать!</a></h1>
+
+<p class="lottery-gift">Приз: @Model.Gift</p>
+<div class="row">
+    <div class="col-md-6 lottery-image-container">
+        @if (Model.Image != null)
+        {
+            <img alt="" class="lottery-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" />
+        }
+        else
+        {
+            <img alt="" class="lottery-image" src="~/Content/Images/no-image.jpg" />
+        }
+    </div>
+    <div class="col-md-6">
+        <p class="lottery-description">@Model.Description</p>
+    </div>
+</div>
+
+<div class="lottery-members">
+    <h1>Эти люди уже приняли участие!</h1>
+    @if (ViewBag.Members != null && ViewBag.Members.Count > 0)
+    {
+        foreach (JsonVkResponse member in ViewBag.Members)
+        {
+            <div class="user-avatar" style="background-image: url('@member.photo_200_orig')" title="@($"{member.first_name} {member.last_name}")">
+            </div>
+        }
+    }
+</div>
+
+<div class="comments">
+    <h1>Комментарии</h1>
+    <div id="vk_comments"></div>
+    <script type="text/javascript">
+        VK.Widgets.Comments("vk_comments", { limit: 10, width: "665", attach: "*" });
+    </script>
+</div>

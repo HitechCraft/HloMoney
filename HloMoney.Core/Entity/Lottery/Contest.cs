@@ -1,4 +1,6 @@
-﻿namespace HloMoney.Core.Entity
+﻿using System;
+
+namespace HloMoney.Core.Entity
 {
     using Base;
     using Models.Enum;
@@ -12,5 +14,7 @@
         public virtual byte[] Image { get; set; }
 
         public virtual ContestType Type { get; set; }
+
+        public virtual DateTime EndTime { get; set; }
     }
 }

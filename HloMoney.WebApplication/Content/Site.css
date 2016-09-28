@@ -1,4 +1,19 @@
-﻿html, body {
+﻿@media (max-width: 998px) {
+  .lottery-image {
+    width: 100%;
+    margin-bottom: 36px; }
+    .lottery-image-container {
+      text-align: center; }
+  .lottery-description {
+    text-align: justify; }
+  .lottery-members {
+    text-align: center; } }
+
+@media (min-width: 998px) and (max-width: 1200px) {
+  .lottery-image {
+    max-width: 460px; } }
+
+html, body {
   min-width: 767px; }
 
 body {
@@ -32,7 +47,7 @@ a {
   width: 128px;
   height: 128px;
   border-radius: 88px;
-  border: 2px solid #16a085;
+  border: 2px solid #2c3e50;
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -41,7 +56,7 @@ a {
     width: 55px;
     height: 55px;
     border-radius: 50px;
-    border: 2px solid #16a085;
+    border: 2px solid #2c3e50;
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto 100%;
@@ -112,6 +127,30 @@ a {
     font-weight: bold; }
   .stats .value {
     display: block; }
+
+.page-title {
+  font-size: 60px; }
+
+.comments h1 {
+  font-size: 54px;
+  margin: 55px 0; }
+
+.lottery-gift {
+  font-size: 35px;
+  font-weight: bold;
+  margin: 50px 0; }
+
+.lottery-description {
+  font-size: 24px; }
+
+.lottery-members h1 {
+  font-size: 54px;
+  margin: 55px 0; }
+
+.lottery-part {
+  float: right;
+  font-size: 32px;
+  padding: 11px 16px; }
 
 .lottery-current {
   text-align: center; }

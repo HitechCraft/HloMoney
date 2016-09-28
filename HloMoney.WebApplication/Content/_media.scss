@@ -1,0 +1,28 @@
+﻿@media(max-width: 998px) {
+    .lottery {
+        &-image {
+            width: 100%;
+            margin-bottom: 36px;
+
+            &-container {
+                text-align: center;
+            }
+        }
+
+        &-description {
+            text-align: justify;
+        }
+
+        &-members {
+            text-align: center;
+        }
+    }
+}
+
+@media(min-width: 998px) and (max-width: 1200px) {
+    .lottery {
+        &-image {
+            max-width: 460px;
+        }
+    }
+}

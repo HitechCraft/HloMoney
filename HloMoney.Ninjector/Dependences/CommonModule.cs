@@ -1,4 +1,7 @@
-﻿namespace HloMoney.Ninjector.Dependences
+﻿using HloMoney.DAL.Repository;
+using HloMoney.DAL.UnitOfWork;
+
+namespace HloMoney.Ninjector.Dependences
 {
     using Core.DI;
     using Ninject.Modules;
@@ -14,6 +17,9 @@
         
             Bind(typeof(ICommandExecutor)).To(typeof(BaseCommandExecutor));
             Bind(typeof(ICommandHandler<>)).To(typeof(BaseCommandHandler<>));
+
+            Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>));
+            Bind(typeof(IUnitOfWork)).To(typeof(NHibernateUnitOfWork));
 
             Bind(typeof(IQueryExecutor)).To(typeof(BaseQueryExecutor));
         }
