@@ -72,8 +72,8 @@ namespace HloMoney.WebApplication.Controllers
             return PartialView("_Members");
         }
 
-        [HttpGet]
-        public ActionResult CheckAvailable(int id)
+        [HttpPost]
+        public JsonResult CheckAvailable(int id)
         {
             try
             {
@@ -84,20 +84,22 @@ namespace HloMoney.WebApplication.Controllers
                         Projector = this.Container.Resolve<IProjector<Contest, ContestViewModel>>()
                     });
 
-                if (vm.EndTime < DateTime.Now && vm.Status == ContestStatus.Actual)
+                if (vm.Status == ContestStatus.Actual)
                 {
                     this.CommandExecutor.Execute(new ContestSetStatusCommand()
                     {
                         Id = id,
                         Status = ContestStatus.Ended
                     });
-                }
 
-                return RedirectToAction("Details", new { id = vm.Id });
+                    return Json(new { status = "OK", message = "Конкурс завершен" });
+                }
+                
+                return Json(new { status = "NO", message = "Конкурс еще не завершен!" });
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return HttpNotFound();
+                return Json(new { status = "NO", message = "Ошибка завершения: " + e.Message });
             }
         }
     }

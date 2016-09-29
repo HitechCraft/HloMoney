@@ -253,6 +253,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\no-image.jpg" />
+    <Content Include="Content\jquery.jgrowl.css" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
@@ -273,9 +274,11 @@
     <Content Include="Content\_media.scss" />
     <Content Include="Content\_variables.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jgrowl.alerts.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.jgrowl.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

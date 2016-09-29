@@ -44,9 +44,30 @@
             if (sec > 0) {
                 timeString += sec + " сек. ";
             }
-            
+
             $('#time-left').text('');
-            $('#time-left').text(timeString === "" ? "0 сек." : timeString);
+
+            if (timeString === "") {
+                $('#time-left').text("0 сек.");
+
+                $.post('@Url.Action("CheckAvailable", "Contest")',
+                    { id: parseInt('@Model.Id') },
+                    function(responce) {
+                        if (responce.status === "OK") {
+                            growlSuccess(responce.message);
+
+                            setTimeout(function() {
+                                    document.location = '@Url.Action("Details", "Contest", new { id = Model.Id })';
+                                },
+                                2000);
+                        } else {
+                            growlError(responce.message);
+                        }
+                    });
+
+            } else {
+                $('#time-left').text(timeString);
+            }
         }
     </script>
 }

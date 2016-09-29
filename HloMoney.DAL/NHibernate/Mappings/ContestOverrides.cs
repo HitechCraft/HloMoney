@@ -29,8 +29,7 @@
                 .Not.Nullable();
 
             mapping.Map(x => x.Image)
-                .Column("Image")
-                .Not.Nullable();
+                .Column("Image").Nullable();
 
             mapping.Map(x => x.EndTime)
                 .Column("EndTime")
