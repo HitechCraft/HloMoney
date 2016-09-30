@@ -86,6 +86,7 @@
     <Compile Include="Repository\Specification\Composite\AndSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\NotSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\OrSpecification.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestPartByUserSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestPartByContestSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestIsEndedSpec.cs" />
     <Compile Include="Repository\Specification\ISpecification.cs" />

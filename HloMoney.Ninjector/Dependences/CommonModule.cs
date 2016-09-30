@@ -17,6 +17,7 @@
             Bind(typeof(ICommandExecutor)).To(typeof(BaseCommandExecutor));
             Bind(typeof(ICommandHandler<>)).To(typeof(BaseCommandHandler<>));
             Bind(typeof(ICommandHandler<ContestSetStatusCommand>)).To(typeof(ContestSetStatusCommandHandler));
+            Bind(typeof(ICommandHandler<ContestTakePartCommand>)).To(typeof(ContestTakePartCommandHandler));
 
             Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>));
             Bind(typeof(IUnitOfWork)).To(typeof(NHibernateUnitOfWork));

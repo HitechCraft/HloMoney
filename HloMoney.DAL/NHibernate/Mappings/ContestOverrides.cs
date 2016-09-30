@@ -16,7 +16,7 @@
             mapping.Table("Contest");
 
             mapping.Id(x => x.Id)
-                .GeneratedBy.Increment();
+                .GeneratedBy.Identity();
 
             mapping.Map(x => x.Description)
                 .Length(2000)

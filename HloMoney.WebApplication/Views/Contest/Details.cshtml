@@ -4,8 +4,11 @@
     ViewBag.Title = "Конкурс #" + Model.Id;
 }
 
-<h1 class="page-title">@ViewBag.Title <a href="#" class="btn btn-success btn-lg lottery-part">Участвовать!</a></h1>
-
+<h1 class="page-title">
+    @ViewBag.Title 
+<a href="javascript:TakePart()" id="lottery-part" class="btn btn-default btn-lg lottery-part">Участвовать!</a>
+</h1>
+<p class="lottery-time">Время: <span id="time-left"></span></p>
 <p class="lottery-gift">Приз: @Model.Gift</p>
 <div class="row">
     <div class="col-md-6 lottery-image-container">
@@ -24,15 +27,7 @@
 </div>
 
 <div class="lottery-members">
-    <h1>Эти люди уже приняли участие!</h1>
-    @if (ViewBag.Members != null && ViewBag.Members.Count > 0)
-    {
-        foreach (JsonVkResponse member in ViewBag.Members)
-        {
-            <div class="user-avatar" style="background-image: url('@member.photo_200_orig')" title="@($"{member.first_name} {member.last_name}")">
-            </div>
-        }
-    }
+    @Html.Action("Members", new { id = Model.Id })
 </div>
 
 <div class="comments">
@@ -42,3 +37,91 @@
         VK.Widgets.Comments("vk_comments", { limit: 10, width: "665", attach: "*" });
     </script>
 </div>
+
+<script type="text/javascript">
+    $(document)
+        .on('ready',
+            function() {
+                $.post('@Url.Action("CheckPart")',
+                    { id: parseInt('@Model.Id') },
+                    function(responce) {
+                        if (responce.status === "NO") {
+                            $('#lottery-part').addClass('disabled');
+                            $('#lottery-part').text('Вы уже участвуете!');
+                        }
+                    });
+
+                setInterval(function() {
+                        setTime();
+                    },
+                    1000);
+            });
+
+    function TakePart() {
+        if (confirm("Действительно принять участие?")) {
+            $.post('@Url.Action("TakePart")',
+                { id: parseInt('@Model.Id') },
+                function(responce) {
+                    if (responce.status === "OK") {
+                        growlSuccess(responce.message);
+
+                        setTimeout(function() {
+                                document.location.reload();
+                            },
+                            2000);
+                    } else {
+                        growlError(responce.message);
+                    }
+                });
+        }
+    }
+
+    function setTime() {
+
+        var now = moment();
+        var end = moment('@Model.EndTime', 'DD.MM.YYYY hh:mm:ss');
+
+        var timeString = "";
+
+        if (end.isAfter(now)) {
+            var d = moment.duration(end.diff(now), 'milliseconds');
+
+            var hours = Math.floor(d.asHours());
+            var mins = Math.floor(d.asMinutes()) - hours * 60;
+            var sec = Math.floor(d.asSeconds()) - hours * 3600 - mins * 60;
+
+            if (hours > 0) {
+                timeString += hours + " ч. ";
+            }
+
+            if (mins > 0) {
+                timeString += mins + " мин. ";
+            }
+
+            if (sec > 0) {
+                timeString += sec + " сек. ";
+            }
+        }
+
+        $('#time-left').text('');
+
+        if (timeString === "") {
+            $.post('@Url.Action("CheckAvailable", "Contest")',
+                { id: parseInt('@Model.Id') },
+                function (responce) {
+                    if (responce.status === "OK") {
+                        growlSuccess(responce.message);
+
+                        setTimeout(function () {
+                            document.location = '@Url.Action("Details", "Contest", new { id = Model.Id })';
+                        },
+                            2000);
+                    }
+                });
+            $('#time-left').text("0 сек.");
+            disableTakingPart();
+        } else {
+            $('#time-left').text(timeString);
+        }
+    }
+</script>

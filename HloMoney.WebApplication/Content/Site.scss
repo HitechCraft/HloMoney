@@ -230,6 +230,10 @@ a {
         }
     }
 
+    &-time {
+        font-size: 20px;
+    }
+
     &-part {
         float: right;
         font-size: 32px;
@@ -248,7 +252,7 @@ a {
 
         h3 {
             font-size: 37px;
-            margin: -22px 0 22px 0px;
+            margin: 0 0 22px 0px;
             font-weight: bold;
         }
 

@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using HloMoney.WebApplication.Mapper;
-
-namespace HloMoney.WebApplication.Controllers
+﻿namespace HloMoney.WebApplication.Controllers
 {
     #region Using Directives
 
     using System;
     using System.Linq;
     using System.Web.Mvc;
+    using System.Collections.Generic;
     using BL.CQRS.Command;
     using BL.CQRS.Query.Entity;
     using Core.DI;
@@ -133,6 +131,25 @@ namespace HloMoney.WebApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize]
+        public JsonResult CheckPart(int id)
+        {
+            if (!new EntityExistsQueryHandler<ContestPart>(this.Container)
+                .Handle(new EntityExistsQuery<ContestPart>
+                {
+                    Specification =
+                        new ContestPartByContestSpec(id) &
+                        new ContestPartByUserSpec(this.CurrentUser.Info.Id.ToString())
+                }))
+            {
+                return Json(new { status = "OK" });
+            }
+
+            return Json(new { status = "NO" });
+        }
+
+        [HttpPost]
+        [Authorize]
         public JsonResult TakePart(int id)
         {
             try
