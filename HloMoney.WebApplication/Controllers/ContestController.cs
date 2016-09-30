@@ -1,4 +1,7 @@
-﻿namespace HloMoney.WebApplication.Controllers
+﻿using System.Collections.Generic;
+using HloMoney.WebApplication.Mapper;
+
+namespace HloMoney.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -36,7 +39,9 @@
                         Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                     });
 
-                ViewBag.Members = VkApiHelper.GetUserInfo("354747, 3345662 , 5367774, 2546432").response;
+                var memberIds = this.GetContestMembers(id.Value);
+
+                ViewBag.Members = VkApiHelper.GetUserInfo(String.Join(", ", memberIds)).response;
 
                 return View(vm);
             }
@@ -69,7 +74,9 @@
         [HttpGet]
         public ActionResult Members(int id)
         {
-            //ViewBag.Members = VkApiHelper.GetUserInfo("354747, 3345662 , 5367774, 2546432").response;
+            var memberIds = this.GetContestMembers(id);
+
+            ViewBag.Members = VkApiHelper.GetUserInfo(String.Join(", ", memberIds)).response;
 
             return PartialView("_Members");
         }
@@ -86,7 +93,7 @@
                         Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                     });
 
-                if (vm.EndTime < DateTime.Now && vm.Status == ContestStatus.Actual)
+                if (vm.EndTime < DateTime.Now && vm.Status == ContestStatus.Started)
                 {
                     CommandExecutor.Execute(new ContestSetStatusCommand()
                     {
@@ -96,7 +103,7 @@
 
                     return Json(new { status = "OK", message = "Конкурс завершен" });
                 }
-                
+
                 return Json(new { status = "NO", message = "Конкурс еще не завершен!" });
             }
             catch (Exception e)
@@ -124,5 +131,38 @@
                 return PartialView("_LastContests");
             }
         }
+
+        [HttpPost]
+        public JsonResult TakePart(int id)
+        {
+            try
+            {
+                this.CommandExecutor.Execute(new ContestTakePartCommand
+                {
+                    ContestId = id,
+                    UserId = this.CurrentUser.Info.Id.ToString()
+                });
+
+                return Json(new { status = "OK", message = "Вы приняли участие!" });
+            }
+            catch (Exception e)
+            {
+                return Json(new {status = "NO", message = "Ошибка: " + e.Message});
+            }
+        }
+
+        #region Private Methods
+        
+        private ICollection<string> GetContestMembers(int id)
+        {
+            return new EntityListQueryHandler<ContestPart, string>(this.Container)
+                .Handle(new EntityListQuery<ContestPart, string>()
+                {
+                    Specification = new ContestPartByContestSpec(id),
+                    Projector = new CommonProjector<ContestPart, string>(x => x.UserId)
+                });
+        }
+
+        #endregion
     }
 }

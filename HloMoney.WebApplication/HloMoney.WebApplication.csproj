@@ -241,6 +241,7 @@
     <Compile Include="Models\ContestViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MemberViewModel.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Ninject\Current\CurrentUser.cs" />
     <Compile Include="Ninject\Current\ICurrentUser.cs" />

@@ -7,6 +7,6 @@ namespace HloMoney.Core.Entity
         /// <summary>
         /// Part, that is won contest
         /// </summary>
-        public ContestPart Part { get; set; }
+        public virtual ContestPart Part { get; set; }
     }
 }

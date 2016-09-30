@@ -4,8 +4,8 @@
 
     public class ContestPart : BaseEntity<ContestPart>
     {
-        public Contest Contest { get; set; }
+        public virtual Contest Contest { get; set; }
 
-        public string UserId { get; set; }
+        public virtual string UserId { get; set; }
     }
 }

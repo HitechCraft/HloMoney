@@ -51,6 +51,6 @@ namespace HloMoney.Core.Entity
         /// <summary>
         /// Parts of this contest
         /// </summary>
-        public ISet<ContestPart> Parts { get; set; }
+        public virtual ISet<ContestPart> Parts { get; set; }
     }
 }
