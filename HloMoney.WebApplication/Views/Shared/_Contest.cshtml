@@ -15,19 +15,21 @@
     </div>
 
     <script type="text/javascript">
+        var now = moment('@DateTime.Now', 'DD.MM.YYYY hh:mm:ss');
+        var end = moment('@Model.EndTime', 'DD.MM.YYYY hh:mm:ss');
+
         $(document).on('ready', function () {
+
             setInterval(function () {
+                now.add(1, 'seconds');
                 setTime();
             }, 1000);
         });
 
         function setTime() {
 
-            var now = moment();
-            var end = moment('@Model.EndTime', 'DD.MM.YYYY hh:mm:ss');
-
             var timeString = "";
-
+            console.log(now);
             if (end.isAfter(now)) {
                 var d = moment.duration(end.diff(now), 'milliseconds');
 
