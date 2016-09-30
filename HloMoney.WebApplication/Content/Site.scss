@@ -29,17 +29,19 @@ textarea {
 }
 
 a {
-    color: #000;
+    color: $blue-color;
     outline: none;
+    cursor: pointer;
 
     &:hover {
-        background:$white-color;
-        color: #1967be;
+        background: $white-color;
+        color: $green-color;
+        text-decoration: none;
     }
 
     &:focus {
-        background:$white-color;
-        color: #1967be;
+        background: $white-color;
+        color: $green-color;
     }
 }
 
@@ -197,6 +199,10 @@ a {
     &-title {
         font-size: 60px;
     }
+
+    &-splitter {
+        margin: 50px 0;
+    }
 }
 
 .comments {
@@ -240,6 +246,12 @@ a {
             margin-bottom: 35px;
         }
 
+        h3 {
+            font-size: 37px;
+            margin: -22px 0 22px 0px;
+            font-weight: bold;
+        }
+
         .state {
             h4 {
                 margin-bottom: 0px;
@@ -258,7 +270,7 @@ a {
         .members {
 
             h3 {
-                margin-bottom: 30px;
+                margin: 7px 0 11px 0;
                 font-weight: bold;
             }
 
@@ -268,5 +280,21 @@ a {
                 display: table;
             }
         }
+    }
+}
+
+footer {
+    font-size: 20px;
+    margin-bottom: 15px;
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .ztn {
+        display: block;
+        font-size: 73px;
+        font-weight: bold;
     }
 }

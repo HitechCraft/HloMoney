@@ -72,6 +72,7 @@
     <Compile Include="DI\IContainer.cs" />
     <Compile Include="Entity\Base\BaseEntity.cs" />
     <Compile Include="Entity\Lottery\Contest.cs" />
+    <Compile Include="Entity\Lottery\ContestPart.cs" />
     <Compile Include="Extentions\StringExtentions.cs" />
     <Compile Include="Helper\VkApiHelper.cs" />
     <Compile Include="Models\Enum\ContestStatus.cs" />

@@ -2,6 +2,6 @@
 {
     public enum ContestStatus
     {
-        Actual, Ended
+        New, Started, Ended
     }
 }

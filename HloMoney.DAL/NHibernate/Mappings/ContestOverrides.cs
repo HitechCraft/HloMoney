@@ -28,8 +28,17 @@
                 .Column("Gift")
                 .Not.Nullable();
 
+            mapping.Map(x => x.Winners)
+                .Column("Winners")
+                .Not.Nullable();
+
             mapping.Map(x => x.Image)
-                .Column("Image").Nullable();
+                .Column("Image")
+                .Nullable();
+
+            mapping.Map(x => x.StartTime)
+                .Column("StartTime")
+                .Not.Nullable();
 
             mapping.Map(x => x.EndTime)
                 .Column("EndTime")
@@ -42,6 +51,8 @@
             mapping.Map(x => x.Status)
                 .Column("Status")
                 .CustomType<ContestStatus>();
+
+            mapping.HasMany(x => x.Parts);
         }
     }
 }

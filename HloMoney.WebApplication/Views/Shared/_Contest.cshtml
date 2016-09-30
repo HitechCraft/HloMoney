@@ -4,18 +4,19 @@
 @if (Model != null)
 {
     <h2>Идет розыгрыш!</h2>
+    <h3>Приз: @Model.Gift</h3>
     <div class="state">
         <h4>Окончание через</h4>
         <span id="time-left" class="time-left"></span>
     </div>
-    <a href="#" class="btn btn-default btn-lg">Принять участие</a>
+    @Html.ActionLink("Принять участие", "Details", "Contest", new { id = Model.Id }, new { @class= "btn btn-default btn-lg", @id = "takepart" })
     <div class="members">
-        @Html.Action("Members", "Contest", new { id = Model.Id })
+        @Html.Action("Members", "Contest", new {id = Model.Id})
     </div>
 
     <script type="text/javascript">
         $(document).on('ready', function () {
-            setInterval(function() {
+            setInterval(function () {
                 setTime();
             }, 1000);
         });
@@ -25,48 +26,55 @@
             var now = moment();
             var end = moment('@Model.EndTime', 'DD.MM.YYYY hh:mm:ss');
 
-            var d = moment.duration(end.diff(now), 'milliseconds');
-
-            var hours = Math.floor(d.asHours());
-            var mins = Math.floor(d.asMinutes()) - hours * 60;
-            var sec = Math.floor(d.asSeconds()) - hours * 3600 - mins * 60;
-
             var timeString = "";
 
-            if (hours > 0) {
-                timeString += hours + " ч. ";
-            }
+            if (end.isAfter(now)) {
+                var d = moment.duration(end.diff(now), 'milliseconds');
 
-            if (mins > 0) {
-                timeString += mins + " мин. ";
-            }
+                var hours = Math.floor(d.asHours());
+                var mins = Math.floor(d.asMinutes()) - hours * 60;
+                var sec = Math.floor(d.asSeconds()) - hours * 3600 - mins * 60;
 
-            if (sec > 0) {
-                timeString += sec + " сек. ";
+                if (hours > 0) {
+                    timeString += hours + " ч. ";
+                }
+
+                if (mins > 0) {
+                    timeString += mins + " мин. ";
+                }
+
+                if (sec > 0) {
+                    timeString += sec + " сек. ";
+                }
             }
 
             $('#time-left').text('');
 
             if (timeString === "") {
-                $('#time-left').text("0 сек.");
-
                 $.post('@Url.Action("CheckAvailable", "Contest")',
                     { id: parseInt('@Model.Id') },
-                    function(responce) {
+                    function (responce) {
                         if (responce.status === "OK") {
                             growlSuccess(responce.message);
 
-                            setTimeout(function() {
-                                    document.location = '@Url.Action("Details", "Contest", new { id = Model.Id })';
-                                },
+                            setTimeout(function () {
+                                document.location = '@Url.Action("Details", "Contest", new { id = Model.Id })';
+                            },
                                 2000);
-                        } else {
-                            growlError(responce.message);
                         }
                     });
-
+                $('#time-left').text("0 сек.");
+                disableTakingPart();
             } else {
                 $('#time-left').text(timeString);
+            }
+        }
+
+        function disableTakingPart() {
+            if (!$('#takepart').hasClass('disabled')) {
+                $('#takepart').addClass('disabled');
+                $('#takepart').attr('href', '#');
+                $('#takepart').text('Идет завершение конкурса');
             }
         }
     </script>
@@ -75,3 +83,6 @@ else
 {
     <h2>Текущих розыгрышей нет!</h2>
 }
+<div class="last">
+    @Html.Action("GetLastContests", "Contest")
+</div>
