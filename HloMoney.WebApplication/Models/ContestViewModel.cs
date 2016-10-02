@@ -17,6 +17,10 @@
 
         public ContestStatus Status { get; set; }
 
+        public int Winners { get; set; }
+
+        public DateTime StartTime { get; set; }
+
         public DateTime EndTime { get; set; }
     }
 }

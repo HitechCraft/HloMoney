@@ -1,14 +1,38 @@
-﻿@using HloMoney.Core.Models.Json
+﻿@using HloMoney.Core.Models.Enum
+@using HloMoney.Core.Models.Json
 @model HloMoney.WebApplication.Models.ContestViewModel
 @{
     ViewBag.Title = "Конкурс #" + Model.Id;
 }
 
 <h1 class="page-title">
-    @ViewBag.Title 
-<a href="javascript:TakePart()" id="lottery-part" class="btn btn-default btn-lg lottery-part">Участвовать!</a>
+    @ViewBag.Title
+
+    @switch (Model.Status)
+    {
+        case ContestStatus.New:
+            <text>
+                <a href="#" class="btn btn-default btn-lg lottery-part disabled">Конкурс скоро начнется!</a>
+            </text>
+            break;
+        case ContestStatus.Started:
+            <text>
+                <a href="javascript:TakePart()" id="lottery-part" class="btn btn-default btn-lg lottery-part">Участвовать!</a>
+            </text>
+            break;
+    }
 </h1>
-<p class="lottery-time">Время: <span id="time-left"></span></p>
+<p class="lottery-time">
+    @if (Model.Status == ContestStatus.New)
+    {
+        <text>Время начала:</text>
+    }
+    else
+    {
+        <text>Время:</text>
+    }
+    <span id="time-left"></span>
+</p>
 <p class="lottery-gift">Приз: @Model.Gift</p>
 <div class="row">
     <div class="col-md-6 lottery-image-container">
@@ -42,6 +66,11 @@
     $(document)
         .on('ready',
             function () {
+                if ('@Model.Status' === '@ContestStatus.New') {
+                    $.post('@Url.Action("StartContest")',
+                        { id: parseInt('@Model.Id') });
+                }
+
                 $.post('@Url.Action("CheckPart")',
                     { id: parseInt('@Model.Id') },
                     function (responce) {
@@ -72,4 +101,11 @@
     }
 </script>
 
-@Html.Partial("_ContestTimeHelper")
+@if (Model.Status == ContestStatus.New)
+{
+    Html.Action("GetContestTime", new { id = Model.Id, dateTime = Model.StartTime });
+}
+else
+{
+    Html.Action("GetContestTime", new { id = Model.Id, dateTime = Model.EndTime });
+}

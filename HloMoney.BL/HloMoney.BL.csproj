@@ -45,9 +45,11 @@
     <Compile Include="CQRS\Command\Base\ICommandExecutor.cs" />
     <Compile Include="CQRS\Command\Base\ICommandHandler.cs" />
     <Compile Include="CQRS\Command\Contest\ContestSelectWinnerCommand.cs" />
+    <Compile Include="CQRS\Command\Contest\ContestPartErrorCreateCommand.cs" />
     <Compile Include="CQRS\Command\Contest\ContestTakePartCommand.cs" />
     <Compile Include="CQRS\Command\Contest\ContestSetStatusCommand.cs" />
     <Compile Include="CQRS\Command\Contest\ContestSelectWinnerCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Contest\ContestPartErrorCreateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Contest\ContestTakePartCommandHandler.cs" />
     <Compile Include="CQRS\Command\Contest\ContestSetStatusCommandHandler.cs" />
     <Compile Include="CQRS\Query\Base\BaseQueryExecutor.cs" />

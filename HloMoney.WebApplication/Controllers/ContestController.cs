@@ -30,6 +30,8 @@
         {
             try
             {
+                this.CheckContest(id.Value);
+
                 var vm = new EntityQueryHandler<Contest, ContestViewModel>(Container)
                     .Handle(new EntityQuery<Contest, ContestViewModel>()
                     {
@@ -98,6 +100,8 @@
                         Id = id,
                         Status = ContestStatus.Ended
                     });
+
+                    this.SelectWinner(id);
 
                     return Json(new { status = "OK", message = "Конкурс завершен" });
                 }
@@ -169,31 +173,35 @@
         }
 
         [HttpPost]
-        public ActionResult SelectWinner(int contestId)
+        public void StartContest(int id)
         {
-            try
-            {
-                this.CommandExecutor.Execute(new ContestSelectWinnerCommand
-                {
-                    ContestId = contestId
-                });
-                
-                return RedirectToAction("Details", new { id = contestId });
-            }
-            catch (Exception e)
-            {
-                this.CommandExecutor.Execute(new ContestPartErrorCreateCommand
-                {
-                    ContestId = contestId,
-                    Error = e.Message
-                });
+            var vm = new EntityQueryHandler<Contest, ContestViewModel>(Container)
+                    .Handle(new EntityQuery<Contest, ContestViewModel>
+                    {
+                        Id = id,
+                        Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
+                    });
 
-                return RedirectToAction("Details", new { id = contestId });
+            if (vm.StartTime < DateTime.Now && vm.Status == ContestStatus.New)
+            {
+                CommandExecutor.Execute(new ContestSetStatusCommand()
+                {
+                    Id = id,
+                    Status = ContestStatus.Started
+                });
             }
         }
 
+        public ActionResult GetContestTime(int id, DateTime dateTime)
+        {
+            ViewBag.Time = dateTime;
+            ViewBag.Contest = id;
+
+            return PartialView("_ContestTimeHelper");
+        }
+
         #region Private Methods
-        
+
         private ICollection<string> GetContestMembers(int id)
         {
             return new EntityListQueryHandler<ContestPart, string>(this.Container)
@@ -204,6 +212,52 @@
                 });
         }
 
+        private void SelectWinner(int contestId)
+        {
+            try
+            {
+                this.CommandExecutor.Execute(new ContestSelectWinnerCommand
+                {
+                    ContestId = contestId
+                });
+            }
+            catch (Exception e)
+            {
+                this.CommandExecutor.Execute(new ContestPartErrorCreateCommand
+                {
+                    ContestId = contestId,
+                    Error = e.Message
+                });
+            }
+        }
+
+        private void CheckContest(int id)
+        {
+            var vm = new EntityQueryHandler<Contest, ContestViewModel>(Container)
+                    .Handle(new EntityQuery<Contest, ContestViewModel>
+                    {
+                        Id = id,
+                        Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
+                    });
+
+            if (vm.Status == ContestStatus.New)
+            {
+                StartContest(id);
+                return;
+            }
+
+            if (vm.EndTime < DateTime.Now && vm.Status == ContestStatus.Started)
+            {
+                CommandExecutor.Execute(new ContestSetStatusCommand()
+                {
+                    Id = id,
+                    Status = ContestStatus.Ended
+                });
+
+                this.SelectWinner(id);
+            }
+        }
+        
         #endregion
     }
 }

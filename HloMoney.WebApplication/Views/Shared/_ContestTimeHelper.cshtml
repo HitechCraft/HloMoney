@@ -1,15 +1,15 @@
 ﻿<script type="text/javascript">
     var now = moment('@DateTime.Now', 'DD.MM.YYYY hh:mm:ss');
-    var end = moment('@Model.EndTime', 'DD.MM.YYYY hh:mm:ss');
+    var end = moment('@ViewBag.Time', 'DD.MM.YYYY hh:mm:ss');
 
     $(document)
         .on('ready',
-            function() {
+            function () {
 
-                setInterval(function() {
-                        now.add(1, 'seconds');
-                        setTime();
-                    },
+                setInterval(function () {
+                    now.add(1, 'seconds');
+                    setTime();
+                },
                     1000);
             });
 
@@ -41,14 +41,14 @@
 
         if (timeString === "") {
             $.post('@Url.Action("CheckAvailable", "Contest")',
-                { id: parseInt('@Model.Id') },
-                function(responce) {
+                { id: parseInt('@ViewBag.Contest') },
+                function (responce) {
                     if (responce.status === "OK") {
                         growlSuccess(responce.message);
 
-                        setTimeout(function() {
-                                document.location = '@Url.Action("Details", "Contest", new {id = Model.Id})';
-                            },
+                        setTimeout(function () {
+                            document.location = '@Url.Action("Details", "Contest", new {id = ViewBag.Contest })';
+                        },
                             2000);
                     }
                 });

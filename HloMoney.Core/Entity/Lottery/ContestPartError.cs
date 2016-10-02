@@ -4,8 +4,8 @@
 
     public class ContestPartError : BaseEntity<ContestPartError>
     {
-        public Contest Contest { get; set; }
+        public virtual Contest Contest { get; set; }
 
-        public string Error { get; set; }
+        public virtual string Error { get; set; }
     }
 }

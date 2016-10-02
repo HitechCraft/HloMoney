@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NHibernate\Mappings\ContestPartErrorOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ContestWinnerOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ContestPartOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ContestOverrides.cs" />

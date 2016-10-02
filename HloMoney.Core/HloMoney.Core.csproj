@@ -73,8 +73,10 @@
     <Compile Include="Entity\Base\BaseEntity.cs" />
     <Compile Include="Entity\Lottery\Contest.cs" />
     <Compile Include="Entity\Lottery\ContestPart.cs" />
+    <Compile Include="Entity\Lottery\ContestPartError.cs" />
     <Compile Include="Entity\Lottery\ContestWinner.cs" />
     <Compile Include="Extentions\StringExtentions.cs" />
+    <Compile Include="Helper\RandomHelper.cs" />
     <Compile Include="Helper\VkApiHelper.cs" />
     <Compile Include="Models\Enum\ContestStatus.cs" />
     <Compile Include="Models\Enum\ContestType.cs" />
