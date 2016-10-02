@@ -25,7 +25,9 @@
                 .Add(AutoMap.AssemblyOf<ContestPart>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<ContestPartOverrides>())
                 .Add(AutoMap.AssemblyOf<ContestWinner>(autoMapHelper)
-                    .UseOverridesFromAssemblyOf<ContestWinnerOverrides>());
+                    .UseOverridesFromAssemblyOf<ContestWinnerOverrides>())
+                .Add(AutoMap.AssemblyOf<ContestPartError>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<ContestPartErrorOverrides>());
         }
     }
 }

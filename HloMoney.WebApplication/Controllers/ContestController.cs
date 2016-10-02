@@ -90,7 +90,7 @@
                         Id = id,
                         Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                     });
-
+                
                 if (vm.EndTime < DateTime.Now && vm.Status == ContestStatus.Started)
                 {
                     CommandExecutor.Execute(new ContestSetStatusCommand()
@@ -165,6 +165,30 @@
             catch (Exception e)
             {
                 return Json(new {status = "NO", message = "Ошибка: " + e.Message});
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SelectWinner(int contestId)
+        {
+            try
+            {
+                this.CommandExecutor.Execute(new ContestSelectWinnerCommand
+                {
+                    ContestId = contestId
+                });
+                
+                return RedirectToAction("Details", new { id = contestId });
+            }
+            catch (Exception e)
+            {
+                this.CommandExecutor.Execute(new ContestPartErrorCreateCommand
+                {
+                    ContestId = contestId,
+                    Error = e.Message
+                });
+
+                return RedirectToAction("Details", new { id = contestId });
             }
         }
 

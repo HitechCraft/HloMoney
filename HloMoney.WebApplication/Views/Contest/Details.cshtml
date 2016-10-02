@@ -41,33 +41,28 @@
 <script type="text/javascript">
     $(document)
         .on('ready',
-            function() {
+            function () {
                 $.post('@Url.Action("CheckPart")',
                     { id: parseInt('@Model.Id') },
-                    function(responce) {
+                    function (responce) {
                         if (responce.status === "NO") {
                             $('#lottery-part').addClass('disabled');
                             $('#lottery-part').text('Вы уже участвуете!');
                         }
                     });
-
-                setInterval(function() {
-                        setTime();
-                    },
-                    1000);
             });
 
     function TakePart() {
         if (confirm("Действительно принять участие?")) {
             $.post('@Url.Action("TakePart")',
                 { id: parseInt('@Model.Id') },
-                function(responce) {
+                function (responce) {
                     if (responce.status === "OK") {
                         growlSuccess(responce.message);
 
-                        setTimeout(function() {
-                                document.location.reload();
-                            },
+                        setTimeout(function () {
+                            document.location.reload();
+                        },
                             2000);
                     } else {
                         growlError(responce.message);
@@ -75,53 +70,6 @@
                 });
         }
     }
-
-    function setTime() {
-
-        var now = moment();
-        var end = moment('@Model.EndTime', 'DD.MM.YYYY hh:mm:ss');
-
-        var timeString = "";
-
-        if (end.isAfter(now)) {
-            var d = moment.duration(end.diff(now), 'milliseconds');
-
-            var hours = Math.floor(d.asHours());
-            var mins = Math.floor(d.asMinutes()) - hours * 60;
-            var sec = Math.floor(d.asSeconds()) - hours * 3600 - mins * 60;
-
-            if (hours > 0) {
-                timeString += hours + " ч. ";
-            }
-
-            if (mins > 0) {
-                timeString += mins + " мин. ";
-            }
-
-            if (sec > 0) {
-                timeString += sec + " сек. ";
-            }
-        }
-
-        $('#time-left').text('');
-
-        if (timeString === "") {
-            $.post('@Url.Action("CheckAvailable", "Contest")',
-                { id: parseInt('@Model.Id') },
-                function (responce) {
-                    if (responce.status === "OK") {
-                        growlSuccess(responce.message);
-
-                        setTimeout(function () {
-                            document.location = '@Url.Action("Details", "Contest", new { id = Model.Id })';
-                        },
-                            2000);
-                    }
-                });
-            $('#time-left').text("0 сек.");
-            disableTakingPart();
-        } else {
-            $('#time-left').text(timeString);
-        }
-    }
 </script>
+
+@Html.Partial("_ContestTimeHelper")

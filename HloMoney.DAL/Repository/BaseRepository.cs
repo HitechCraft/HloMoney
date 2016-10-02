@@ -1,4 +1,6 @@
-﻿namespace HloMoney.DAL.Repository
+﻿using NHibernate.Util;
+
+namespace HloMoney.DAL.Repository
 {
     #region Using Directives
 
@@ -74,6 +76,16 @@
         public bool Exist(ISpecification<TEntity> specification)
         {
             return Query(specification).Any();
+        }
+
+        public bool Any()
+        {
+            return Query().Any();
+        }
+
+        public int Count()
+        {
+            return Query().Count;
         }
 
         public ICollection<TEntity> Query(ISpecification<TEntity> specification)

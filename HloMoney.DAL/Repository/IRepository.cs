@@ -72,5 +72,15 @@
         /// <param name="specification">Entity spec</param>
         /// <returns></returns>
         bool Exist(ISpecification<TEntity> specification);
+        /// <summary>
+        /// Check existing any entities
+        /// </summary>
+        /// <returns></returns>
+        bool Any();
+        /// <summary>
+        /// Count of entities
+        /// </summary>
+        /// <returns></returns>
+        int Count();
     }
 }
