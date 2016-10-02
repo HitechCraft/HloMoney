@@ -93,6 +93,13 @@
                         Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                     });
                 
+                if (vm.StartTime < DateTime.Now && vm.Status == ContestStatus.New)
+                {
+                    StartContest(id);
+
+                    return Json(new { status = "OK", message = "Конкурс стартовал" });
+                }
+
                 if (vm.EndTime < DateTime.Now && vm.Status == ContestStatus.Started)
                 {
                     CommandExecutor.Execute(new ContestSetStatusCommand()
