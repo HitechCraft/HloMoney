@@ -2,23 +2,26 @@
 {
     using System.Collections.Generic;
     using System;
+    using Entity;
 
     public static class RandomHelper
     {
         /// <summary>
-        /// Get random entities from entity list
+        /// Get random winners from parts
         /// </summary>
         /// <param name="entities">As a list of objects</param>
         /// <param name="count">Count of entties</param>
         /// <returns></returns>
-        public static ICollection<object> GetRandomEntities(object entities, int count)
+        public static ICollection<ContestPart> GetRandomEntities(List<ContestPart> parts, int count)
         {
-            var entityList = entities as ICollection<object>;
+            ICollection<ContestPart> selectedParts = new List<ContestPart>();
 
-            if(entityList.Count < count)
-                throw new Exception("Не достаточно элементов в коллекции");
+            for (int i = 0; i < count; i++)
+            {
+                selectedParts.Add(parts[new Random().Next(0, count)]);
+            }
 
-            return null;
+            return selectedParts;
         }
     }
 }

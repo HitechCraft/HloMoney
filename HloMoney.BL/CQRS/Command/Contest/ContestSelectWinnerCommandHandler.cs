@@ -35,7 +35,7 @@
             if (contestPartRep.Count() < contest.Winners)
                 throw new Exception("Участников не достаточно");
 
-            var randomParts = (ICollection<ContestPart>)RandomHelper.GetRandomEntities(contestParts, contest.Winners);
+            var randomParts = RandomHelper.GetRandomEntities(contestParts.ToList(), contest.Winners);
 
             foreach (var winner in randomParts)
             {
