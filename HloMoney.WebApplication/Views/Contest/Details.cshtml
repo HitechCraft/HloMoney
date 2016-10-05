@@ -8,31 +8,8 @@
 <h1 class="page-title">
     @ViewBag.Title
 
-    @switch (Model.Status)
-    {
-        case ContestStatus.New:
-            <text>
-                <a href="#" class="btn btn-default btn-lg lottery-part disabled">Конкурс скоро начнется!</a>
-            </text>
-            break;
-        case ContestStatus.Started:
-            <text>
-                <a href="javascript:TakePart()" id="lottery-part" class="btn btn-default btn-lg lottery-part">Участвовать!</a>
-            </text>
-            break;
-    }
+    <a href="javascript:TakePart()" id="lottery-part" class="btn btn-default btn-lg lottery-part">Участвовать!</a>
 </h1>
-<p class="lottery-time">
-    @if (Model.Status == ContestStatus.New)
-    {
-        <text>Начало через:</text>
-    }
-    else
-    {
-        <text>Время:</text>
-    }
-    <span id="time-left"></span>
-</p>
 <p class="lottery-gift">Приз: @Model.Gift</p>
 <div class="row">
     <div class="col-md-6 lottery-image-container">
@@ -50,65 +27,16 @@
     </div>
 </div>
 
-@if (Model.Status != ContestStatus.New)
-{
-    <div class="lottery-members">
-        @Html.Action("Members", new { id = Model.Id })
-    </div>
-
-    <div class="comments">
-        <h1>Комментарии</h1>
-        <div id="vk_comments"></div>
-        <script type="text/javascript">
+<div class="comments">
+    <h1>Комментарии</h1>
+    <div id="vk_comments"></div>
+    <script type="text/javascript">
         VK.Widgets.Comments("vk_comments", { limit: 10, width: "665", attach: "*" });
-        </script>
-    </div>
-}
+    </script>
+</div>
 
 <script type="text/javascript">
-    $(document)
-        .on('ready',
-            function () {
-                if ('@Model.Status' === '@ContestStatus.New') {
-                    $.post('@Url.Action("StartContest")',
-                        { id: parseInt('@Model.Id') });
-                }
-
-                $.post('@Url.Action("CheckPart")',
-                    { id: parseInt('@Model.Id') },
-                    function (responce) {
-                        if (responce.status === "NO") {
-                            $('#lottery-part').addClass('disabled');
-                            $('#lottery-part').text('Вы уже участвуете!');
-                        }
-                    });
-            });
-
     function TakePart() {
-        if (confirm("Действительно принять участие?")) {
-            $.post('@Url.Action("TakePart")',
-                { id: parseInt('@Model.Id') },
-                function (responce) {
-                    if (responce.status === "OK") {
-                        growlSuccess(responce.message);
-
-                        setTimeout(function () {
-                            document.location.reload();
-                        },
-                            2000);
-                    } else {
-                        growlError(responce.message);
-                    }
-                });
-        }
+        
     }
 </script>
-
-@if (Model.Status == ContestStatus.New)
-{
-    @Html.Action("GetContestTime", new { id = Model.Id, dateTime = Model.StartTime });
-}
-else
-{
-    @Html.Action("GetContestTime", new { id = Model.Id, dateTime = Model.EndTime });
-}

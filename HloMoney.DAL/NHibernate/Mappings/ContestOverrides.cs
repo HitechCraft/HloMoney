@@ -27,32 +27,6 @@
                 .Length(128)
                 .Column("Gift")
                 .Not.Nullable();
-
-            mapping.Map(x => x.Winners)
-                .Column("Winners")
-                .Not.Nullable();
-
-            mapping.Map(x => x.Image)
-                .Column("Image")
-                .Nullable();
-
-            mapping.Map(x => x.StartTime)
-                .Column("StartTime")
-                .Not.Nullable();
-
-            mapping.Map(x => x.EndTime)
-                .Column("EndTime")
-                .Not.Nullable();
-
-            mapping.Map(x => x.Type)
-                .Column("Type")
-                .CustomType<ContestType>();
-
-            mapping.Map(x => x.Status)
-                .Column("Status")
-                .CustomType<ContestStatus>();
-
-            mapping.HasMany(x => x.Parts);
         }
     }
 }

@@ -3,11 +3,11 @@
     using Models;
     using Core.Entity;
 
-    public class ContestToContestViewModelMapper : BaseMapper<Contest, ContestViewModel>
+    public class ContestToContestEditViewModelMapper : BaseMapper<Contest, ContestEditViewModel>
     {
-        public ContestToContestViewModelMapper()
+        public ContestToContestEditViewModelMapper()
         {
-            this.ConfigurationStore.CreateMap<Contest, ContestViewModel>()
+            this.ConfigurationStore.CreateMap<Contest, ContestEditViewModel>()
                 .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.Id))
                 .ForMember(dst => dst.Description, ext => ext.MapFrom(src => src.Description))
                 .ForMember(dst => dst.Gift, ext => ext.MapFrom(src => src.Gift))

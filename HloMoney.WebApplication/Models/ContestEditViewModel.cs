@@ -1,6 +1,6 @@
 ﻿namespace HloMoney.WebApplication.Models
 {
-    public class ContestViewModel
+    public class ContestEditViewModel
     {
         public int Id { get; set; }
 

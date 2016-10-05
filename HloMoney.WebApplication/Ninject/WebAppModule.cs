@@ -1,6 +1,4 @@
-﻿using HloMoney.Core.Entity;
-
-namespace HloMoney.Ninjector.Dependences
+﻿namespace HloMoney.Ninjector.Dependences
 {
     using Ninject.Modules;
     using Core.Projector;
@@ -8,6 +6,7 @@ namespace HloMoney.Ninjector.Dependences
     using Core.Models.Json;
     using WebApplication.Models;
     using WebApplication.Ninject.Current;
+    using Core.Entity;
 
     public class WebAppModule : NinjectModule
     {
@@ -18,6 +17,7 @@ namespace HloMoney.Ninjector.Dependences
 
             Bind(typeof(IProjector<JsonVkResponse, UserInfo>)).To(typeof(JsonVkResponseToUserInfoMapper));
             Bind(typeof(IProjector<Contest, ContestViewModel>)).To(typeof(ContestToContestViewModelMapper));
+            Bind(typeof(IProjector<Contest, ContestEditViewModel>)).To(typeof(ContestToContestEditViewModelMapper));
         }
     }
 }

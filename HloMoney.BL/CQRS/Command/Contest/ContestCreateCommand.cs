@@ -1,9 +1,7 @@
-﻿namespace HloMoney.WebApplication.Models
+﻿namespace HloMoney.BL.CQRS.Command
 {
-    public class ContestViewModel
+    public class ContestCreateCommand
     {
-        public int Id { get; set; }
-
         public string Description { get; set; }
 
         public string Gift { get; set; }
