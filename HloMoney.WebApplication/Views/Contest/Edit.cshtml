@@ -1,0 +1,77 @@
+﻿@model HloMoney.WebApplication.Models.ContestEditViewModel
+@{
+    ViewBag.Title = "Изменить информацию конкурса";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Contest", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-6">
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Image)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Gift)
+                @Html.EditorFor(model => model.Gift, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Gift, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary" />
+                @Html.ActionLink("Отмена", "Index", "Home", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label>Изображение</label>
+            <br />
+            @if (Model.Image != null && Convert.ToBase64String(Model.Image) != String.Empty)
+            {
+                <img alt="" id="contest-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" />
+            }
+            else
+            {
+                <img alt="" id="contest-image" src="~/Content/Images/no-image.jpg" />
+            }
+
+            <div class="form-group image-changer">
+                <a href="#" class="btn btn-primary">Выбрать изображение</a>
+                <input type="file" name="uploadContestImage" id="uploadContestImage" />
+            </div>
+        </div>
+
+    </div>
+}
+
+<script type="text/javascript">
+
+    tinymce.init({ selector: 'textarea' });
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#contest-image').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#uploadContestImage")
+        .change(function() {
+            readURL(this);
+        });
+</script>

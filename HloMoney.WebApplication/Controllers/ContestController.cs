@@ -52,6 +52,7 @@
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]
+        [ValidateInput(false)]
         public ActionResult Create(ContestEditViewModel vm)
         {
             if (ModelState.IsValid)
@@ -70,6 +71,60 @@
                     return RedirectToAction("Index", "Home");
                 }
                 catch(Exception e)
+                {
+                    ModelState.AddModelError(String.Empty, e.Message);
+                }
+            }
+
+            return View(vm);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Edit(int? id)
+        {
+            try
+            {
+                var vm = new EntityQueryHandler<Contest, ContestEditViewModel>(this.Container)
+                    .Handle(new EntityQuery<Contest, ContestEditViewModel>
+                    {
+                        Id = id,
+                        Projector = this.Container.Resolve<IProjector<Contest, ContestEditViewModel>>()
+                    });
+
+                return View(vm);
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        [ValidateInput(false)]
+        public ActionResult Edit(ContestEditViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var uploadImage = Request.Files["uploadContestImage"];
+
+                    if (uploadImage != null && uploadImage.ContentLength > 0)
+                        vm.Image = ImageManager.GetImageBytes(uploadImage);
+
+                    this.CommandExecutor.Execute(new ContestUpdateCommand
+                    {
+                        Id = vm.Id,
+                        Description = vm.Description,
+                        Gift = vm.Gift,
+                        Image = vm.Image
+                    });
+
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (Exception e)
                 {
                     ModelState.AddModelError(String.Empty, e.Message);
                 }
