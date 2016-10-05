@@ -175,6 +175,10 @@ a {
   font-size: 54px;
   margin: 55px 0; }
 
+#contest-image {
+  max-width: 500px;
+  max-height: 500px; }
+
 .lottery-gift {
   font-size: 35px;
   font-weight: bold;
@@ -194,6 +198,9 @@ a {
   float: right;
   font-size: 32px;
   padding: 11px 16px; }
+
+.lottery-image {
+  max-width: 100%; }
 
 .lottery-current {
   text-align: center; }
@@ -231,4 +238,15 @@ footer {
     display: block;
     font-size: 73px;
     font-weight: bold; }
+
+.image-changer {
+  margin-top: 20px;
+  position: relative; }
+  .image-changer input[type="file"] {
+    position: absolute;
+    top: 0px;
+    width: 200px;
+    height: 45px;
+    opacity: 0;
+    cursor: pointer; }
 

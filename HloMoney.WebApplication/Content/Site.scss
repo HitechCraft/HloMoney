@@ -212,6 +212,13 @@ a {
     }
 }
 
+#contest {
+    &-image {
+        max-width: 500px;
+        max-height: 500px;
+    }
+}
+
 .lottery {
     &-gift {
         font-size: 35px;
@@ -238,6 +245,10 @@ a {
         float: right;
         font-size: 32px;
         padding: 11px 16px;
+    }
+
+    &-image {
+        max-width: 100%;
     }
 
     &-current {
@@ -300,5 +311,22 @@ footer {
         display: block;
         font-size: 73px;
         font-weight: bold;
+    }
+}
+
+
+.image {
+    &-changer {
+        margin-top: 20px;
+        position: relative;
+
+        input[type="file"] {
+            position: absolute;
+            top: 0px;
+            width: 200px;
+            height: 45px;
+            opacity: 0;
+            cursor: pointer;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace HloMoney.DAL.NHibernate.Mappings
+﻿using System;
+
+namespace HloMoney.DAL.NHibernate.Mappings
 {
     #region Using Directives
 
@@ -27,6 +29,11 @@
                 .Length(128)
                 .Column("Gift")
                 .Not.Nullable();
+
+            mapping.Map(x => x.Image)
+                .Length(Int32.MaxValue)
+                .Column("Image")
+                .Nullable();
         }
     }
 }

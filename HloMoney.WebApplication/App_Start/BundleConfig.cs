@@ -12,7 +12,10 @@ namespace HloMoney.WebApplication
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/moment.js",
                         "~/Scripts/jquery.jgrowl.js",
-                        "~/Scripts/jgrowl.alerts.js"));
+                        "~/Scripts/jgrowl.alerts.js",
+                        "~/Scripts/jquery.ui.widget.js",
+                        "~/Scripts/jquery-ui.min.js",
+                        "~/Scripts/jquery.fileupload.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

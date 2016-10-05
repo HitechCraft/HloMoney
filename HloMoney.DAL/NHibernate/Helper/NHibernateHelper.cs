@@ -28,7 +28,7 @@
                 if (_sessionFactory == null)
                 {
                     _sessionFactory = Fluently.Configure()
-                        .Database(MsSqlConfiguration.MsSql2008.ConnectionString(x => x.FromConnectionStringWithKey("HloMoney")))
+                        .Database(MsSqlConfiguration.MsSql2012.ConnectionString(x => x.FromConnectionStringWithKey("HloMoney")))
                         .Mappings(x => x.AutoMappings(new AutomappingHelper()))
                         .ExposeConfiguration(config => config.SetProperty("current_session_context_class", "web"))
                         .BuildSessionFactory();

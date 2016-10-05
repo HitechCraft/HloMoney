@@ -5,16 +5,14 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Collections.Generic;
     using BL.CQRS.Command;
     using BL.CQRS.Query.Entity;
     using Core.DI;
     using Core.Entity;
-    using Core.Helper;
-    using Core.Models.Enum;
     using Core.Projector;
     using Core.Repository.Specification;
     using Models;
+    using Manager;
 
     #endregion
 
@@ -46,6 +44,41 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Create(ContestEditViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var uploadImage = Request.Files["uploadContestImage"];
+
+                    this.CommandExecutor.Execute(new ContestCreateCommand
+                    {
+                        Description = vm.Description,
+                        Gift = vm.Gift,
+                        Image = ImageManager.GetImageBytes(uploadImage)
+                    });
+
+                    return RedirectToAction("Index", "Home");
+                }
+                catch(Exception e)
+                {
+                    ModelState.AddModelError(String.Empty, e.Message);
+                }
+            }
+
+            return View(vm);
+        }
+
+        [HttpGet]
         public ActionResult Current()
         {
             try
@@ -53,9 +86,8 @@
                 var vm = new EntityListQueryHandler<Contest, ContestViewModel>(Container)
                     .Handle(new EntityListQuery<Contest, ContestViewModel>
                     {
-                        Specification = !new ContestIsEndedSpec(),
                         Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
-                    }).First();
+                    }).OrderByDescending(x => x.Id).First();
 
                 return PartialView("_Contest", vm);
             }
