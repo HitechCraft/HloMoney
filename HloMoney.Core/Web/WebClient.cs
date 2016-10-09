@@ -1,11 +1,11 @@
-﻿using System.Net;
-using System.Text;
-
-namespace HloMoney.Core.Web
+﻿namespace HloMoney.Core.Web
 {
+    using System.Net;
+    using System.Text;
+
     internal class WebClient
     {
-        private static readonly global::System.Net.WebClient Client = CreateDefaultWebClient();
+        private static readonly System.Net.WebClient Client = CreateDefaultWebClient();
 
         internal static T GetResponseJson<T>(string url)
         {
@@ -17,7 +17,7 @@ namespace HloMoney.Core.Web
             return Client.DownloadString(url);
         }
         
-        internal static global::System.Net.WebClient CreateDefaultWebClient()
-            => new global::System.Net.WebClient { Encoding = Encoding.UTF8, Proxy = new WebProxy() };
+        internal static System.Net.WebClient CreateDefaultWebClient()
+            => new System.Net.WebClient { Encoding = Encoding.UTF8 };
     }
 }

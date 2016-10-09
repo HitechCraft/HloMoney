@@ -40,7 +40,7 @@ html, body {
   min-width: 767px; }
 
 body {
-  background-color: #f0ecff;
+  background-color: #fffeec;
   padding-bottom: 20px;
   color: #2c3e50; }
 
@@ -61,11 +61,11 @@ a {
   outline: none;
   cursor: pointer; }
   a:hover {
-    background: #f0ecff;
+    background: #fffeec;
     color: #16a085;
     text-decoration: none; }
   a:focus {
-    background: #f0ecff;
+    background: #fffeec;
     color: #16a085; }
 
 .user-avatar {
@@ -99,7 +99,7 @@ a {
   display: table; }
 
 .navbar {
-  background: #f0ecff;
+  background: #fffeec;
   color: #2c3e50;
   font-weight: bold; }
   .navbar-brand {
@@ -137,10 +137,11 @@ a {
     color: #16a085; }
 
 .header {
-  background: #f0ecff;
+  background: #fffeec;
   margin-top: -60px; }
   .header .logo {
-    background: url(Images/logo.png) no-repeat;
+    background-image: url(Images/logo.png);
+    background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
     width: 100%;
@@ -230,14 +231,19 @@ a {
 
 footer {
   font-size: 20px;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  line-height: 35px; }
   footer ul {
     list-style: none;
     padding: 0; }
-  footer .ztn {
-    display: block;
-    font-size: 73px;
-    font-weight: bold; }
+  footer ul.links li {
+    text-align: center; }
+  footer .ztn-logo {
+    background: url(Images/ztn-logo.png);
+    background-size: 100%;
+    width: 150px;
+    height: 150px;
+    margin-top: -30px; }
 
 .image-changer {
   margin-top: 20px;
@@ -249,4 +255,7 @@ footer {
     height: 45px;
     opacity: 0;
     cursor: pointer; }
+
+#vk_like {
+  float: right; }
 

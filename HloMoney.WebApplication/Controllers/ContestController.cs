@@ -133,6 +133,24 @@
             return View(vm);
         }
 
+        [HttpPost]
+        public JsonResult Delete(int? id)
+        {
+            try
+            {
+                this.CommandExecutor.Execute(new ContestRemoveCommand
+                {
+                    Id = id.Value
+                });
+
+                return Json(new {status = "OK", message = "Успешно удалено"});
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "NO", message = "Ошибка удаления: " + e.Message });
+            }
+        }
+
         [HttpGet]
         public ActionResult Current()
         {

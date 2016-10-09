@@ -1,14 +1,7 @@
-﻿using HloMoney.Core.Entity.Base;
-
-namespace HloMoney.WebApplication.Controllers
+﻿namespace HloMoney.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using Core.DI;
-    using Core.Helper;
-    using BL.CQRS.Query.Entity;
-    using Core.Entity;
-    using Core.Projector;
-    using Models;
 
     public class HomeController : BaseController
     {
@@ -25,6 +18,16 @@ namespace HloMoney.WebApplication.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
+            return View();
+        }
+
+        public ActionResult Faq()
+        {
+            return View();
+        }
+
+        public ActionResult Reports()
+        {
             return View();
         }
 

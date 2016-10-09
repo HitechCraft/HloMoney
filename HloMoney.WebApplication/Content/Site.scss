@@ -158,7 +158,8 @@ a {
     margin-top: -60px;
 
     .logo {
-        background: url(./Images/logo.png) no-repeat;
+        background-image: url(./Images/logo.png);
+        background-repeat: no-repeat;
         background-position: center;
         background-size: 100%;
         width: 100%;
@@ -301,16 +302,25 @@ a {
 footer {
     font-size: 20px;
     margin-bottom: 15px;
+    line-height: 35px;
 
     ul {
         list-style: none;
         padding: 0;
     }
 
-    .ztn {
-        display: block;
-        font-size: 73px;
-        font-weight: bold;
+    ul.links {
+        li {
+            text-align: center;
+        }
+    }
+
+    .ztn-logo {
+        background: url(Images/ztn-logo.png);
+        background-size: 100%;
+        width: 150px;
+        height: 150px;
+        margin-top: -30px;
     }
 }
 
@@ -329,4 +339,8 @@ footer {
             cursor: pointer;
         }
     }
+}
+
+#vk_like {
+    float: right;
 }
