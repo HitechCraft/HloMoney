@@ -339,6 +339,8 @@
     <Content Include="Views\Contest\Edit.cshtml" />
     <Content Include="Views\Home\Faq.cshtml" />
     <Content Include="Views\Home\Reports.cshtml" />
+    <Content Include="Views\Home\Title.cshtml" />
+    <Content Include="Views\Home\_TitleLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

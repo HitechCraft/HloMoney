@@ -8,7 +8,12 @@
         public HomeController(IContainer container) : base(container)
         {
         }
-        
+
+        public ActionResult Title()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             return View();
