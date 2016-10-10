@@ -262,3 +262,13 @@ footer {
 #vk_like {
   float: right; }
 
+.howplay {
+  margin: 30px;
+  padding: 0; }
+  .howplay li {
+    font-size: 31px;
+    line-height: 50px; }
+    .howplay li img {
+      max-width: 1000px;
+      border: 1px solid; }
+
