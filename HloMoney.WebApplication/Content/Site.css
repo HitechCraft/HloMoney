@@ -40,7 +40,7 @@ html, body {
   min-width: 767px; }
 
 body {
-  background-color: #fffeec;
+  background-color: #fff;
   padding-bottom: 20px;
   color: #2c3e50; }
 
@@ -61,11 +61,11 @@ a {
   outline: none;
   cursor: pointer; }
   a:hover {
-    background: #fffeec;
+    background: #fff;
     color: #16a085;
     text-decoration: none; }
   a:focus {
-    background: #fffeec;
+    background: #fff;
     color: #16a085; }
 
 .user-avatar {
@@ -99,7 +99,7 @@ a {
   display: table; }
 
 .navbar {
-  background: #fffeec;
+  background: #fff;
   color: #2c3e50;
   font-weight: bold; }
   .navbar-brand {
@@ -137,7 +137,7 @@ a {
     color: #16a085; }
 
 .header {
-  background: #fffeec;
+  background: #fff;
   margin-top: -60px; }
   .header .logo {
     background-image: url(Images/logo.png);
