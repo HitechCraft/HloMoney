@@ -271,6 +271,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config" />
+    <None Include="Properties\PublishProfiles\HloMoney.pubxml" />
     <Content Include="Content\Site.scss" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
