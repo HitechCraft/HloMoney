@@ -76,38 +76,47 @@ namespace HloMoney.WebApplication.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
+            try
             {
-                return RedirectToAction("Index", "Home");
-            }
+                var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+                if (loginInfo == null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
 
-            // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                default:
-                    var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                // Sign in the user with this external login provider if the user already has a login
+                var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    default:
+                        var info = await AuthenticationManager.GetExternalLoginInfoAsync();
 
-                    var user = new ApplicationUser
-                    {
-                        UserName = VkApiHelper.GetUserName(loginInfo.Login.ProviderKey), Email = loginInfo.Email
-                    };
-                    var createUser = await UserManager.CreateAsync(user);
+                        var user = new ApplicationUser
+                        {
+                            UserName = VkApiHelper.GetUserName(loginInfo.Login.ProviderKey),
+                            Email = loginInfo.Email
+                        };
+                        var createUser = await UserManager.CreateAsync(user);
 
-                    if (createUser.Succeeded)
-                    {
-                        createUser = await UserManager.AddLoginAsync(user.Id, info.Login);
                         if (createUser.Succeeded)
                         {
-                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                            return RedirectToLocal(returnUrl);
+                            createUser = await UserManager.AddLoginAsync(user.Id, info.Login);
+                            if (createUser.Succeeded)
+                            {
+                                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                                return RedirectToLocal(returnUrl);
+                            }
                         }
-                    }
 
-                    return RedirectToLocal(returnUrl);
+                        return RedirectToLocal(returnUrl);
+                }
+            }
+            catch (Exception e)
+            {
+                LogHelper.Error("Ошибка входа: " + e);
+                return null;
             }
         }
 
