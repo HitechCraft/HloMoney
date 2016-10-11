@@ -19,6 +19,11 @@
         /// <summary>
         /// User vk id, that took contest part
         /// </summary>
-        public virtual string UserId { get; set; }
+        public virtual Account Partner { get; set; }
+
+        /// <summary>
+        /// Winner reference
+        /// </summary>
+        public virtual ContestWinner Winner { get; set; }
     }
 }

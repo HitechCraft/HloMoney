@@ -2,33 +2,30 @@
 {
     #region Using Directives
 
-    using Base;
     using System;
+    using Base;
 
     #endregion
 
     /// <summary>
-    /// Entity for user comments
+    /// Entity for users reports
     /// </summary>
-    public class Comment : BaseEntity<Comment>
+    public class Report : BaseEntity<Report>
     {
         /// <summary>
-        /// Comment text
+        /// Report title
+        /// </summary>
+        public virtual string Title { get; set; }
+        /// <summary>
+        /// Report text
         /// </summary>
         public virtual string Text { get; set; }
-
         /// <summary>
-        /// Author Vk id
+        /// User Vk id
         /// </summary>
-        public virtual string AuthorId { get; set; }
-
+        public virtual Account Author { get; set; }
         /// <summary>
-        /// Contest this comment belong
-        /// </summary>
-        public virtual Contest Contest { get; set; }
-
-        /// <summary>
-        /// Comment added date
+        /// Report added date
         /// </summary>
         public virtual DateTime Date { get; set; }
     }

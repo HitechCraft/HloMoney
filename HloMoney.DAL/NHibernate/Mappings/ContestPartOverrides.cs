@@ -21,10 +21,11 @@
                 .Column("Contest")
                 .Not.Nullable();
 
-            mapping.Map(x => x.UserId)
-                .Length(128)
-                .Column("UserId")
+            mapping.References(x => x.Partner)
+                .Column("Partner")
                 .Not.Nullable();
+
+            mapping.HasOne(x => x.Winner);
         }
     }
 }

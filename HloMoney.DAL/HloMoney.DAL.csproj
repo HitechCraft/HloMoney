@@ -52,10 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NHibernate\Mappings\ReportOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ContestOverrides.cs" />
     <Compile Include="NHibernate\Helper\AutomappingHelper.cs" />
     <Compile Include="NHibernate\Helper\NHibernateHelper.cs" />
     <Compile Include="NHibernate\MappingConfig.cs" />
+    <Compile Include="NHibernate\Mappings\CommentOverrides.cs" />
+    <Compile Include="NHibernate\Mappings\ContestWinnerOverrides.cs" />
+    <Compile Include="NHibernate\Mappings\ContestPartOverrides.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
