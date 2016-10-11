@@ -75,7 +75,9 @@
     <Compile Include="DI\BaseContainer.cs" />
     <Compile Include="DI\IContainer.cs" />
     <Compile Include="Entity\Base\BaseEntity.cs" />
-    <Compile Include="Entity\Lottery\Contest.cs" />
+    <Compile Include="Entity\Contest\Contest.cs" />
+    <Compile Include="Entity\Contest\ContestPart.cs" />
+    <Compile Include="Entity\Contest\ContestWinner.cs" />
     <Compile Include="Extentions\StringExtentions.cs" />
     <Compile Include="Helper\LogHelper.cs" />
     <Compile Include="Helper\VkApiHelper.cs" />
