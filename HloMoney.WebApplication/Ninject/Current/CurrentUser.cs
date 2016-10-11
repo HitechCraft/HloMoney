@@ -31,8 +31,11 @@
             {
                 var userVkLogin = user.Logins.FirstOrDefault(x => x.LoginProvider == "Vkontakte");
 
+                var source =
+                    VkApiHelper.GetUserInfo(userVkLogin != null ? userVkLogin.ProviderKey : "0").response;
+
                 return this._container.Resolve<IProjector<JsonVkResponse, UserInfo>>()
-                    .Project(VkApiHelper.GetUserInfo(userVkLogin != null ? userVkLogin.ProviderKey : "0").response.First());
+                    .Project(source.First());
             }
 
             return null;

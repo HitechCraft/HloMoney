@@ -11,7 +11,7 @@
 
         public string LastName { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public string AvatarLink { get; set; }
 
