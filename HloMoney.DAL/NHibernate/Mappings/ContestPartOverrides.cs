@@ -15,13 +15,13 @@
             mapping.Table("ContestPart");
 
             mapping.Id(x => x.Id)
-                .GeneratedBy.Identity();
+                .GeneratedBy.Increment();
 
             mapping.References(x => x.Contest)
                 .Column("Contest")
                 .Not.Nullable();
 
-            mapping.References(x => x.Partner)
+            mapping.Map(x => x.Partner)
                 .Column("Partner")
                 .Not.Nullable();
 

@@ -19,8 +19,12 @@
 <body>
     @Html.Partial("_NavBar")
     <div class="container body-content">
-        @RenderBody()
-        <hr class="page-splitter"/>
+        <div class="wrapper">
+            @RenderBody()
+        </div>
+    </div>
+    <div class="container">
+        <hr class="page-splitter" />
         @Html.Partial("_Footer")
     </div>
 

@@ -22,8 +22,6 @@
             return mapConfig.AutoMappings
                 .Add(AutoMap.AssemblyOf<Contest>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<ContestOverrides>())
-                .Add(AutoMap.AssemblyOf<Account>(autoMapHelper)
-                    .UseOverridesFromAssemblyOf<AccountOverrides>())
                 .Add(AutoMap.AssemblyOf<ContestPart>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<ContestPartOverrides>())
                 .Add(AutoMap.AssemblyOf<ContestWinner>(autoMapHelper)

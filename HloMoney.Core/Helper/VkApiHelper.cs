@@ -15,19 +15,24 @@
         private static string ApiVersion => "5.53";
         private static string UserInfoFields => "bdate,photo_200_orig,online";
 
-        public static JsonVkUserInfo GetUserInfo(string userIds)
+        public static JsonVkUserInfo GetUsersInfo(string userIds)
         {
             return WebRequestExecutor.GetVkUserInfoResponse($"{ApiBaseUrl}method/users.get", userIds, UserInfoFields,
                 ApiVersion);
         }
+        
+        public static JsonVkResponse GetUserResponce(string userId)
+        {
+            return GetUsersInfo(userId).response.First();
+        }
+
+        #region User Info
 
         public static string GetUserName(string userId)
         {
             try
             {
-                var userInfo =
-                    WebRequestExecutor.GetVkUserInfoResponse($"{ApiBaseUrl}method/users.get", userId, UserInfoFields,
-                        ApiVersion).response.First();
+                var userInfo = GetUserResponce(userId);
 
                 return $"{userInfo.first_name} {userInfo.last_name}";
             }
@@ -36,5 +41,21 @@
                 return String.Empty;
             }
         }
+
+        public static string GetUserAvatar(string userId)
+        {
+            try
+            {
+                var userInfo = GetUserResponce(userId);
+
+                return $"{userInfo.photo_200_orig}";
+            }
+            catch (Exception)
+            {
+                return String.Empty;
+            }
+        }
+
+        #endregion
     }
 }

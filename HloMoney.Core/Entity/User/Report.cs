@@ -23,7 +23,11 @@
         /// <summary>
         /// User Vk id
         /// </summary>
-        public virtual Account Author { get; set; }
+        public virtual string Author { get; set; }
+        /// <summary>
+        /// User service mark
+        /// </summary>
+        public virtual float Mark { get; set; }
         /// <summary>
         /// Report added date
         /// </summary>

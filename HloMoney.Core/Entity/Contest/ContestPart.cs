@@ -19,7 +19,7 @@
         /// <summary>
         /// User vk id, that took contest part
         /// </summary>
-        public virtual Account Partner { get; set; }
+        public virtual string Partner { get; set; }
 
         /// <summary>
         /// Winner reference

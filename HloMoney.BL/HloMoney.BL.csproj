@@ -50,6 +50,8 @@
     <Compile Include="CQRS\Command\Contest\ContestRemoveCommandHandler.cs" />
     <Compile Include="CQRS\Command\Contest\ContestUpdateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Contest\ContestCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Report\ReportCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Report\ReportCreateCommandHandler.cs" />
     <Compile Include="CQRS\Query\Base\BaseQueryExecutor.cs" />
     <Compile Include="CQRS\Query\Base\BaseQueryHandler.cs" />
     <Compile Include="CQRS\Query\Base\IQuery.cs" />

@@ -20,7 +20,7 @@
         /// <summary>
         /// Author Vk id
         /// </summary>
-        public virtual Account Author { get; set; }
+        public virtual string Author { get; set; }
 
         /// <summary>
         /// Contest this comment belong

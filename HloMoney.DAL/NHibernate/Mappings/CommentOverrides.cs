@@ -15,7 +15,7 @@
             mapping.Table("Comment");
 
             mapping.Id(x => x.Id)
-                .GeneratedBy.Identity();
+                .GeneratedBy.Increment();
 
             mapping.Map(x => x.Text)
                 .Length(255)
@@ -26,7 +26,7 @@
                 .Column("Contest")
                 .Not.Nullable();
 
-            mapping.References(x => x.Author)
+            mapping.Map(x => x.Author)
                 .Column("Author")
                 .Not.Nullable();
 

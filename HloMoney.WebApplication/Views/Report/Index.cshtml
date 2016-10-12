@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Отзывы пользователей";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div id="reports">
+    @Html.Action("GetReportList")
+</div>
+
+<script type="text/javascript">
+    var pageIndex = 1;
+    var pageCount;
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() === $(document).height() - $(window).height()) {
+            console.log("test");
+        }
+    });
+
+</script>

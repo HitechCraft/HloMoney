@@ -15,8 +15,8 @@
             mapping.Table("Report");
 
             mapping.Id(x => x.Id)
-                .GeneratedBy.Identity();
-            
+                .GeneratedBy.Increment();
+
             mapping.Map(x => x.Title)
                 .Length(128)
                 .Column("Title")
@@ -27,8 +27,12 @@
                 .Column("Text")
                 .Not.Nullable();
 
-            mapping.References(x => x.Author)
+            mapping.Map(x => x.Author)
                 .Column("Author")
+                .Not.Nullable();
+
+            mapping.Map(x => x.Mark)
+                .Column("Mark")
                 .Not.Nullable();
 
             mapping.Map(x => x.Date)

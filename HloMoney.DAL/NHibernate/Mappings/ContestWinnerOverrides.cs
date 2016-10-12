@@ -15,7 +15,7 @@
             mapping.Table("ContestWinner");
 
             mapping.Id(x => x.Id)
-                .GeneratedBy.Identity();
+                .GeneratedBy.Increment();
 
             mapping.References(x => x.Part)
                 .Column("Part")

@@ -18,6 +18,10 @@
             Bind(typeof(IProjector<JsonVkResponse, UserInfo>)).To(typeof(JsonVkResponseToUserInfoMapper));
             Bind(typeof(IProjector<Contest, ContestViewModel>)).To(typeof(ContestToContestViewModelMapper));
             Bind(typeof(IProjector<Contest, ContestEditViewModel>)).To(typeof(ContestToContestEditViewModelMapper));
+
+            Bind(typeof(IProjector<Report, ReportViewModel>)).To(typeof(ReportToReportViewModelMapper));
+
+            Bind(typeof(IProjector<Report, ReportCreateViewModel>)).To(typeof(ReportToReportCreateViewModelMapper));
         }
     }
 }
