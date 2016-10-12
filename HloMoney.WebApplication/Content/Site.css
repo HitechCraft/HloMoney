@@ -292,7 +292,7 @@ footer {
     border: 2px solid #2c3e50;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: auto auto;
+    background-size: 100% 100%;
     margin: 0 auto;
     margin-top: 18px; }
   .report-title {
@@ -307,7 +307,7 @@ footer {
       width: 173px;
       height: 33px; }
     .report-mark-overall {
-      margin: -28px 10px 64px 4px; }
+      margin: -43px 4px 64px 4px; }
     .report-mark-fill {
       position: absolute;
       background: url("Images/full-stars.png") no-repeat;

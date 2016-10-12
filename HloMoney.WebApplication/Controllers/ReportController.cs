@@ -1,4 +1,6 @@
-﻿namespace HloMoney.WebApplication.Controllers
+﻿using HloMoney.Core.Repository.Specification;
+
+namespace HloMoney.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -51,14 +53,14 @@
         [Authorize]
         public ActionResult Create(ReportCreateViewModel vm)
         {
-            //if (new EntityExistsQueryHandler<Report>(this.Container)
-            //    .Handle(new EntityExistsQuery<Report>()
-            //    {
-            //        Specification = new RulePointByNameSpec(this.CurrentUser.Info.Id)
-            //    }))
-            //{
-            //    return View("AlreadyReported");
-            //}
+            if (new EntityExistsQueryHandler<Report>(this.Container)
+                .Handle(new EntityExistsQuery<Report>()
+                {
+                    Specification = new ReportByUserSpec(this.CurrentUser.Info.Id)
+                }))
+            {
+                return View("AlreadyReported");
+            }
 
             if (vm.Mark < 1 || vm.Mark > 5) ModelState.AddModelError("Mark", "Оценка должна быть в интервале от 1 до 5");
 
@@ -100,6 +102,17 @@
                 });
 
             return PartialView("_ReportPartialList", vm);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public bool IsAlreadyReported()
+        {
+            return new EntityExistsQueryHandler<Report>(this.Container)
+                .Handle(new EntityExistsQuery<Report>
+                {
+                    Specification = new ReportByUserSpec(this.CurrentUser.Info.Id)
+                });
         }
 
         #endregion

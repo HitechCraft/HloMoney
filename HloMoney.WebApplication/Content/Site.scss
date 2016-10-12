@@ -389,7 +389,7 @@ footer {
             border: 2px solid #2c3e50;
             background-position: center;
             background-repeat: no-repeat;
-            background-size: auto auto;
+            background-size: 100% 100%;
             margin: 0 auto;
             margin-top: 18px;
         }
@@ -412,7 +412,7 @@ footer {
         }
 
         &-overall {
-            margin: -28px 10px 64px 4px;
+            margin: -43px 4px 64px 4px;
         }
 
         &-fill {

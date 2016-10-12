@@ -9,7 +9,7 @@
 
     #endregion
 
-    public class RulePointByNameSpec : BaseSpecification<Report>
+    public class ReportByUserSpec : BaseSpecification<Report>
     {
         #region Private Fields
 
@@ -19,7 +19,7 @@
 
         #region Constructor
 
-        public RulePointByNameSpec(string userId)
+        public ReportByUserSpec(string userId)
         {
             this._userId = userId;
         }

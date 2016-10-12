@@ -13,7 +13,7 @@
 
         private static string ApiBaseUrl => "http://api.vk.com/";
         private static string ApiVersion => "5.53";
-        private static string UserInfoFields => "bdate,photo_200_orig,online";
+        private static string UserInfoFields => "bdate,photo_max,online";
 
         public static JsonVkUserInfo GetUsersInfo(string userIds)
         {
@@ -48,7 +48,7 @@
             {
                 var userInfo = GetUserResponce(userId);
 
-                return $"{userInfo.photo_200_orig}";
+                return $"{userInfo.photo_max}";
             }
             catch (Exception)
             {
