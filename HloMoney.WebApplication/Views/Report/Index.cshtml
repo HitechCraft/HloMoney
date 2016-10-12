@@ -4,7 +4,10 @@
 }
 
 <h2 class="page-title">@ViewBag.Title</h2>
-
+@if (ViewBag.OverallMark != null && ViewBag.OverallMark > 0)
+{
+    <h3>Общая оценка пользователей: @ViewBag.OverallMark</h3>
+}
 <div id="reports">
     @Html.Action("GetReportList")
 </div>

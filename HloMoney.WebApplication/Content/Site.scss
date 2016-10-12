@@ -411,11 +411,20 @@ footer {
             height: 33px;
         }
 
+        &-overall {
+            margin: -28px 10px 64px 4px;
+        }
+
         &-fill {
             position: absolute;
             background: url('Images/full-stars.png') no-repeat;
             width: 0;
             height: 33px;
+        }
+
+        &-text {
+            font-size: 25px;
+            font-weight: bold;
         }
     }
 }

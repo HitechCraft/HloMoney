@@ -1,6 +1,4 @@
-﻿using HloMoney.Core.Projector;
-
-namespace HloMoney.WebApplication.Controllers
+﻿namespace HloMoney.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -12,6 +10,8 @@ namespace HloMoney.WebApplication.Controllers
     using BL.CQRS.Query.Entity;
     using Core.Entity;
     using Models;
+    using System.Linq;
+    using Core.Projector;
 
     #endregion
 
@@ -26,6 +26,8 @@ namespace HloMoney.WebApplication.Controllers
         // GET: Report
         public ActionResult Index()
         {
+            ViewBag.OverallMark = this.GetServiceMark();
+
             return View();
         }
 
@@ -33,14 +35,14 @@ namespace HloMoney.WebApplication.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            if (new EntityExistsQueryHandler<Report>(this.Container)
-                .Handle(new EntityExistsQuery<Report>()
-                {
-                    Specification = new RulePointByNameSpec(this.CurrentUser.Info.Id)
-                }))
-            {
-                return View("AlreadyReported", new ReportCreateViewModel());
-            }
+            //if (new EntityExistsQueryHandler<Report>(this.Container)
+            //    .Handle(new EntityExistsQuery<Report>()
+            //    {
+            //        Specification = new RulePointByNameSpec(this.CurrentUser.Info.Id)
+            //    }))
+            //{
+            //    return View("AlreadyReported", new ReportCreateViewModel());
+            //}
 
             return View();
         }
@@ -49,16 +51,16 @@ namespace HloMoney.WebApplication.Controllers
         [Authorize]
         public ActionResult Create(ReportCreateViewModel vm)
         {
-            if (new EntityExistsQueryHandler<Report>(this.Container)
-                .Handle(new EntityExistsQuery<Report>()
-                {
-                    Specification = new RulePointByNameSpec(this.CurrentUser.Info.Id)
-                }))
-            {
-                return View("AlreadyReported");
-            }
+            //if (new EntityExistsQueryHandler<Report>(this.Container)
+            //    .Handle(new EntityExistsQuery<Report>()
+            //    {
+            //        Specification = new RulePointByNameSpec(this.CurrentUser.Info.Id)
+            //    }))
+            //{
+            //    return View("AlreadyReported");
+            //}
 
-            if (vm.Mark < 1 || vm.Mark > 5) ModelState.AddModelError(String.Empty, "Оценка должна быть в интервале от 0 до 5");
+            if (vm.Mark < 1 || vm.Mark > 5) ModelState.AddModelError("Mark", "Оценка должна быть в интервале от 1 до 5");
 
             try
             {
@@ -98,6 +100,23 @@ namespace HloMoney.WebApplication.Controllers
                 });
 
             return PartialView("_ReportPartialList", vm);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private float GetServiceMark()
+        {
+            var marks = new EntityListQueryHandler<Report, float>(this.Container)
+                .Handle(new EntityListQuery<Report, float>
+                {
+                    Projector = new CommonProjector<Report, float>(x => x.Mark)
+                });
+
+            if (marks.Any()) return (float)(marks.Aggregate((start, next) => start + next) / marks.Count);
+
+            return 0;
         }
 
         #endregion

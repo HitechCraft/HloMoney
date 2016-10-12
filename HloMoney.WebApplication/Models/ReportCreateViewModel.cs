@@ -6,14 +6,15 @@ namespace HloMoney.WebApplication.Models
 
     public class ReportCreateViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Необходимо заполнить заголовок")]
         [Display(Name = "Заголовок")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Необходимо заполнить текст отзыва")]
         [Display(Name = "Текст")]
         public string Text { get; set; }
 
+        [Required(ErrorMessage = "Необходимо выбрать оценку")]
         [Display(Name = "Оценка сервиса (кликните, чтобы оценить)")]
         public float Mark { get; set; }
     }
