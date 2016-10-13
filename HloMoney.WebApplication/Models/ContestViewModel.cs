@@ -1,5 +1,8 @@
 ﻿namespace HloMoney.WebApplication.Models
 {
+    using System;
+    using Core.Models.Enum;
+
     public class ContestViewModel
     {
         public int Id { get; set; }
@@ -9,5 +12,11 @@
         public string Gift { get; set; }
 
         public byte[] Image { get; set; }
+
+        public int WinnerCount { get; set; }
+
+        public ContestType Type { get; set; }
+        
+        public DateTime EndTime { get; set; }
     }
 }

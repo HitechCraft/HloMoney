@@ -5,18 +5,30 @@ html, body {
     min-width: 767px;
     font-size: 20px;
     height: 100%;
+    font-family: 'Open Sans', sans-serif;
 }
 
 body {
     background-color: $white-color;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
     padding-bottom: 20px;
     color: $blue-color;
 }
 
 .body {
     &-content {
+        position: relative;
         padding-left: 15px;
         padding-right: 15px;
+        min-height: 100%;
+    }
+}
+
+.content {
+    &-wrapper {
+        background: transparent;
         min-height: 100%;
     }
 }
@@ -47,13 +59,13 @@ a {
     cursor: pointer;
 
     &:hover {
-        background: $white-color;
+        background: transparent;
         color: $green-color;
         text-decoration: none;
     }
 
     &:focus {
-        background: $white-color;
+        background: transparent;
         color: $green-color;
     }
 }
@@ -96,7 +108,7 @@ a {
 }
 
 .navbar {
-    background: $white-color;
+    background: transparent;
     color: $blue-color;
     font-weight: bold;
 
@@ -247,7 +259,31 @@ a {
     }
 
     &-description {
-        font-size: 24px;
+        h1, h2, h3, h4 {
+            line-height: 50px;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 35px;
+        }
+
+        h2 {
+            font-size: 25px;
+        }
+
+        h3 {
+            font-size: 18px;
+        }
+
+        h4 {
+            font-size: 12px;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
     }
 
     &-members {
@@ -361,7 +397,8 @@ footer {
 }
 
 #vk_like {
-    float: right;
+    position: absolute !important;
+    right: 0;
 }
 
 .howplay {

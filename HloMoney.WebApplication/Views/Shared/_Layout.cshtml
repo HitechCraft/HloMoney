@@ -17,17 +17,18 @@
     </script>
 </head>
 <body>
-    @Html.Partial("_NavBar")
-    <div class="container body-content">
-        <div class="wrapper">
-            @RenderBody()
+    <div class="content-wrapper">
+        @Html.Partial("_NavBar")
+        <div class="container body-content">
+            <div class="wrapper">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="container">
+            <hr class="page-splitter" />
+            @Html.Partial("_Footer")
         </div>
     </div>
-    <div class="container">
-        <hr class="page-splitter" />
-        @Html.Partial("_Footer")
-    </div>
-
     @RenderSection("scripts", required: false)
 </body>
 </html>

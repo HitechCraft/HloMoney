@@ -1,0 +1,53 @@
+﻿body {
+    color: #fff;
+    //text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+a {
+    color: #fff !important;
+
+    &:hover {
+        color: #f39c12 !important;
+    }
+
+    &:focus {
+        color: #f39c12 !important;
+    }
+}
+
+.content {
+    &-wrapper {
+        background: rgba(44, 62, 80, 0.62);
+    }
+}
+
+.global {
+    &-title {
+        text-align: center;
+
+        .btn {
+            margin: 35px 0 50px 0;
+
+            &:hover, &:focus {
+                color: #fff !important;
+            }
+        }
+    }
+}
+
+.page {
+    &-title {
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+}
+
+.lottery {
+    &-gift {
+        margin-top: 15px;
+    }
+
+    &-description {
+        text-align: center;
+    }
+}

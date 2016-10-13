@@ -39,16 +39,25 @@
 html, body {
   min-width: 767px;
   font-size: 20px;
-  height: 100%; }
+  height: 100%;
+  font-family: 'Open Sans', sans-serif; }
 
 body {
   background-color: #fff;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
   padding-bottom: 20px;
   color: #2c3e50; }
 
 .body-content {
+  position: relative;
   padding-left: 15px;
   padding-right: 15px;
+  min-height: 100%; }
+
+.content-wrapper {
+  background: transparent;
   min-height: 100%; }
 
 .dl-horizontal dt {
@@ -70,11 +79,11 @@ a {
   outline: none;
   cursor: pointer; }
   a:hover {
-    background: #fff;
+    background: transparent;
     color: #16a085;
     text-decoration: none; }
   a:focus {
-    background: #fff;
+    background: transparent;
     color: #16a085; }
 
 .user-avatar {
@@ -108,7 +117,7 @@ a {
   display: table; }
 
 .navbar {
-  background: #fff;
+  background: transparent;
   color: #2c3e50;
   font-weight: bold; }
   .navbar-brand {
@@ -199,8 +208,25 @@ a {
   font-weight: bold;
   margin: 50px 0; }
 
-.lottery-description {
-  font-size: 24px; }
+.lottery-description h1, .lottery-description h2, .lottery-description h3, .lottery-description h4 {
+  line-height: 50px;
+  margin: 0; }
+
+.lottery-description h1 {
+  font-size: 35px; }
+
+.lottery-description h2 {
+  font-size: 25px; }
+
+.lottery-description h3 {
+  font-size: 18px; }
+
+.lottery-description h4 {
+  font-size: 12px; }
+
+.lottery-description ul {
+  padding: 0;
+  list-style: none; }
 
 .lottery-members h1 {
   font-size: 54px;
@@ -271,7 +297,8 @@ footer {
     cursor: pointer; }
 
 #vk_like {
-  float: right; }
+  position: absolute !important;
+  right: 0; }
 
 .howplay {
   margin: 30px;

@@ -22,9 +22,18 @@
 
             var contest = contestRep.GetEntity(command.Id);
 
+            if(contest.StartTime < DateTime.Now)
+                throw new Exception("Конкурс уже начался");
+            if (contest.EndTime < DateTime.Now)
+                throw new Exception("Конкурс уже закончился");
+            
             contest.Description = command.Description;
             contest.Gift = command.Gift;
             contest.Image = command.Image;
+            contest.WinnerCount = command.WinnerCount;
+
+            contest.StartTime = command.StartTime;
+            contest.EndTime = command.EndTime;
 
             contestRep.Update(contest);
             contestRep.Dispose();

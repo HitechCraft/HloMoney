@@ -37,8 +37,16 @@ namespace HloMoney.WebApplication.Controllers
                         Id = id,
                         Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                     });
-                
-                return View(vm);
+
+                switch (vm.Type)
+                {
+                    case ContestType.CommentTime:
+                        return View("CommentDetails", vm);
+                    case ContestType.Global:
+                        return View("GlobalDetails", vm);
+                    default:
+                        return View(vm);
+                }
             }
             catch (Exception e)
             {
@@ -79,7 +87,7 @@ namespace HloMoney.WebApplication.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     ModelState.AddModelError(String.Empty, e.Message);
                 }
@@ -130,10 +138,13 @@ namespace HloMoney.WebApplication.Controllers
                         Id = vm.Id,
                         Description = vm.Description,
                         Gift = vm.Gift,
-                        Image = vm.Image
+                        Image = vm.Image,
+                        WinnerCount = vm.WinnerCount,
+                        StartTime = vm.StartTime,
+                        EndTime = vm.EndTime
                     });
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Details", new { id = vm.Id});
                 }
                 catch (Exception e)
                 {
@@ -154,7 +165,7 @@ namespace HloMoney.WebApplication.Controllers
                     Id = id.Value
                 });
 
-                return Json(new {status = "OK", message = "Успешно удалено"});
+                return Json(new { status = "OK", message = "Успешно удалено" });
             }
             catch (Exception e)
             {

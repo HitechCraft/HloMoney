@@ -251,6 +251,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\GlobalStyles.css">
+      <DependentUpon>GlobalStyles.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\GlobalStyles.min.css">
+      <DependentUpon>GlobalStyles.css</DependentUpon>
+    </Content>
     <Content Include="Content\Images\contest-desc.jpg" />
     <Content Include="Content\Images\empty-stars.png" />
     <Content Include="Content\Images\full-stars.png" />
@@ -276,6 +282,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\GlobalStyles.scss" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -440,6 +447,7 @@
     <Content Include="Views\Report\_ReportPartialList.cshtml" />
     <Content Include="Views\Report\Create.cshtml" />
     <Content Include="Views\Report\AlreadyReported.cshtml" />
+    <Content Include="Views\Contest\GlobalDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

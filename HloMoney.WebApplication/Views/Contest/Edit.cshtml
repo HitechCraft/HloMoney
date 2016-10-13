@@ -28,8 +28,21 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Создать" class="btn btn-primary" />
-                @Html.ActionLink("Отмена", "Index", "Home", null, new { @class = "btn btn-primary" })
+                @Html.LabelFor(model => model.WinnerCount)
+                @Html.EditorFor(model => model.WinnerCount, new { htmlAttributes = new { @class = "form-control", type = "number", min = 1 } })
+                @Html.ValidationMessageFor(model => model.WinnerCount, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartTime)
+                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control", @id = "starttime" } })
+                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndTime)
+                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control", @id = "endtime" } })
+                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-md-6">
@@ -41,7 +54,7 @@
             }
             else
             {
-                <img alt="" id="contest-image" src="~/Content/Images/no-image.jpg" />
+                <img alt="" id="contest-image" src="~/Content/Images/no-image.png" />
             }
 
             <div class="form-group image-changer">
@@ -49,11 +62,19 @@
                 <input type="file" name="uploadContestImage" id="uploadContestImage" />
             </div>
         </div>
-
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Сохранить изменения" class="btn btn-primary" />
+        @Html.ActionLink("Отмена", "Details", new { id = Model.Id }, new { @class = "btn btn-primary" })
     </div>
 }
 
 <script type="text/javascript">
+
+    $(function () {
+        $("#starttime").datepicker({ dateFormat: 'dd.mm.yy' });
+        $("#endtime").datepicker({ dateFormat: 'dd.mm.yy' });
+    });
 
     tinymce.init({ selector: 'textarea' });
 
