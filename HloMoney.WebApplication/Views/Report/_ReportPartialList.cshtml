@@ -4,6 +4,7 @@
 {
     foreach (var report in Model)
     {
+        <hr />
         <div class="report">
             <div class="col-md-3">
                 <div class="report-author-avatar" style="background-image: url(@report.AuthorAvatar);"></div>
@@ -12,7 +13,7 @@
                 <p><span class="report-title">@report.AuthorName: @report.Title</span></p>
                 <div class="report-mark">
                     <div class="report-mark-bg"></div>
-                    <div class="report-mark-fill" style="width: @((173f / 5 * report.Mark).ToString().Replace(',', '.'))px"></div>
+                    <div class="report-mark-fill" style="width: @((173f/5*report.Mark).ToString().Replace(',', '.'))px"></div>
                 </div>
                 <p>@report.Text</p>
                 <p>

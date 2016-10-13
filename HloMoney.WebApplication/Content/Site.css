@@ -62,6 +62,9 @@ select,
 textarea {
   max-width: 280px; }
 
+.form-group input, .form-group select {
+  max-width: 100% !important; }
+
 a {
   color: #2c3e50;
   outline: none;
@@ -188,7 +191,8 @@ a {
 
 #contest-image {
   max-width: 500px;
-  max-height: 500px; }
+  max-height: 500px;
+  border: 1px solid #2c3e50; }
 
 .lottery-gift {
   font-size: 35px;
@@ -218,7 +222,7 @@ a {
   .lottery-current h2 {
     font-size: 50px;
     font-weight: bold;
-    margin-top: 55px;
+    margin-top: 130px;
     margin-bottom: 35px; }
   .lottery-current h3 {
     font-size: 37px;
@@ -316,4 +320,24 @@ footer {
     .report-mark-text {
       font-size: 25px;
       font-weight: bold; }
+
+span.loader {
+  display: block;
+  background: url(Images/loader.gif) no-repeat;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto; }
+
+.btn-custom {
+  color: #2c3e50;
+  background-color: rgba(44, 62, 80, 0.22);
+  border-color: rgba(44, 62, 80, 0.22); }
+  .btn-custom:hover {
+    color: #2c3e50;
+    background-color: rgba(44, 62, 80, 0.3);
+    border-color: rgba(44, 62, 80, 0.3); }
+  .btn-custom:focus {
+    color: #2c3e50;
+    background-color: rgba(44, 62, 80, 0.3);
+    border-color: rgba(44, 62, 80, 0.3); }
 

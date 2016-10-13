@@ -80,6 +80,7 @@
     <Compile Include="Entity\Contest\ContestPart.cs" />
     <Compile Include="Entity\Contest\ContestWinner.cs" />
     <Compile Include="Entity\User\Report.cs" />
+    <Compile Include="Extentions\IEnumerableExtentions.cs" />
     <Compile Include="Extentions\StringExtentions.cs" />
     <Compile Include="Helper\LogHelper.cs" />
     <Compile Include="Helper\VkApiHelper.cs" />

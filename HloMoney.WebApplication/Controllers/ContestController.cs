@@ -1,4 +1,7 @@
-﻿namespace HloMoney.WebApplication.Controllers
+﻿using System.Collections.Generic;
+using HloMoney.Core.Models.Enum;
+
+namespace HloMoney.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -47,6 +50,8 @@
         [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
+            ViewBag.Types = this.GetTypeList();
+
             return View();
         }
 
@@ -65,7 +70,11 @@
                     {
                         Description = vm.Description,
                         Gift = vm.Gift,
-                        Image = ImageManager.GetImageBytes(uploadImage)
+                        Image = ImageManager.GetImageBytes(uploadImage),
+                        WinnerCount = vm.WinnerCount,
+                        Type = vm.Type,
+                        StartTime = vm.StartTime,
+                        EndTime = vm.EndTime
                     });
 
                     return RedirectToAction("Index", "Home");
@@ -75,6 +84,8 @@
                     ModelState.AddModelError(String.Empty, e.Message);
                 }
             }
+
+            ViewBag.Types = this.GetTypeList();
 
             return View(vm);
         }
@@ -168,6 +179,29 @@
             {
                 return PartialView("_Contest");
             }
+        }
+
+        private IEnumerable<SelectListItem> GetTypeList()
+        {
+            return new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Text = Resource.ContestTypeStandartTime,
+                    Value = ((int)ContestType.StandartTime).ToString(),
+                    Selected = true
+                },
+                new SelectListItem()
+                {
+                    Text = Resource.ContestTypeCommentTime,
+                    Value = ((int)ContestType.CommentTime).ToString()
+                },
+                new SelectListItem()
+                {
+                    Text = Resource.ContestTypeGlobal,
+                    Value = ((int)ContestType.Global).ToString()
+                }
+            };
         }
     }
 }

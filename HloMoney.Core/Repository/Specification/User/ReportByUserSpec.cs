@@ -1,11 +1,10 @@
-﻿namespace HitechCraft.Core.Repository.Specification
+﻿namespace HloMoney.Core.Repository.Specification.User
 {
     #region Using Directives
 
     using System;
     using System.Linq.Expressions;
-    using HloMoney.Core.Entity;
-    using HloMoney.Core.Repository.Specification;
+    using Entity;
 
     #endregion
 

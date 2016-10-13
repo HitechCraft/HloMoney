@@ -5,8 +5,7 @@
     using Base;
     using Core.DI;
     using Core.Entity;
-    using System;
-    using Core.Repository.Specification;
+    using Core.Models.Enum;
 
     #endregion
 
@@ -24,7 +23,12 @@
             {
                 Description = command.Description,
                 Gift = command.Gift,
-                Image = command.Image
+                Image = command.Image,
+                Type = command.Type,
+                WinnerCount = command.WinnerCount,
+                Status = ContestStatus.New,
+                StartTime = command.StartTime,
+                EndTime = command.EndTime
             });
             
             contestRep.Dispose();

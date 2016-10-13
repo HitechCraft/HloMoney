@@ -241,6 +241,11 @@
     <Compile Include="Ninject\Current\ICurrentUser.cs" />
     <Compile Include="Ninject\WebAppModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -249,10 +254,12 @@
     <Content Include="Content\Images\contest-desc.jpg" />
     <Content Include="Content\Images\empty-stars.png" />
     <Content Include="Content\Images\full-stars.png" />
+    <Content Include="Content\Images\loader.gif" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\main.jpg" />
-    <Content Include="Content\Images\no-image.jpg" />
+    <Content Include="Content\Images\no-image.png" />
     <Content Include="Content\Images\ztn-logo.png" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.jgrowl.css" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
@@ -459,6 +466,12 @@
       <Project>{BDE7A7FF-AC68-419D-A927-BA4B9EF935C8}</Project>
       <Name>HloMoney.Ninjector</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

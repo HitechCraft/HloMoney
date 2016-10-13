@@ -19,14 +19,49 @@
     @Html.Action("GetReportList")
 </div>
 
+<div class="btn-group-justified">
+    <a href="javascript:loadMoreReports()" class="btn btn-custom btn-lg" id="load-more">Показать еще</a>
+</div>
+
 <script type="text/javascript">
     var pageIndex = 1;
-    var pageCount;
+
+    $(document)
+        .on('ready',
+            function() {
+                checkReportLoading();
+            });
+
+    function checkReportLoading() {
+        $.get('@Url.Action("IsAllReportsLoaded")',
+            { index: parseInt(pageIndex) },
+            function (responce) {
+                if (responce === "True") {
+                    $('#load-more').css('display', 'none');
+                }
+            });
+    }
+
+    function loadMoreReports() {
+        $('#load-more').html('<span class="loader"></span>');
+        pageIndex++;
+        getReports();
+    }
 
     $(window).scroll(function () {
         if ($(window).scrollTop() === $(document).height() - $(window).height()) {
-            console.log("test");
+            
         }
     });
+
+    function getReports() {
+        $.get('@Url.Action("GetReportList")',
+            { page: pageIndex },
+            function(responce) {
+                $('#reports').append(responce);
+                $('#load-more').html('Показать еще');
+                checkReportLoading();
+            });
+    }
 
 </script>

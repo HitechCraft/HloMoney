@@ -35,6 +35,12 @@ textarea {
     max-width: 280px;
 }
 
+.form-group {
+    input, select {
+        max-width: 100% !important;
+    }
+}
+
 a {
     color: $blue-color;
     outline: none;
@@ -229,6 +235,7 @@ a {
     &-image {
         max-width: 500px;
         max-height: 500px;
+        border: 1px solid #2c3e50;
     }
 }
 
@@ -270,7 +277,7 @@ a {
         h2 {
             font-size: 50px;
             font-weight: bold;
-            margin-top: 55px;
+            margin-top: 130px;
             margin-bottom: 35px;
         }
 
@@ -426,5 +433,31 @@ footer {
             font-size: 25px;
             font-weight: bold;
         }
+    }
+}
+
+span.loader {
+    display: block;
+    background: url(Images/loader.gif) no-repeat;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+}
+
+.btn-custom {
+    color: #2c3e50;
+    background-color: rgba(44, 62, 80, 0.22);
+    border-color: rgba(44, 62, 80, 0.22);
+
+    &:hover {
+        color: #2c3e50;
+        background-color: rgba(44, 62, 80, 0.3);
+        border-color: rgba(44, 62, 80, 0.3);
+    }
+
+    &:focus {
+        color: #2c3e50;
+        background-color: rgba(44, 62, 80, 0.3);
+        border-color: rgba(44, 62, 80, 0.3);
     }
 }
