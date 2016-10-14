@@ -398,10 +398,20 @@ a {
             margin: 0 0 10px 0px;
         }
 
-        &-list{
-            .active{
+        &-list {
+            .active {
                 margin-bottom: 30px;
             }
+        }
+    }
+
+    &-winner {
+        margin-bottom: 12px;
+
+        img {
+            max-width: 64px;
+            border: 2px solid #3a5269;
+            border-radius: 32px;
         }
     }
 }

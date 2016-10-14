@@ -9,7 +9,13 @@
         {
             <div class="col-md-4 active">
                 <h3 class="title">Конкурс #@contest.Id</h3>
-                <p>Приз: @contest.Gift</p>
+                <div class="contest-winner">
+                    <p>Победител@(contest.WinnerCount > 1 ? "и" : "ь"):</p>
+                    @foreach (var winner in contest.Winners)
+                    {
+                        <img src="@winner.WinnerAvatar" />
+                    }
+                </div>
                 @Html.ActionLink("Подробнее", "Details", "Contest", new { id = contest.Id }, new { @class = "btn btn-primary" })
             </div>
         }

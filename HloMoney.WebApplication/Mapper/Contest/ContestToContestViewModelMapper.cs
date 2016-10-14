@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using HloMoney.Core.Helper;
-
-namespace HloMoney.WebApplication.Mapper
+﻿namespace HloMoney.WebApplication.Mapper
 {
     using Models;
     using Core.Entity;
+    using System.Linq;
+    using Core.Helper;
 
     public class ContestToContestViewModelMapper : BaseMapper<Contest, ContestViewModel>
     {
@@ -19,13 +18,8 @@ namespace HloMoney.WebApplication.Mapper
                 .ForMember(dst => dst.Type, ext => ext.MapFrom(src => src.Type))
                 .ForMember(dst => dst.Status, ext => ext.MapFrom(src => src.Status))
                 .ForMember(dst => dst.EndTime, ext => ext.MapFrom(src => src.EndTime))
-                .ForMember(dst => dst.Winners, ext => ext.MapFrom(src => src.Parts.Select(x => x.Winner)))
                 .ForMember(dst => dst.Comments, ext => ext.MapFrom(src => src.Comments));
-
-            this.ConfigurationStore.CreateMap<ContestWinner, WinnerViewModel>()
-                .ForMember(dst => dst.WinnerName, ext => ext.MapFrom(src => VkApiHelper.GetUserName(src.Part.Partner)))
-                .ForMember(dst => dst.WinnerAvatar, ext => ext.MapFrom(src => VkApiHelper.GetUserAvatar(src.Part.Partner)));
-
+            
             this.ConfigurationStore.CreateMap<Comment, CommentViewModel>()
                 .ForMember(dst => dst.ContestId, ext => ext.MapFrom(src => src.Contest.Id))
                 .ForMember(dst => dst.AuthorName, ext => ext.MapFrom(src => VkApiHelper.GetUserName(src.Author)))

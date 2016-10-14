@@ -6,6 +6,11 @@
 
     public class ContestViewModel
     {
+        public ContestViewModel()
+        {
+            Winners = new List<WinnerViewModel>();
+        }
+
         public int Id { get; set; }
 
         public string Description { get; set; }
@@ -24,6 +29,6 @@
 
         public IEnumerable<CommentViewModel> Comments { get; set; }
 
-        public IEnumerable<WinnerViewModel> Winners { get; set; }
+        public List<WinnerViewModel> Winners { get; set; }
     }
 }

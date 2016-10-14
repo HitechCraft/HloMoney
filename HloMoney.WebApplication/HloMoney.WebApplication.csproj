@@ -225,6 +225,7 @@
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Mapper\BaseMapper.cs" />
     <Compile Include="Mapper\CommonMapper.cs" />
+    <Compile Include="Mapper\Contest\ContestWinnerToWinnerViewModelMapper.cs" />
     <Compile Include="Mapper\User\CommentToCommentViewModelMapper.cs" />
     <Compile Include="Mapper\Contest\ContestToContestEditViewModelMapper.cs" />
     <Compile Include="Mapper\Contest\ContestToContestViewModelMapper.cs" />
