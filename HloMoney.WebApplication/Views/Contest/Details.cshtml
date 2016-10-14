@@ -6,6 +6,12 @@
 }
 <h1 class="page-title">
     @ViewBag.Title
+
+    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart)
+    {
+        <a class="btn btn-success" href="javascript:TakePart('@Model.Id')">Участвовать!</a>
+    }
+
     @if (User.IsInRole("Administrator"))
     {
         @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
@@ -15,7 +21,7 @@
 </h1>
 <p class="contest-gift">Приз: @Model.Gift</p>
 <div class="row">
-    <div class="col-md-6 contest-image-container">
+    <div class="col-md-12">
         @if (Model.Image != null)
         {
             <img alt="" class="contest-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" />
@@ -24,23 +30,33 @@
         {
             <img alt="" class="contest-image" src="~/Content/Images/no-image.png" />
         }
-    </div>
-    <div class="col-md-6">
-        <div class="contest-description">@Html.Raw(Model.Description)</div>
+        <div class="contest-description">
+            @Html.Raw(Model.Description)
+        </div>
     </div>
 </div>
 
+@Html.Action("ContestMembers", new { contestId = Model.Id })
+
 <div class="comments">
     <h1>Комментарии</h1>
-    <div class="well">
-        <h3>Оставить комментарий (осталось <span id="comment-text-len">255</span> символов)</h3>
-        <div class="form-group">
-            <textarea class="form-control" id = "comment-text" maxlength = "255"></textarea>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="well">
+            <h3>Оставить комментарий (осталось <span id="comment-text-len">255</span> символов)
+            </h3>
+            <div class="form-group">
+                <textarea class="form-control" id="comment-text" maxlength="255"></textarea>
+            </div>
+            <div class="form-group">
+                <a href="javascript:AddComment()" class="btn btn-primary">Написать</a>
+            </div>
         </div>
-        <div class="form-group">
-            <a href="javascript:AddComment()" class="btn btn-primary">Написать</a>
-        </div>
-    </div>
+    }
+    else
+    {
+        <h3>Чтобы оставить комментарий вы должны @Html.ActionLink("войти", "Auth", "Account", new { returnUrl = Url.Action("Details", new { id = Model.Id })}, null)</h3>
+    }
     @Html.Action("GetCommentList", "Comment")
 </div>
 
@@ -62,7 +78,7 @@
         }
 
         function AddComment() {
-            
+
         }
 
         function DeleteContest(contestId) {
@@ -73,8 +89,8 @@
                         growlSuccess(responce.message);
 
                         setTimeout(function () {
-                                document.location = '@Url.Action("Index", "Home")';
-                            },
+                            document.location = '@Url.Action("Index", "Home")';
+                        },
                             2000);
                     } else {
                         growlError(responce.message);

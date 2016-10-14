@@ -247,6 +247,28 @@ namespace HloMoney.WebApplication.Controllers
         }
 
         [HttpGet]
+        public ActionResult ContestMembers(int contestId)
+        {
+            try
+            {
+                var vm = new EntityListQueryHandler<ContestPart, ContestPartViewModel>(Container)
+                        .Handle(new EntityListQuery<ContestPart, ContestPartViewModel>
+                        {
+                            Specification = new ContestPartByContestSpec(contestId),
+                            Projector = Container.Resolve<IProjector<ContestPart, ContestPartViewModel>>()
+                        }).ToList().Randomize();
+
+                ViewBag.MemberCount = vm.Count();
+
+                return PartialView("_ContestMembers", vm.Limit(3));
+            }
+            catch (Exception e)
+            {
+                return PartialView("_ContestMembers");
+            }
+        }
+
+        [HttpGet]
         public ActionResult GlobalContest()
         {
             try

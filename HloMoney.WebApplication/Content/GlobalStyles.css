@@ -1,5 +1,6 @@
 ﻿body {
-  color: #fff; }
+  color: #fff;
+  background-repeat: no-repeat; }
 
 a {
   color: #fff !important; }
@@ -22,9 +23,9 @@ a {
   font-weight: bold;
   margin-bottom: 0; }
 
-.contest-gift {
+.lottery-gift {
   margin-top: 15px; }
 
-.contest-description {
+.lottery-description {
   text-align: center; }
 

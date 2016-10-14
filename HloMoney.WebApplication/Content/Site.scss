@@ -9,8 +9,8 @@ html, body {
 }
 
 body {
+    background-image: url(Images/bg.jpg);
     background-color: $white-color;
-    background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% auto;
     color: $blue-color;
@@ -254,7 +254,9 @@ a {
 .comments {
 
     h1 {
-        margin: 32px 0;
+        font-size: 54px;
+        margin: 55px 0;
+        text-align: center;
     }
 
     h2 {
@@ -290,6 +292,9 @@ a {
     }
 
     &-description {
+        text-align: center;
+        margin-top: 65px;
+
         h1, h2, h3, h4 {
             line-height: 50px;
             margin: 0;
@@ -318,6 +323,24 @@ a {
     }
 
     &-members {
+
+        h1 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .member {
+            width: 33.333333333%;
+            float: left;
+            text-align: center;
+
+            img {
+                width: 180px;
+                border: 2px solid #2c3e50;
+                border-radius: 90px;
+            }
+        }
+
         h1 {
             font-size: 54px;
             margin: 55px 0;
@@ -335,7 +358,7 @@ a {
     }
 
     &-image {
-        max-width: 100%;
+        width: 100%;
     }
 
     &-current {
@@ -403,7 +426,7 @@ a {
                 margin-bottom: 30px;
                 padding-top: 60px;
                 padding-bottom: 60px;
-                background-color: rgb(229, 236, 240);
+                background-color: rgba(44, 62, 80, 0.1);
             }
         }
     }

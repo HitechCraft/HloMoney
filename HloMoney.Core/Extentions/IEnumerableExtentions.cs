@@ -1,4 +1,6 @@
-﻿namespace HloMoney.Core.Extentions
+﻿using System;
+
+namespace HloMoney.Core.Extentions
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -32,6 +34,27 @@
             var limitedList = list.Skip(start).Reverse().Skip(list.Count() - count).Reverse();
 
             return limitedList;
+        }
+
+        public static IList<T> Randomize<T>(this IList<T> target)
+        {
+            Random RndNumberGenerator = new Random();
+
+            SortedList<int, T> newList = new SortedList<int, T>();
+
+            foreach (T item in target)
+            {
+                newList.Add(RndNumberGenerator.Next(), item);
+            }
+
+            target.Clear();
+
+            for (int i = 0; i < newList.Count; i++)
+            {
+                target.Add(newList.Values[i]);
+            }
+
+            return target;
         }
     }
 }

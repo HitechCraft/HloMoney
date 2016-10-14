@@ -43,8 +43,8 @@ html, body {
   font-family: 'Open Sans', sans-serif; }
 
 body {
+  background-image: url(Images/bg.jpg);
   background-color: #fff;
-  background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% auto;
   color: #2c3e50; }
@@ -202,7 +202,9 @@ a {
   margin: 50px 0; }
 
 .comments h1 {
-  margin: 32px 0; }
+  font-size: 54px;
+  margin: 55px 0;
+  text-align: center; }
 
 .comments h2 {
   margin: 40px 0; }
@@ -225,25 +227,36 @@ a {
   font-weight: bold;
   margin: 50px 0; }
 
-.contest-description h1, .contest-description h2, .contest-description h3, .contest-description h4 {
-  line-height: 50px;
-  margin: 0; }
+.contest-description {
+  text-align: center;
+  margin-top: 65px; }
+  .contest-description h1, .contest-description h2, .contest-description h3, .contest-description h4 {
+    line-height: 50px;
+    margin: 0; }
+  .contest-description h1 {
+    font-size: 35px; }
+  .contest-description h2 {
+    font-size: 25px; }
+  .contest-description h3 {
+    font-size: 18px; }
+  .contest-description h4 {
+    font-size: 12px; }
+  .contest-description ul {
+    padding: 0;
+    list-style: none; }
 
-.contest-description h1 {
-  font-size: 35px; }
+.contest-members h1 {
+  margin-bottom: 30px;
+  text-align: center; }
 
-.contest-description h2 {
-  font-size: 25px; }
-
-.contest-description h3 {
-  font-size: 18px; }
-
-.contest-description h4 {
-  font-size: 12px; }
-
-.contest-description ul {
-  padding: 0;
-  list-style: none; }
+.contest-members .member {
+  width: 33.333333333%;
+  float: left;
+  text-align: center; }
+  .contest-members .member img {
+    width: 180px;
+    border: 2px solid #2c3e50;
+    border-radius: 90px; }
 
 .contest-members h1 {
   font-size: 54px;
@@ -258,7 +271,7 @@ a {
   padding: 11px 16px; }
 
 .contest-image {
-  max-width: 100%; }
+  width: 100%; }
 
 .contest-current {
   text-align: center; }
@@ -298,7 +311,7 @@ a {
     margin-bottom: 30px;
     padding-top: 60px;
     padding-bottom: 60px;
-    background-color: #e5ecf0; }
+    background-color: rgba(44, 62, 80, 0.1); }
 
 .contest-winner {
   margin-bottom: 12px; }

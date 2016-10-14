@@ -97,6 +97,7 @@
     <Compile Include="Repository\Specification\Contest\ContestIsActiveSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestWinnerSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestIsGlobalSpec.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestPartByContestSpec.cs" />
     <Compile Include="Repository\Specification\ISpecification.cs" />
     <Compile Include="Repository\Specification\User\ReportByUserSpec.cs" />
     <Compile Include="Web\Json.cs" />
