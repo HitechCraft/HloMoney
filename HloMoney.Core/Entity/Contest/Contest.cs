@@ -47,12 +47,12 @@
         /// <summary>
         /// Time, when contest will be start
         /// </summary>
-        public virtual DateTime StartTime { get; set; }
+        public virtual DateTime? StartTime { get; set; }
 
         /// <summary>
         /// Time, when contest will be finish
         /// </summary>
-        public virtual DateTime EndTime { get; set; }
+        public virtual DateTime? EndTime { get; set; }
 
         /// <summary>
         /// Parts of this contest

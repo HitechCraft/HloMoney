@@ -14,8 +14,8 @@ namespace HloMoney.BL.CQRS.Command
 
         public int WinnerCount { get; set; }
 
-        public DateTime StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
-        public DateTime EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
     }
 }

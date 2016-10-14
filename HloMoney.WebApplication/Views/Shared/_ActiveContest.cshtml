@@ -1,0 +1,21 @@
+﻿@using HloMoney.Core.Models.Json
+@model IEnumerable<HloMoney.WebApplication.Models.ContestViewModel>
+
+<div class="contest-actives">
+    <h3>Что сейчас разыгрываем:</h3>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var contest in Model)
+        {
+            <div class="col-md-4">
+                <h3>Конкурс #@contest.Id</h3>
+                <p>Приз: @contest.Gift</p>
+                @Html.ActionLink("Подробнее", "Details", "Contest", new { id = contest.Id }, new { @class = "btn btn-primary btn-small" })
+            </div>
+        }
+    }
+    else
+    {
+        <h3>Текущих розыгрышей нет!</h3>
+    }
+</div>

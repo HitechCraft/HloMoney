@@ -19,6 +19,16 @@
         {
             var contestRep = GetRepository<Contest>();
 
+            var status = ContestStatus.New;
+
+            if (command.Type == ContestType.Standart)
+            {
+                command.StartTime = null;
+                command.EndTime = null;
+
+                status = ContestStatus.Started;
+            }
+
             contestRep.Add(new Contest
             {
                 Description = command.Description,
@@ -26,7 +36,7 @@
                 Image = command.Image,
                 Type = command.Type,
                 WinnerCount = command.WinnerCount,
-                Status = ContestStatus.New,
+                Status = status,
                 StartTime = command.StartTime,
                 EndTime = command.EndTime
             });

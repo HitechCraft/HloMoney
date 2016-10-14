@@ -50,11 +50,11 @@
 
             mapping.Map(x => x.StartTime)
                 .Column("StartTime")
-                .Not.Nullable();
+                .Nullable();
 
             mapping.Map(x => x.EndTime)
                 .Column("EndTime")
-                .Not.Nullable();
+                .Nullable();
 
             mapping.HasMany(x => x.Parts)
                 .Cascade.All();

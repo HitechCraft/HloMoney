@@ -11,7 +11,7 @@
         <div class="col-md-6">
             @Html.AntiForgeryToken()
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummaryStyled(false)
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Description)
@@ -37,16 +37,18 @@
                 @Html.ValidationMessageFor(model => model.WinnerCount, "", new { @class = "text-danger" })
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.StartTime)
-                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control", @id = "starttime" } })
-                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
-            </div>
+            <div id="select-time">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StartTime)
+                    @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control", @id = "starttime" } })
+                    @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.EndTime)
-                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control", @id = "endtime" } })
-                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EndTime)
+                    @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control", @id = "endtime" } })
+                    @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -74,7 +76,20 @@
         $("#endtime").datepicker({ dateFormat: 'dd.mm.yy' });
     });
 
-    tinymce.init({ selector: 'textarea' });
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'code'
+    });
+
+    $('#type')
+        .on('change',
+            function () {
+                if ($(this).val() === '0') {
+                    $('#select-time').css('display', 'none');
+                } else {
+                    $('#select-time').css('display', 'block');
+                }
+            });
 
     function readURL(input) {
         if (input.files && input.files[0]) {

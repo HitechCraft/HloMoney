@@ -19,13 +19,13 @@
         public abstract Expression<Func<TEntity, bool>> IsSatisfiedBy();
         
         public static ISpecification<TEntity> operator &(
-            ISpecification<TEntity> specLeft, BaseSpecification<TEntity> specRight)
+            BaseSpecification<TEntity> specLeft, ISpecification<TEntity> specRight)
         {
             return new AndSpecification<TEntity>(specLeft, specRight);
         }
 
         public static ISpecification<TEntity> operator |(
-            ISpecification<TEntity> specLeft, BaseSpecification<TEntity> specRight)
+            BaseSpecification<TEntity> specLeft, ISpecification<TEntity> specRight)
         {
             return new OrSpecification<TEntity>(specLeft, specRight);
         }

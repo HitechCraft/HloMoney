@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using HloMoney.Core.Models.Enum;
+﻿using HloMoney.Core.Extentions;
+using HloMoney.Core.Repository.Specification.User;
 
 namespace HloMoney.WebApplication.Controllers
 {
@@ -13,46 +13,24 @@ namespace HloMoney.WebApplication.Controllers
     using Core.DI;
     using Core.Entity;
     using Core.Projector;
-    using Core.Repository.Specification;
     using Models;
     using Manager;
+    using System.Collections.Generic;
+    using Core.Models.Enum;
 
     #endregion
 
     public class ContestController : BaseController
     {
+        #region Constructors
+
         public ContestController(IContainer container) : base(container)
         {
         }
 
-        // GET: Contest
-        [Authorize]
-        public ActionResult Details(int? id)
-        {
-            try
-            {
-                var vm = new EntityQueryHandler<Contest, ContestViewModel>(Container)
-                    .Handle(new EntityQuery<Contest, ContestViewModel>()
-                    {
-                        Id = id,
-                        Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
-                    });
+        #endregion
 
-                switch (vm.Type)
-                {
-                    case ContestType.CommentTime:
-                        return View("CommentDetails", vm);
-                    case ContestType.Global:
-                        return View("GlobalDetails", vm);
-                    default:
-                        return View(vm);
-                }
-            }
-            catch (Exception e)
-            {
-                return HttpNotFound();
-            }
-        }
+        #region CRUD
 
         [HttpGet]
         [Authorize(Roles = "Administrator")]
@@ -111,6 +89,8 @@ namespace HloMoney.WebApplication.Controllers
                         Projector = this.Container.Resolve<IProjector<Contest, ContestEditViewModel>>()
                     });
 
+                ViewBag.Types = this.GetTypeList();
+
                 return View(vm);
             }
             catch (Exception)
@@ -144,7 +124,7 @@ namespace HloMoney.WebApplication.Controllers
                         EndTime = vm.EndTime
                     });
 
-                    return RedirectToAction("Details", new { id = vm.Id});
+                    return RedirectToAction("Details", new { id = vm.Id });
                 }
                 catch (Exception e)
                 {
@@ -152,7 +132,38 @@ namespace HloMoney.WebApplication.Controllers
                 }
             }
 
+            ViewBag.Types = this.GetTypeList();
+
             return View(vm);
+        }
+
+        // GET: Contest
+        [Authorize]
+        public ActionResult Details(int? id)
+        {
+            try
+            {
+                var vm = new EntityQueryHandler<Contest, ContestViewModel>(Container)
+                    .Handle(new EntityQuery<Contest, ContestViewModel>()
+                    {
+                        Id = id,
+                        Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
+                    });
+
+                switch (vm.Type)
+                {
+                    case ContestType.CommentTime:
+                        return View("CommentDetails", vm);
+                    case ContestType.Global:
+                        return View("GlobalDetails", vm);
+                    default:
+                        return View(vm);
+                }
+            }
+            catch (Exception e)
+            {
+                return HttpNotFound();
+            }
         }
 
         [HttpPost]
@@ -173,22 +184,46 @@ namespace HloMoney.WebApplication.Controllers
             }
         }
 
+        #endregion
+
+        #region Actions
+
+        public ActionResult ActiveContests()
+        {
+            try
+            {
+                var vm = new EntityListQueryHandler<Contest, ContestViewModel>(Container)
+                        .Handle(new EntityListQuery<Contest, ContestViewModel>
+                        {
+                            Specification = new ContestIsActiveSpec() & !new ContestIsGlobalSpec(),
+                            Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
+                        }).Limit(3);
+
+                return PartialView("_ActiveContest", vm);
+            }
+            catch (Exception e)
+            {
+                return PartialView("_ActiveContest");
+            }
+        }
+
         [HttpGet]
-        public ActionResult Current()
+        public ActionResult GlobalContest()
         {
             try
             {
                 var vm = new EntityListQueryHandler<Contest, ContestViewModel>(Container)
                     .Handle(new EntityListQuery<Contest, ContestViewModel>
                     {
+                        Specification = new ContestIsGlobalSpec(),
                         Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
-                    }).OrderByDescending(x => x.Id).First();
+                    }).First();
 
-                return PartialView("_Contest", vm);
+                return PartialView("_GlobalContest", vm);
             }
             catch (Exception e)
             {
-                return PartialView("_Contest");
+                return PartialView("_GlobalContest");
             }
         }
 
@@ -196,6 +231,12 @@ namespace HloMoney.WebApplication.Controllers
         {
             return new List<SelectListItem>()
             {
+                new SelectListItem()
+                {
+                    Text = Resource.ContestTypeStandart,
+                    Value = ((int)ContestType.Standart).ToString(),
+                    Selected = false
+                },
                 new SelectListItem()
                 {
                     Text = Resource.ContestTypeStandartTime,
@@ -214,5 +255,7 @@ namespace HloMoney.WebApplication.Controllers
                 }
             };
         }
+
+        #endregion
     }
 }

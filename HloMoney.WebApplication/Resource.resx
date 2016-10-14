@@ -126,6 +126,9 @@
   <data name="ContestTypeGlobal" xml:space="preserve">
     <value>Глобальный конкурс</value>
   </data>
+  <data name="ContestTypeStandart" xml:space="preserve">
+    <value>Обычный без времени</value>
+  </data>
   <data name="ContestTypeStandartTime" xml:space="preserve">
     <value>Обычный на время</value>
   </data>

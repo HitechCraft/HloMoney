@@ -4,7 +4,8 @@
 
     using FluentNHibernate.Automapping;
     using FluentNHibernate.Automapping.Alterations;
-    using HloMoney.Core.Entity;
+    using Core.Entity;
+    using System;
 
     #endregion
 
@@ -18,7 +19,7 @@
                 .GeneratedBy.Increment();
 
             mapping.Map(x => x.Text)
-                .Length(255)
+                .Length(Int32.MaxValue)
                 .Column("Text")
                 .Not.Nullable();
 

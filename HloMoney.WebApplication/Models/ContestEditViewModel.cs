@@ -27,9 +27,9 @@
         public ContestType Type { get; set; }
         
         [Display(Name = "Дата начала")]
-        public DateTime StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
         [Display(Name = "Дата окончания")]
-        public DateTime EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
     }
 }

@@ -1,0 +1,13 @@
+﻿@using HloMoney.Core.Models.Json
+@model HloMoney.WebApplication.Models.ContestViewModel
+    
+@if (Model != null)
+{
+    <div>
+        <h2>Идет глобальный розыгрыш!</h2>
+        <h3>
+            <strong>Приз: @Model.Gift</strong>
+        </h3>
+        @Html.ActionLink("Принять участие!!!", "Details", "Contest", new { id = Model.Id }, new { @class = "btn btn-warning btn-lg", @id = "takepart" })
+    </div>
+}

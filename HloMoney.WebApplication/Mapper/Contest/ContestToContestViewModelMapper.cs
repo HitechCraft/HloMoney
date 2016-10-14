@@ -1,4 +1,6 @@
-﻿namespace HloMoney.WebApplication.Mapper
+﻿using HloMoney.Core.Helper;
+
+namespace HloMoney.WebApplication.Mapper
 {
     using Models;
     using Core.Entity;
@@ -14,7 +16,14 @@
                 .ForMember(dst => dst.Image, ext => ext.MapFrom(src => src.Image))
                 .ForMember(dst => dst.WinnerCount, ext => ext.MapFrom(src => src.WinnerCount))
                 .ForMember(dst => dst.Type, ext => ext.MapFrom(src => src.Type))
-                .ForMember(dst => dst.EndTime, ext => ext.MapFrom(src => src.EndTime));
+                .ForMember(dst => dst.EndTime, ext => ext.MapFrom(src => src.EndTime))
+                .ForMember(dst => dst.Comments, ext => ext.MapFrom(src => src.Comments));
+
+            this.ConfigurationStore.CreateMap<Comment, CommentViewModel>()
+                .ForMember(dst => dst.ContestId, ext => ext.MapFrom(src => src.Contest.Id))
+                .ForMember(dst => dst.AuthorName, ext => ext.MapFrom(src => VkApiHelper.GetUserName(src.Author)))
+                .ForMember(dst => dst.AuthorAvatar, ext => ext.MapFrom(src => VkApiHelper.GetUserAvatar(src.Author)))
+                .ForMember(dst => dst.Date, ext => ext.MapFrom(src => src.Date));
         }
     }
 }

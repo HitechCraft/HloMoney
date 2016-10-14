@@ -88,6 +88,15 @@ namespace HloMoney.WebApplication {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Обычный без времени.
+        /// </summary>
+        internal static string ContestTypeStandart {
+            get {
+                return ResourceManager.GetString("ContestTypeStandart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Обычный на время.
         /// </summary>
         internal static string ContestTypeStandartTime {

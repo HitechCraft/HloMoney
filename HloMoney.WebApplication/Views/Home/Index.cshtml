@@ -9,23 +9,24 @@
 
 <div class="project-status">
     @*<div class="stats">
-        <span class="title">78</span>
-        <span class="value">Розыгрышей</span>
-    </div>
-    <div class="stats">
-        <span class="title">1200</span>
-        <span class="value">Участников</span>
-    </div>
-    <div class="stats">
-        <span class="title">133</span>
-        <span class="value">На сайте</span>
-    </div>
-    <div class="stats">
-        <span class="title">43255</span>
-        <span class="value">Сумма выплат</span>
-    </div>*@
+            <span class="title">78</span>
+            <span class="value">Розыгрышей</span>
+        </div>
+        <div class="stats">
+            <span class="title">1200</span>
+            <span class="value">Участников</span>
+        </div>
+        <div class="stats">
+            <span class="title">133</span>
+            <span class="value">На сайте</span>
+        </div>
+        <div class="stats">
+            <span class="title">43255</span>
+            <span class="value">Сумма выплат</span>
+        </div>*@
 </div>
 
-<div class="lottery-current">
-    @Html.Action("Current", "Contest")
+<div class="contest-current">
+    @Html.Action("GlobalContest", "Contest")
+    @Html.Action("ActiveContests", "Contest")
 </div>

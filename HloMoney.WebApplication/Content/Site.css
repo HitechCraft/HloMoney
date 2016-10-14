@@ -1,6 +1,6 @@
 ﻿@media (max-width: 768px) {
   .navbar {
-    background: #2c3e50 !important; }
+    background: #3a5269; }
     .navbar-toggle {
       border: 1px solid #fff;
       padding: 10px 14px;
@@ -22,18 +22,18 @@
       padding: 15px 25px !important; } }
 
 @media (min-width: 769px) and (max-width: 998px) {
-  .lottery-image {
+  .contest-image {
     width: 100%;
     margin-bottom: 36px; }
-    .lottery-image-container {
+    .contest-image-container {
       text-align: center; }
-  .lottery-description {
+  .contest-description {
     text-align: justify; }
-  .lottery-members {
+  .contest-members {
     text-align: center; } }
 
 @media (min-width: 999px) and (max-width: 1200px) {
-  .lottery-image {
+  .contest-image {
     max-width: 460px; } }
 
 html, body {
@@ -44,10 +44,9 @@ html, body {
 
 body {
   background-color: #fff;
-  background-attachment: fixed;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: 100% auto;
-  padding-bottom: 20px;
   color: #2c3e50; }
 
 .body-content {
@@ -71,7 +70,7 @@ select,
 textarea {
   max-width: 280px; }
 
-.form-group input, .form-group select {
+.form-group input, .form-group select, .form-group textarea {
   max-width: 100% !important; }
 
 a {
@@ -85,6 +84,14 @@ a {
   a:focus {
     background: transparent;
     color: #16a085; }
+
+.validation h4 {
+  font-size: 25px; }
+
+.validation-summary-errors ul {
+  padding: 0;
+  list-style: none;
+  font-weight: bold; }
 
 .user-avatar {
   display: inline-block;
@@ -127,7 +134,7 @@ a {
     color: #2c3e50; }
   .navbar-nav li a {
     font-size: 20px;
-    padding: 24px 20px; }
+    padding: 27px 20px; }
   .navbar-nav li a.login {
     padding: 24px 20px !important; }
   .navbar-right li a {
@@ -155,8 +162,7 @@ a {
     color: #16a085; }
 
 .header {
-  background: #fff;
-  margin-top: -60px; }
+  background: transparent; }
   .header .logo {
     background-image: url(Images/logo.png);
     background-repeat: no-repeat;
@@ -195,76 +201,86 @@ a {
   margin: 50px 0; }
 
 .comments h1 {
-  font-size: 54px;
-  margin: 55px 0; }
+  margin: 32px 0; }
+
+.comments h2 {
+  margin: 40px 0; }
+
+.comments .well h3 {
+  margin-top: 0; }
+
+.comments .well textarea {
+  min-height: 170px;
+  resize: none;
+  font-size: 20px; }
 
 #contest-image {
   max-width: 500px;
   max-height: 500px;
   border: 1px solid #2c3e50; }
 
-.lottery-gift {
+.contest-gift {
   font-size: 35px;
   font-weight: bold;
   margin: 50px 0; }
 
-.lottery-description h1, .lottery-description h2, .lottery-description h3, .lottery-description h4 {
+.contest-description h1, .contest-description h2, .contest-description h3, .contest-description h4 {
   line-height: 50px;
   margin: 0; }
 
-.lottery-description h1 {
+.contest-description h1 {
   font-size: 35px; }
 
-.lottery-description h2 {
+.contest-description h2 {
   font-size: 25px; }
 
-.lottery-description h3 {
+.contest-description h3 {
   font-size: 18px; }
 
-.lottery-description h4 {
+.contest-description h4 {
   font-size: 12px; }
 
-.lottery-description ul {
+.contest-description ul {
   padding: 0;
   list-style: none; }
 
-.lottery-members h1 {
+.contest-members h1 {
   font-size: 54px;
   margin: 55px 0; }
 
-.lottery-time {
+.contest-time {
   font-size: 20px; }
 
-.lottery-part {
+.contest-part {
   float: right;
   font-size: 32px;
   padding: 11px 16px; }
 
-.lottery-image {
+.contest-image {
   max-width: 100%; }
 
-.lottery-current {
+.contest-current {
   text-align: center; }
-  .lottery-current h2 {
+  .contest-current h2 {
     font-size: 50px;
     font-weight: bold;
     margin-top: 130px;
     margin-bottom: 35px; }
-  .lottery-current h3 {
+  .contest-current h3 {
     font-size: 37px;
     margin: 0 0 22px 0px;
     font-weight: bold; }
-  .lottery-current .state h4 {
+  .contest-current .state h4 {
     margin-bottom: 0px; }
-  .lottery-current .state #time-left {
+  .contest-current .state #time-left {
     font-size: 70px; }
-  .lottery-current .btn {
+  .contest-current .btn {
     margin: 45px 0;
     font-size: 35px; }
-  .lottery-current .members h3 {
+  .contest-current .members h3 {
     margin: 7px 0 11px 0;
     font-weight: bold; }
-  .lottery-current .members:after {
+  .contest-current .members:after {
     clear: both;
     content: " ";
     display: table; }

@@ -3,6 +3,10 @@
     public enum ContestType
     {
         /// <summary>
+        /// Обычный розыгрыш без времени
+        /// </summary>
+        Standart,
+        /// <summary>
         /// Обычный розыгрыш с ограничением по времени
         /// </summary>
         StandartTime,

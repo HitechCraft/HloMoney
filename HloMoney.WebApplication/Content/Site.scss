@@ -10,10 +10,9 @@ html, body {
 
 body {
     background-color: $white-color;
-    background-attachment: fixed;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: 100% auto;
-    padding-bottom: 20px;
     color: $blue-color;
 }
 
@@ -48,7 +47,7 @@ textarea {
 }
 
 .form-group {
-    input, select {
+    input, select, textarea {
         max-width: 100% !important;
     }
 }
@@ -67,6 +66,22 @@ a {
     &:focus {
         background: transparent;
         color: $green-color;
+    }
+}
+
+.validation {
+    h4 {
+        font-size: 25px;
+    }
+
+    &-summary {
+        &-errors {
+            ul {
+                padding: 0;
+                list-style: none;
+                font-weight: bold;
+            }
+        }
     }
 }
 
@@ -123,7 +138,7 @@ a {
         li {
             a {
                 font-size: 20px;
-                padding: 24px 20px;
+                padding: 27px 20px;
             }
 
             a.login {
@@ -179,8 +194,7 @@ a {
 }
 
 .header {
-    background: $white-color;
-    margin-top: -60px;
+    background: transparent;
 
     .logo {
         background-image: url(./Images/logo.png);
@@ -237,9 +251,25 @@ a {
 }
 
 .comments {
+
     h1 {
-        font-size: 54px;
-        margin: 55px 0;
+        margin: 32px 0;
+    }
+
+    h2 {
+        margin: 40px 0;
+    }
+
+    .well {
+        h3 {
+            margin-top: 0;
+        }
+
+        textarea {
+            min-height: 170px;
+            resize: none;
+            font-size: 20px;
+        }
     }
 }
 
@@ -251,7 +281,7 @@ a {
     }
 }
 
-.lottery {
+.contest {
     &-gift {
         font-size: 35px;
         font-weight: bold;

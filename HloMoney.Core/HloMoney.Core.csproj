@@ -94,6 +94,9 @@
     <Compile Include="Repository\Specification\Composite\AndSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\NotSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\OrSpecification.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestIsNewSpec.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestIsActiveSpec.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestIsGlobalSpec.cs" />
     <Compile Include="Repository\Specification\ISpecification.cs" />
     <Compile Include="Repository\Specification\User\ReportByUserSpec.cs" />
     <Compile Include="Web\Json.cs" />
@@ -107,9 +110,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\Specification\Contest\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
