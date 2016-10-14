@@ -8,16 +8,16 @@
 
     #endregion
 
-    public class NotSpecification<TEntity> : ISpecification<TEntity> where TEntity : BaseEntity<TEntity>
+    public class NotSpecification<TEntity> : BaseSpecification<TEntity> where TEntity : BaseEntity<TEntity>
     {
-        private readonly ISpecification<TEntity> _wrapped;
+        private readonly BaseSpecification<TEntity> _wrapped;
 
-        public NotSpecification(ISpecification<TEntity> wrapped)
+        public NotSpecification(BaseSpecification<TEntity> wrapped)
         {
             this._wrapped = wrapped;
         }
 
-        public Expression<Func<TEntity, bool>> IsSatisfiedBy()
+        public override Expression<Func<TEntity, bool>> IsSatisfiedBy()
         {
             var param = Expression.Parameter(typeof(TEntity), "x");
             var body = Expression.Not(Expression.Invoke(this._wrapped.IsSatisfiedBy(), param));

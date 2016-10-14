@@ -1,4 +1,6 @@
-﻿namespace HloMoney.BL.CQRS.Command
+﻿using System;
+
+namespace HloMoney.BL.CQRS.Command
 {
     #region Using Directives
 
@@ -18,15 +20,12 @@
         public override void Handle(ContestCreateCommand command)
         {
             var contestRep = GetRepository<Contest>();
-
-            var status = ContestStatus.New;
+            
+            var status = ContestStatus.Started;
 
             if (command.Type == ContestType.Standart)
             {
-                command.StartTime = null;
                 command.EndTime = null;
-
-                status = ContestStatus.Started;
             }
 
             contestRep.Add(new Contest
@@ -37,7 +36,7 @@
                 Type = command.Type,
                 WinnerCount = command.WinnerCount,
                 Status = status,
-                StartTime = command.StartTime,
+                StartTime = DateTime.Now,
                 EndTime = command.EndTime
             });
             

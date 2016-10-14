@@ -12,18 +12,18 @@
     /// Specification for logic combining of other specifications
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class OrSpecification<TEntity> : ISpecification<TEntity> where TEntity : BaseEntity<TEntity>
+    public class OrSpecification<TEntity> : BaseSpecification<TEntity> where TEntity : BaseEntity<TEntity>
     {
-        private readonly ISpecification<TEntity> _left;
-        private readonly ISpecification<TEntity> _right;
+        private readonly BaseSpecification<TEntity> _left;
+        private readonly BaseSpecification<TEntity> _right;
 
-        public OrSpecification(ISpecification<TEntity> left, ISpecification<TEntity> right)
+        public OrSpecification(BaseSpecification<TEntity> left, BaseSpecification<TEntity> right)
         {
             this._left = left;
             this._right = right;
         }
 
-        public Expression<Func<TEntity, bool>> IsSatisfiedBy()
+        public override Expression<Func<TEntity, bool>> IsSatisfiedBy()
         {
             var param = Expression.Parameter(typeof(TEntity), "x");
 

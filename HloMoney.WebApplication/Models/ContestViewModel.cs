@@ -17,9 +17,13 @@
         public int WinnerCount { get; set; }
 
         public ContestType Type { get; set; }
-        
+
+        public ContestStatus Status { get; set; }
+
         public DateTime? EndTime { get; set; }
 
         public IEnumerable<CommentViewModel> Comments { get; set; }
+
+        public IEnumerable<WinnerViewModel> Winners { get; set; }
     }
 }

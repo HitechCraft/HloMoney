@@ -1,13 +1,22 @@
-﻿@using HloMoney.Core.Models.Json
+﻿@using HloMoney.Core.Models.Enum
 @model HloMoney.WebApplication.Models.ContestViewModel
-    
-@if (Model != null)
+
+@if (Model != null && Model.Status != ContestStatus.Ended)
 {
-    <div>
+    if (Model.Status == ContestStatus.Started)
+    {
         <h2>Идет глобальный розыгрыш!</h2>
-        <h3>
-            <strong>Приз: @Model.Gift</strong>
-        </h3>
-        @Html.ActionLink("Принять участие!!!", "Details", "Contest", new { id = Model.Id }, new { @class = "btn btn-warning btn-lg", @id = "takepart" })
-    </div>
+            <h3>
+                <strong>Приз: @Model.Gift</strong>
+            </h3>
+            @Html.ActionLink("Принять участие!!!", "Details", "Contest", new { id = Model.Id }, new { @class = "btn btn-warning btn-lg", @id = "takepart" })
+    }
+    else
+    {
+        <h2>Глобальный розыгрыш вот вот начнется!</h2>
+            <h3>
+                <strong>Приз: @Model.Gift</strong>
+            </h3>
+            @Html.ActionLink("Узнать", "Details", "Contest", new { id = Model.Id }, new { @class = "btn btn-warning btn-lg", @id = "takepart" })
+    }
 }

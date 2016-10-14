@@ -13,9 +13,7 @@ namespace HloMoney.BL.CQRS.Command
         public byte[] Image { get; set; }
 
         public int WinnerCount { get; set; }
-
-        public DateTime? StartTime { get; set; }
-
+        
         public DateTime? EndTime { get; set; }
     }
 }

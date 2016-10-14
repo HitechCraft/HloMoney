@@ -241,6 +241,7 @@
     <Compile Include="Models\ReportCreateViewModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\WinnerViewModel.cs" />
     <Compile Include="Ninject\Current\CurrentUser.cs" />
     <Compile Include="Ninject\Current\ICurrentUser.cs" />
     <Compile Include="Ninject\WebAppModule.cs" />
@@ -454,6 +455,7 @@
     <Content Include="Views\Contest\GlobalDetails.cshtml" />
     <Content Include="Views\Comment\_CommentPartialList.cshtml" />
     <Content Include="Views\Shared\_ActiveContest.cshtml" />
+    <Content Include="Views\Shared\_EndedContest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -195,6 +195,7 @@ a {
 
 .header {
     background: transparent;
+    margin-bottom: 80px !important;
 
     .logo {
         background-image: url(./Images/logo.png);
@@ -343,7 +344,6 @@ a {
         h2 {
             font-size: 50px;
             font-weight: bold;
-            margin-top: 130px;
             margin-bottom: 35px;
         }
 
@@ -363,11 +363,6 @@ a {
             }
         }
 
-        .btn {
-            margin: 45px 0;
-            font-size: 35px;
-        }
-
         .members {
 
             h3 {
@@ -379,6 +374,33 @@ a {
                 clear: both;
                 content: " ";
                 display: table;
+            }
+        }
+    }
+
+    &-global {
+        margin: 87px 0 50px 0;
+
+        .btn {
+            margin: 45px 0;
+            font-size: 35px;
+        }
+    }
+
+    &-actives, &-ended {
+        margin: 26px 0 47px 0;
+
+        h3 {
+            margin: 0 0 43px 0px;
+        }
+
+        h3.title {
+            margin: 0 0 10px 0px;
+        }
+
+        &-list{
+            .active{
+                margin-bottom: 30px;
             }
         }
     }

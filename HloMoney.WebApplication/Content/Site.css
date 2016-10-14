@@ -1,6 +1,6 @@
 ﻿@media (max-width: 768px) {
   .navbar {
-    background: #3a5269; }
+    background: #3a5269 !important; }
     .navbar-toggle {
       border: 1px solid #fff;
       padding: 10px 14px;
@@ -22,18 +22,18 @@
       padding: 15px 25px !important; } }
 
 @media (min-width: 769px) and (max-width: 998px) {
-  .contest-image {
+  .lottery-image {
     width: 100%;
     margin-bottom: 36px; }
-    .contest-image-container {
+    .lottery-image-container {
       text-align: center; }
-  .contest-description {
+  .lottery-description {
     text-align: justify; }
-  .contest-members {
+  .lottery-members {
     text-align: center; } }
 
 @media (min-width: 999px) and (max-width: 1200px) {
-  .contest-image {
+  .lottery-image {
     max-width: 460px; } }
 
 html, body {
@@ -162,7 +162,8 @@ a {
     color: #16a085; }
 
 .header {
-  background: transparent; }
+  background: transparent;
+  margin-bottom: 80px !important; }
   .header .logo {
     background-image: url(Images/logo.png);
     background-repeat: no-repeat;
@@ -264,7 +265,6 @@ a {
   .contest-current h2 {
     font-size: 50px;
     font-weight: bold;
-    margin-top: 130px;
     margin-bottom: 35px; }
   .contest-current h3 {
     font-size: 37px;
@@ -274,9 +274,6 @@ a {
     margin-bottom: 0px; }
   .contest-current .state #time-left {
     font-size: 70px; }
-  .contest-current .btn {
-    margin: 45px 0;
-    font-size: 35px; }
   .contest-current .members h3 {
     margin: 7px 0 11px 0;
     font-weight: bold; }
@@ -284,6 +281,21 @@ a {
     clear: both;
     content: " ";
     display: table; }
+
+.contest-global {
+  margin: 87px 0 50px 0; }
+  .contest-global .btn {
+    margin: 45px 0;
+    font-size: 35px; }
+
+.contest-actives, .contest-ended {
+  margin: 26px 0 47px 0; }
+  .contest-actives h3, .contest-ended h3 {
+    margin: 0 0 43px 0px; }
+  .contest-actives h3.title, .contest-ended h3.title {
+    margin: 0 0 10px 0px; }
+  .contest-actives-list .active, .contest-ended-list .active {
+    margin-bottom: 30px; }
 
 footer {
   font-size: 20px;

@@ -22,6 +22,12 @@ namespace HloMoney.WebApplication.Controllers
 
     public class ContestController : BaseController
     {
+        #region Properties
+
+        public int ContestsOnPage => 3;
+
+        #endregion
+
         #region Constructors
 
         public ContestController(IContainer container) : base(container)
@@ -59,7 +65,6 @@ namespace HloMoney.WebApplication.Controllers
                         Image = ImageManager.GetImageBytes(uploadImage),
                         WinnerCount = vm.WinnerCount,
                         Type = vm.Type,
-                        StartTime = vm.StartTime,
                         EndTime = vm.EndTime
                     });
 
@@ -120,7 +125,6 @@ namespace HloMoney.WebApplication.Controllers
                         Gift = vm.Gift,
                         Image = vm.Image,
                         WinnerCount = vm.WinnerCount,
-                        StartTime = vm.StartTime,
                         EndTime = vm.EndTime
                     });
 
@@ -188,22 +192,47 @@ namespace HloMoney.WebApplication.Controllers
 
         #region Actions
 
-        public ActionResult ActiveContests()
+        [HttpGet]
+        public ActionResult ActiveContests(bool? all)
+        {
+            try
+            {
+                ViewBag.AllShowed = all != null && all.Value;
+
+                var vm = new EntityListQueryHandler<Contest, ContestViewModel>(Container)
+                        .Handle(new EntityListQuery<Contest, ContestViewModel>
+                        {
+                            Specification = new ContestIsActiveSpec() & !new ContestIsGlobalSpec(),
+                            Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
+                        });
+
+                if (vm.Count <= this.ContestsOnPage) ViewBag.AllShowed = true;
+
+                return PartialView("_ActiveContest", (all != null && all.Value ? vm : vm.Limit(3)));
+            }
+            catch (Exception e)
+            {
+                return PartialView("_ActiveContest");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EndedContests()
         {
             try
             {
                 var vm = new EntityListQueryHandler<Contest, ContestViewModel>(Container)
                         .Handle(new EntityListQuery<Contest, ContestViewModel>
                         {
-                            Specification = new ContestIsActiveSpec() & !new ContestIsGlobalSpec(),
+                            Specification = !new ContestIsActiveSpec() & !new ContestIsGlobalSpec(),
                             Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
-                        }).Limit(3);
-
-                return PartialView("_ActiveContest", vm);
+                        });
+                
+                return PartialView("_EndedContest", vm.Limit(this.ContestsOnPage));
             }
             catch (Exception e)
             {
-                return PartialView("_ActiveContest");
+                return PartialView("_EndedContest");
             }
         }
 

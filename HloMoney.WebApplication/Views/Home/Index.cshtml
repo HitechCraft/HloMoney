@@ -27,6 +27,32 @@
 </div>
 
 <div class="contest-current">
-    @Html.Action("GlobalContest", "Contest")
-    @Html.Action("ActiveContests", "Contest")
+    <div class="contest-global">
+        @Html.Action("GlobalContest", "Contest")
+    </div>
+    <div class="contest-actives">
+        @Html.Action("ActiveContests", "Contest")
+    </div>
+    <div class="contest-ended">
+        @Html.Action("EndedContests", "Contest")
+    </div>
 </div>
+
+<script type="text/javascript">
+    
+    function loadAllActives() {
+        $('#load-all').html('<span class="loader"></span>');
+        getAllActives();
+    }
+
+    function getAllActives() {
+        $.get('@Url.Action("ActiveContests", "Contest")',
+            { all: true },
+            function(responce) {
+                $('.contest-actives').html('');
+                $('.contest-actives').html(responce);
+
+                $('#load-more').html('Показать все');
+            });
+    }
+</script>
