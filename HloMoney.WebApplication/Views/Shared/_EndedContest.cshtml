@@ -1,31 +1,25 @@
 ﻿@using HloMoney.Core.Models.Json
 @model IEnumerable<HloMoney.WebApplication.Models.ContestViewModel>
 
-<h3>III прошедших конкурсов:</h3>
 @if (Model != null && Model.Any())
 {
-    <div class="row contest-actives-list">
-        @foreach (var contest in Model)
-        {
-            <div class="col-md-4 active">
-                <h3 class="title">Конкурс #@contest.Id</h3>
-                <div class="contest-winner">
-                    <p>Победител@(contest.WinnerCount > 1 ? "и" : "ь"):</p>
-                    @foreach (var winner in contest.Winners)
+    <div class="contest-ended">
+        <h3>Прошедшие конкурсов:</h3>
+        <div class="contest-actives-list">
+            @foreach (var contest in Model)
+            {
+                <div class="col-md-4 active">
+                    <h3 class="title">Конкурс #@contest.Id</h3>
+                    <div class="contest-winner">
+                        <p>Победител@(contest.WinnerCount > 1 ? "и" : "ь"):</p>
+                        @foreach (var winner in contest.Winners)
                     {
-                        <img src="@winner.WinnerAvatar" />
-                    }
+                            <img src="@winner.WinnerAvatar" />
+                        }
+                    </div>
+                    @Html.ActionLink("Подробнее", "Details", "Contest", new { id = contest.Id }, new { @class = "btn btn-primary" })
                 </div>
-                @Html.ActionLink("Подробнее", "Details", "Contest", new { id = contest.Id }, new { @class = "btn btn-primary" })
-            </div>
-        }
+            }
+        </div>
     </div>
-    if (ViewBag.AllShowed != null && !ViewBag.AllShowed)
-    {
-        <a href="javascript:loadAllActives()" class="btn btn-custom btn-lg" id="load-all">Показать все текущие</a>
-    }
-}
-else
-{
-    <h3>Текущих розыгрышей нет!</h3>
 }

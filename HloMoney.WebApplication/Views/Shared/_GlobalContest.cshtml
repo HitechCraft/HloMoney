@@ -3,20 +3,22 @@
 
 @if (Model != null && Model.Status != ContestStatus.Ended)
 {
-    if (Model.Status == ContestStatus.Started)
-    {
-        <h2>Идет глобальный розыгрыш!</h2>
+    <div class="contest-global">
+        @if (Model.Status == ContestStatus.Started)
+        {
+            <h2>Идет глобальный розыгрыш!</h2>
             <h3>
                 <strong>Приз: @Model.Gift</strong>
             </h3>
             @Html.ActionLink("Принять участие!!!", "Details", "Contest", new { id = Model.Id }, new { @class = "btn btn-warning btn-lg", @id = "takepart" })
-    }
-    else
-    {
-        <h2>Глобальный розыгрыш вот вот начнется!</h2>
+        }
+        else
+        {
+            <h2>Глобальный розыгрыш вот вот начнется!</h2>
             <h3>
                 <strong>Приз: @Model.Gift</strong>
             </h3>
             @Html.ActionLink("Узнать", "Details", "Contest", new { id = Model.Id }, new { @class = "btn btn-warning btn-lg", @id = "takepart" })
-    }
+        }
+    </div>
 }

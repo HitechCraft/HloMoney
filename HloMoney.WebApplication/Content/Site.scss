@@ -401,6 +401,9 @@ a {
         &-list {
             .active {
                 margin-bottom: 30px;
+                padding-top: 60px;
+                padding-bottom: 60px;
+                background-color: rgb(229, 236, 240);
             }
         }
     }

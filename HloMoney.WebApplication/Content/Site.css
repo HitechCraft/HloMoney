@@ -295,7 +295,10 @@ a {
   .contest-actives h3.title, .contest-ended h3.title {
     margin: 0 0 10px 0px; }
   .contest-actives-list .active, .contest-ended-list .active {
-    margin-bottom: 30px; }
+    margin-bottom: 30px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: #e5ecf0; }
 
 .contest-winner {
   margin-bottom: 12px; }
