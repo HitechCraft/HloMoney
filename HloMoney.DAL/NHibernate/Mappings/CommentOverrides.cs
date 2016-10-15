@@ -19,7 +19,7 @@
                 .GeneratedBy.Increment();
 
             mapping.Map(x => x.Text)
-                .Length(Int32.MaxValue)
+                .Length(255)
                 .Column("Text")
                 .Not.Nullable();
 

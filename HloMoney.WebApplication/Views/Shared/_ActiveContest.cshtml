@@ -5,7 +5,7 @@
     <h3>Что сейчас разыгрываем:</h3>
     @if (Model != null && Model.Any())
     {
-        <div class="contest-actives-list">
+        <div class="row contest-actives-list">
             @foreach (var contest in Model)
             {
                 <div class="col-md-4 active">

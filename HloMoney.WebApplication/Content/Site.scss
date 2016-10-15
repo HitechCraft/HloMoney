@@ -10,10 +10,10 @@ html, body {
 
 body {
     background-image: url(Images/bg.jpg);
-    background-color: $white-color;
+    background-color: #482647;
     background-attachment: fixed;
     background-size: 100% auto;
-    color: $blue-color;
+    color: $white-color;
 }
 
 .body {
@@ -52,20 +52,24 @@ textarea {
     }
 }
 
+hr {
+    border-top: 1px solid rgba(230, 230, 230, 0.12);
+}
+
 a {
-    color: $blue-color;
+    color: $white-color;
     outline: none;
     cursor: pointer;
 
     &:hover {
         background: transparent;
-        color: $green-color;
+        color: $orange-color;
         text-decoration: none;
     }
 
     &:focus {
         background: transparent;
-        color: $green-color;
+        color: $orange-color;
     }
 }
 
@@ -91,7 +95,6 @@ a {
         width: 128px;
         height: 128px;
         border-radius: 88px;
-        border: 2px solid $blue-color;
         background-position: center;
         background-repeat: no-repeat;
         background-size: auto 100%;
@@ -101,7 +104,6 @@ a {
             width: 55px;
             height: 55px;
             border-radius: 50px;
-            border: 2px solid $blue-color;
             background-position: center;
             background-repeat: no-repeat;
             background-size: auto 100%;
@@ -124,14 +126,14 @@ a {
 
 .navbar {
     background: transparent;
-    color: $blue-color;
+    color: $white-color;
     font-weight: bold;
 
     &-brand {
         padding: 26px 33px 22px 17px;
         font-size: 29px;
         height: 69px;
-        color: $blue-color;
+        color: $orange-color;
     }
 
     &-nav {
@@ -161,7 +163,7 @@ a {
 .nav {
     li {
         a {
-            color: $blue-color;
+            color: $white-color;
 
             &:hover {
                 background-color: transparent;
@@ -263,16 +265,70 @@ a {
         margin: 40px 0;
     }
 
+    .comment {
+        margin: 0;
+        padding: 20px 0;
+
+        &-avatar-col {
+            width: 25%;
+            float: left;
+        }
+
+        &-text-col {
+            width: 75%;
+            float: left;
+        }
+
+        &-author {
+            &-avatar {
+                width: 160px;
+                height: 160px;
+                border-radius: 100px;
+                border: 2px solid #2c3e50;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                margin: 0 auto;
+                margin-top: 18px;
+            }
+        }
+
+        &-title {
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        &-text {
+            min-height: 121px;
+            margin-top: 15px;
+        }
+    }
+
     .well {
+        background-color: transparent;
+        border: 0;
+
         h3 {
             margin-top: 0;
         }
 
         textarea {
+            background-color: rgba(255, 255, 255, 0.08);
+            outline-color: #563f59;
+            outline-width: 10px;
+            color: #fff;
             min-height: 170px;
             resize: none;
             font-size: 20px;
         }
+    }
+
+    margin-bottom: 40px;
+
+    &:after {
+        clear: both;
+        content: " ";
+        display: table;
     }
 }
 
@@ -358,6 +414,7 @@ a {
     }
 
     &-image {
+        border: 1px solid rgb(173, 136, 189);
         width: 100%;
     }
 
@@ -426,7 +483,6 @@ a {
                 margin-bottom: 30px;
                 padding-top: 60px;
                 padding-bottom: 60px;
-                background-color: rgba(44, 62, 80, 0.1);
             }
         }
     }

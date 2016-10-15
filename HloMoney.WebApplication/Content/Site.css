@@ -44,10 +44,10 @@ html, body {
 
 body {
   background-image: url(Images/bg.jpg);
-  background-color: #fff;
+  background-color: #482647;
   background-attachment: fixed;
   background-size: 100% auto;
-  color: #2c3e50; }
+  color: #fff; }
 
 .body-content {
   position: relative;
@@ -73,17 +73,20 @@ textarea {
 .form-group input, .form-group select, .form-group textarea {
   max-width: 100% !important; }
 
+hr {
+  border-top: 1px solid rgba(230, 230, 230, 0.12); }
+
 a {
-  color: #2c3e50;
+  color: #fff;
   outline: none;
   cursor: pointer; }
   a:hover {
     background: transparent;
-    color: #16a085;
+    color: #ff7f0b;
     text-decoration: none; }
   a:focus {
     background: transparent;
-    color: #16a085; }
+    color: #ff7f0b; }
 
 .validation h4 {
   font-size: 25px; }
@@ -98,7 +101,6 @@ a {
   width: 128px;
   height: 128px;
   border-radius: 88px;
-  border: 2px solid #2c3e50;
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -107,7 +109,6 @@ a {
     width: 55px;
     height: 55px;
     border-radius: 50px;
-    border: 2px solid #2c3e50;
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto 100%;
@@ -125,13 +126,13 @@ a {
 
 .navbar {
   background: transparent;
-  color: #2c3e50;
+  color: #fff;
   font-weight: bold; }
   .navbar-brand {
     padding: 26px 33px 22px 17px;
     font-size: 29px;
     height: 69px;
-    color: #2c3e50; }
+    color: #ff7f0b; }
   .navbar-nav li a {
     font-size: 20px;
     padding: 27px 20px; }
@@ -143,23 +144,23 @@ a {
     line-height: 21px; }
 
 .nav li a {
-  color: #2c3e50; }
+  color: #fff; }
   .nav li a:hover {
     background-color: transparent;
-    color: #16a085; }
+    color: #47b39c; }
   .nav li a:focus {
     background-color: transparent;
-    color: #16a085; }
+    color: #47b39c; }
 
 .nav .open a {
   background-color: transparent;
   color: #2c3e50; }
   .nav .open a:hover {
     background-color: transparent;
-    color: #16a085; }
+    color: #47b39c; }
   .nav .open a:focus {
     background-color: transparent;
-    color: #16a085; }
+    color: #47b39c; }
 
 .header {
   background: transparent;
@@ -201,21 +202,56 @@ a {
 .page-splitter {
   margin: 50px 0; }
 
-.comments h1 {
-  font-size: 54px;
-  margin: 55px 0;
-  text-align: center; }
-
-.comments h2 {
-  margin: 40px 0; }
-
-.comments .well h3 {
-  margin-top: 0; }
-
-.comments .well textarea {
-  min-height: 170px;
-  resize: none;
-  font-size: 20px; }
+.comments {
+  margin-bottom: 40px; }
+  .comments h1 {
+    font-size: 54px;
+    margin: 55px 0;
+    text-align: center; }
+  .comments h2 {
+    margin: 40px 0; }
+  .comments .comment {
+    margin: 0;
+    padding: 20px 0; }
+    .comments .comment-avatar-col {
+      width: 25%;
+      float: left; }
+    .comments .comment-text-col {
+      width: 75%;
+      float: left; }
+    .comments .comment-author-avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 100px;
+      border: 2px solid #2c3e50;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      margin: 0 auto;
+      margin-top: 18px; }
+    .comments .comment-title {
+      font-weight: bold;
+      font-size: 25px; }
+    .comments .comment-text {
+      min-height: 121px;
+      margin-top: 15px; }
+  .comments .well {
+    background-color: transparent;
+    border: 0; }
+    .comments .well h3 {
+      margin-top: 0; }
+    .comments .well textarea {
+      background-color: rgba(255, 255, 255, 0.08);
+      outline-color: #563f59;
+      outline-width: 10px;
+      color: #fff;
+      min-height: 170px;
+      resize: none;
+      font-size: 20px; }
+  .comments:after {
+    clear: both;
+    content: " ";
+    display: table; }
 
 #contest-image {
   max-width: 500px;
@@ -271,6 +307,7 @@ a {
   padding: 11px 16px; }
 
 .contest-image {
+  border: 1px solid #ad88bd;
   width: 100%; }
 
 .contest-current {
@@ -310,8 +347,7 @@ a {
   .contest-actives-list .active, .contest-ended-list .active {
     margin-bottom: 30px;
     padding-top: 60px;
-    padding-bottom: 60px;
-    background-color: rgba(44, 62, 80, 0.1); }
+    padding-bottom: 60px; }
 
 .contest-winner {
   margin-bottom: 12px; }
