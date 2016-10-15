@@ -43,11 +43,10 @@ html, body {
   font-family: 'Open Sans', sans-serif; }
 
 body {
-  background-image: url(Images/bg.jpg);
-  background-color: #482647;
+  background-color: #53405c;
   background-attachment: fixed;
   background-size: 100% auto;
-  color: #fff; }
+  color: #f9e8d8; }
 
 .body-content {
   position: relative;
@@ -77,7 +76,7 @@ hr {
   border-top: 1px solid rgba(230, 230, 230, 0.12); }
 
 a {
-  color: #fff;
+  color: #f9e8d8;
   outline: none;
   cursor: pointer; }
   a:hover {
@@ -126,7 +125,7 @@ a {
 
 .navbar {
   background: transparent;
-  color: #fff;
+  color: #f9e8d8;
   font-weight: bold; }
   .navbar-brand {
     padding: 26px 33px 22px 17px;
@@ -144,7 +143,7 @@ a {
     line-height: 21px; }
 
 .nav li a {
-  color: #fff; }
+  color: #f9e8d8; }
   .nav li a:hover {
     background-color: transparent;
     color: #47b39c; }
@@ -443,15 +442,15 @@ span.loader {
   margin: 0 auto; }
 
 .btn-custom {
-  color: #2c3e50;
-  background-color: rgba(44, 62, 80, 0.22);
-  border-color: rgba(44, 62, 80, 0.22); }
+  color: #f9e8d8;
+  background-color: rgba(158, 123, 175, 0.63);
+  border-color: #805b92; }
   .btn-custom:hover {
-    color: #2c3e50;
-    background-color: rgba(44, 62, 80, 0.3);
-    border-color: rgba(44, 62, 80, 0.3); }
+    color: #f9e8d8;
+    background-color: rgba(158, 123, 175, 0.8);
+    border-color: #805b92; }
   .btn-custom:focus {
-    color: #2c3e50;
-    background-color: rgba(44, 62, 80, 0.3);
-    border-color: rgba(44, 62, 80, 0.3); }
+    color: #f9e8d8;
+    background-color: rgba(158, 123, 175, 0.8);
+    border-color: #805b92; }
 

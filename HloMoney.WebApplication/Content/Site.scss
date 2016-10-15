@@ -9,8 +9,8 @@ html, body {
 }
 
 body {
-    background-image: url(Images/bg.jpg);
-    background-color: #482647;
+    //background-image: url(Images/bg.jpg);
+    background-color: $viol-color;
     background-attachment: fixed;
     background-size: 100% auto;
     color: $white-color;
@@ -626,19 +626,19 @@ span.loader {
 }
 
 .btn-custom {
-    color: #2c3e50;
-    background-color: rgba(44, 62, 80, 0.22);
-    border-color: rgba(44, 62, 80, 0.22);
+    color: $white-color;
+    background-color: rgba(158, 123, 175, 0.63);
+    border-color: rgb(128, 91, 146);
 
     &:hover {
-        color: #2c3e50;
-        background-color: rgba(44, 62, 80, 0.3);
-        border-color: rgba(44, 62, 80, 0.3);
+        color: $white-color;
+        background-color: rgba(158, 123, 175, 0.80);
+        border-color: rgb(128, 91, 146);
     }
 
     &:focus {
-        color: #2c3e50;
-        background-color: rgba(44, 62, 80, 0.3);
-        border-color: rgba(44, 62, 80, 0.3);
+        color: $white-color;
+        background-color: rgba(158, 123, 175, 0.80);
+        border-color: rgb(128, 91, 146);
     }
 }
