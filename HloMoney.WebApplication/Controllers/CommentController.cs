@@ -1,4 +1,7 @@
-﻿namespace HloMoney.WebApplication.Controllers
+﻿using System.Linq;
+using HloMoney.BL.CQRS.Command;
+
+namespace HloMoney.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -9,6 +12,7 @@
     using Core.Extentions;
     using Core.Projector;
     using Models;
+    using System;
 
     #endregion
 
@@ -26,9 +30,26 @@
 
         #region CRUD
 
-        public ActionResult Index()
+        public JsonResult Create(string text, int contestId)
         {
-            return View();
+            try
+            {
+                if (text.Length <= 0) throw new Exception("Комментарий не может быть пустым");
+                if (text.Length > 255) throw new Exception("Комментарий не может превышать 255 символов");
+
+                this.CommandExecutor.Execute(new CommentCreateCommand
+                {
+                    AuthorId = this.CurrentUser.Info.Id,
+                    Text = text,
+                    ContestId = contestId
+                });
+
+                return Json(new {status = "OK", message = "Успешно"});
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "NO", message = "Ошибка добавления: " + e.Message });
+            }
         }
 
         #endregion
@@ -46,7 +67,7 @@
                 })
             .TakeRange((current - 1) * this.CommentOnLoad, current * this.CommentOnLoad);
 
-            return PartialView("_CommentPartialList", vm);
+            return PartialView("_CommentPartialList", vm.OrderByDescending(x => x.Date));
         }
 
         #endregion

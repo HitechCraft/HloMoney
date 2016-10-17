@@ -44,6 +44,10 @@
     <Compile Include="CQRS\Command\Base\BaseCommandHandler.cs" />
     <Compile Include="CQRS\Command\Base\ICommandExecutor.cs" />
     <Compile Include="CQRS\Command\Base\ICommandHandler.cs" />
+    <Compile Include="CQRS\Command\Comment\CommentRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\Comment\CommentCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Comment\CommentRemoveCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Comment\CommentCreateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Contest\ContestRemoveCommand.cs" />
     <Compile Include="CQRS\Command\Contest\ContestUpdateCommand.cs" />
     <Compile Include="CQRS\Command\Contest\ContestCreateCommand.cs" />

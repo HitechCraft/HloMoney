@@ -21,6 +21,9 @@
             Bind(typeof(ICommandHandler<ContestUpdateCommand>)).To(typeof(ContestUpdateCommandHandler));
             Bind(typeof(ICommandHandler<ContestRemoveCommand>)).To(typeof(ContestRemoveCommandHandler));
 
+            Bind(typeof(ICommandHandler<CommentCreateCommand>)).To(typeof(CommentCreateCommandHandler));
+            Bind(typeof(ICommandHandler<CommentRemoveCommand>)).To(typeof(CommentRemoveCommandHandler));
+
             Bind(typeof(ICommandHandler<ReportCreateCommand>)).To(typeof(ReportCreateCommandHandler));
 
             Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>));
