@@ -35,7 +35,9 @@
 <script type="text/javascript">
 
     function loadAllActives() {
-        $('#load-all').html('<span class="loader"></span>');
+        $('#load-more').addClass('disabled');
+        $('#load-all').html('<div id="loader"></div>');
+        new imageLoader('startAnimation()');
         getAllActives();
     }
 
@@ -43,6 +45,8 @@
         $.get('@Url.Action("ActiveContests", "Contest")',
             { all: true },
             function (responce) {
+                new imageLoader('stopAnimation()');
+                $('#load-more').removeClass('disabled');
                 $('.contest-actives').html('');
                 $('.contest-actives').html(responce);
 
