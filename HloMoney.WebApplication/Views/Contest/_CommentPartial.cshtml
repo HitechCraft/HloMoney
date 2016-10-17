@@ -1,0 +1,81 @@
+﻿<div class="comments">
+    <h1>Комментарии</h1>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="well">
+            <h3>
+                Оставить комментарий (осталось <span id="comment-text-len">255</span> символов)
+            </h3>
+            <div class="form-group">
+                <textarea class="form-control" id="comment-text" maxlength="255"></textarea>
+            </div>
+            <div class="form-group">
+                <a href="javascript:AddComment()" class="btn btn-primary">Написать</a>
+                <span id="comment-error" class="text-danger"></span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>Чтобы оставить комментарий вы должны @Html.ActionLink("войти", "Auth", "Account", new { returnUrl = Url.Action("Details", new { id = Model.Id }) }, null)</h3>
+    }
+    <div id="comments">
+        @Html.Action("GetCommentList", "Comment", new { contestId = Model.Id })
+    </div>
+</div>
+
+<script type="text/javascript">
+
+        $('#comment-text')
+            .on('input',
+                function () {
+                    if (checkMaxLength($(this).val(), $(this).attr('maxlength'))) {
+                        $('#comment-text-len').text();
+                        $('#comment-text-len').text($(this).attr('maxlength') - $(this).val().length);
+                    }
+                });
+
+        function checkMaxLength(text, limit) {
+            return text.length <= limit;
+        }
+
+        function AddComment() {
+            $('#comment-error').text('');
+
+            $.post('@Url.Action("Create", "Comment")',
+                { text: $('#comment-text').val(), contestId: parseInt('@Model.Id') },
+                function(responce) {
+                    if (responce.status === "NO") {
+                        $('#comment-error').text(responce.message);
+                    } else {
+                        $('#comment-text').val('');
+                        LoadComments();
+                    }
+                });
+        }
+
+        function LoadComments() {
+            $.get('@Url.Action("GetCommentList", "Comment")',
+                { page: 1, contestId: parseInt('@Model.Id') },
+                function (responce) {
+                    $('#comments').html(responce);
+                });
+        }
+
+        function DeleteContest(contestId) {
+            $.post('@Url.Action("Delete")',
+                { id: parseInt(contestId) },
+                function (responce) {
+                    if (responce.status === "OK") {
+                        growlSuccess(responce.message);
+
+                        setTimeout(function () {
+                            document.location = '@Url.Action("Index", "Home")';
+                        },
+                            2000);
+                    } else {
+                        growlError(responce.message);
+                    }
+                });
+        }
+</script>

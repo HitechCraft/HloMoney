@@ -27,7 +27,7 @@
 
         public DateTime? EndTime { get; set; }
 
-        public IEnumerable<CommentViewModel> Comments { get; set; }
+        public ICollection<CommentViewModel> Comments { get; set; }
 
         public List<WinnerViewModel> Winners { get; set; }
     }

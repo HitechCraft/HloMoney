@@ -94,6 +94,7 @@
     <Compile Include="Repository\Specification\Composite\AndSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\NotSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\OrSpecification.cs" />
+    <Compile Include="Repository\Specification\CommentByContestSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestIsActiveSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestWinnerSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestIsGlobalSpec.cs" />

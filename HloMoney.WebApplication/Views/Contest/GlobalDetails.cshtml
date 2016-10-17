@@ -30,13 +30,9 @@
     </div>
 </div>
 
-@*<div class="comments">
-    <h1>Комментарии</h1>
-    <div id="vk_comments"></div>
-    <script type="text/javascript">
-        VK.Widgets.Comments("vk_comments", { limit: 10, width: "665", attach: "*" });
-    </script>
-</div>*@
+@Html.Action("ContestMembers", new { contestId = Model.Id })
+
+@Html.Partial("_CommentPartial")
 
 @if (User.IsInRole("Administrator"))
 {

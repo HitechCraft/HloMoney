@@ -229,15 +229,7 @@ namespace HloMoney.WebApplication.Controllers
                             Specification = !new ContestIsActiveSpec() & !new ContestIsGlobalSpec(),
                             Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                         });
-
-                //TODO: разобраться с дублированием в automapper и перенести это туда
-                vm.ForEach(x => x.Winners.AddRange(new EntityListQueryHandler<ContestWinner, WinnerViewModel>(Container)
-                        .Handle(new EntityListQuery<ContestWinner, WinnerViewModel>
-                        {
-                            Specification = new ContestWinnerSpec(x.Id),
-                            Projector = Container.Resolve<IProjector<ContestWinner, WinnerViewModel>>()
-                        })));
-
+                
                 return PartialView("_EndedContest", vm.Limit(this.ContestsOnPage));
             }
             catch (Exception e)
