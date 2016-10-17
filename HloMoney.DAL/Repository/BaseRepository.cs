@@ -62,7 +62,7 @@ namespace HloMoney.DAL.Repository
 
             if (projector != null)
             {
-                return entities.Project(projector).ToList();
+                return entities.ToList().Project(projector);
             }
             
             return ((IQueryable<TResult>) entities).ToList();
