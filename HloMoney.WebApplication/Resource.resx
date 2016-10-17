@@ -132,4 +132,7 @@
   <data name="ContestTypeStandartTime" xml:space="preserve">
     <value>Обычный на время</value>
   </data>
+  <data name="ErrorReportMarkLength" xml:space="preserve">
+    <value>Оценка должна быть в интервале от 1 до 5</value>
+  </data>
 </root>

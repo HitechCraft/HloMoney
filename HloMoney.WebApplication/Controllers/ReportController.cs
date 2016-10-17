@@ -63,7 +63,7 @@
                 return View("AlreadyReported");
             }
 
-            if (vm.Mark < 1 || vm.Mark > 5) ModelState.AddModelError("Mark", "Оценка должна быть в интервале от 1 до 5");
+            if (vm.Mark < 1 || vm.Mark > 5) ModelState.AddModelError("Mark", Resource.ErrorReportMarkLength);
 
             try
             {

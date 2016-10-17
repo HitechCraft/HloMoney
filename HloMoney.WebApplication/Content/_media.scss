@@ -1,17 +1,19 @@
-﻿@media(max-width: 768px) {
+﻿@import 'variables';
+
+@media(max-width: 768px) {
     .navbar {
-        background: #3a5269 !important;
+        background: $red-color !important;
 
         &-toggle {
-            border: 1px solid #fff;
+            border: 1px solid $white-color;
             padding: 10px 14px;
-            color: #fff;
+            color: $white-color;
         }
 
         &-brand {
             padding: 19px 33px 19px 16px !important;
             height: 59px !important;
-            color: #fff !important;
+            color: $white-color !important;
 
             &:hover {
                 background-color: transparent;
@@ -22,19 +24,19 @@
     .nav {
         li {
             a {
-                color: #fff !important;
+                color: $white-color !important;
             }
         }
 
         .open {
             a {
                 background-color: transparent;
-                color: #fff !important;
+                color: $white-color !important;
             }
         }
 
         .dropdown {
-            background: #3a5269;
+            background: $blue-color;
 
             ul {
                 li {

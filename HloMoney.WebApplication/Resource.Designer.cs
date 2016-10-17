@@ -104,5 +104,14 @@ namespace HloMoney.WebApplication {
                 return ResourceManager.GetString("ContestTypeStandartTime", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оценка должна быть в интервале от 1 до 5.
+        /// </summary>
+        internal static string ErrorReportMarkLength {
+            get {
+                return ResourceManager.GetString("ErrorReportMarkLength", resourceCulture);
+            }
+        }
     }
 }

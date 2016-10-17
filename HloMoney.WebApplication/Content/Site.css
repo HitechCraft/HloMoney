@@ -1,23 +1,23 @@
 ﻿@media (max-width: 768px) {
   .navbar {
-    background: #3a5269 !important; }
+    background: #cd5151 !important; }
     .navbar-toggle {
-      border: 1px solid #fff;
+      border: 1px solid #f9e8d8;
       padding: 10px 14px;
-      color: #fff; }
+      color: #f9e8d8; }
     .navbar-brand {
       padding: 19px 33px 19px 16px !important;
       height: 59px !important;
-      color: #fff !important; }
+      color: #f9e8d8 !important; }
       .navbar-brand:hover {
         background-color: transparent; }
   .nav li a {
-    color: #fff !important; }
+    color: #f9e8d8 !important; }
   .nav .open a {
     background-color: transparent;
-    color: #fff !important; }
+    color: #f9e8d8 !important; }
   .nav .dropdown {
-    background: #3a5269; }
+    background: #2c3e50; }
     .nav .dropdown ul li a {
       padding: 15px 25px !important; } }
 
@@ -402,6 +402,12 @@ footer {
     clear: both;
     content: " ";
     display: table; }
+  .report-avatar-col {
+    width: 33.33333333%;
+    float: left; }
+  .report-text-col {
+    width: 66.66666666%;
+    float: left; }
   .report-author-avatar {
     width: 160px;
     height: 160px;

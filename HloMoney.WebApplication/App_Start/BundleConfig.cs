@@ -16,7 +16,8 @@ namespace HloMoney.WebApplication
                         "~/Scripts/jquery.ui.widget.js",
                         "~/Scripts/jquery-ui.min.js",
                         "~/Scripts/jquery.fileupload.js",
-                        "~/Scripts/tinymce/tinymce.min.js"));
+                        "~/Scripts/tinymce/tinymce.min.js",
+                        "~/Scripts/loader.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
