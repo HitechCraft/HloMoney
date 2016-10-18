@@ -8,19 +8,19 @@
 
     #endregion
 
-    public class ContestPartByContestSpec : BaseSpecification<ContestPart>
+    public class ContestPartByUserSpec : BaseSpecification<ContestPart>
     {
         #region Private Fields
 
-        private readonly int _contestId;
+        private readonly string _userId;
 
         #endregion
 
         #region Constructor
 
-        public ContestPartByContestSpec(int contestId)
+        public ContestPartByUserSpec(string userId)
         {
-            this._contestId = contestId;
+            this._userId = userId;
         }
 
         #endregion
@@ -29,7 +29,7 @@
 
         public override Expression<Func<ContestPart, bool>> IsSatisfiedBy()
         {
-            return contestPart => contestPart.Contest.Id == this._contestId;
+            return contestPart => contestPart.Partner == this._userId;
         }
 
         #endregion
