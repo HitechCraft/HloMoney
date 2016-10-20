@@ -55,6 +55,8 @@
         [ValidateInput(false)]
         public ActionResult Create(ContestEditViewModel vm)
         {
+            if(vm.WinnerCount < 1 || vm.WinnerCount > 3) ModelState.AddModelError(String.Empty, "Минимальное кол-во участников - 1, максимальное - 3");
+
             if (ModelState.IsValid)
             {
                 try
@@ -66,7 +68,7 @@
                         Description = vm.Description,
                         Gift = vm.Gift,
                         Image = ImageManager.GetImageBytes(uploadImage),
-                        WinnerCount = vm.WinnerCount,
+                        WinnerCount = vm.Type != ContestType.CommentTime ? vm.WinnerCount : 1,
                         Type = vm.Type,
                         EndTime = vm.EndTime
                     });
@@ -127,7 +129,7 @@
                         Description = vm.Description,
                         Gift = vm.Gift,
                         Image = vm.Image,
-                        WinnerCount = vm.WinnerCount,
+                        WinnerCount = vm.Type != ContestType.CommentTime ? vm.WinnerCount : 1,
                         EndTime = vm.EndTime
                     });
 

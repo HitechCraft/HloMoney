@@ -78,8 +78,12 @@
     $('#type')
         .on('change',
             function () {
+                $('#WinnerCount').removeAttr('readonly');
                 if ($(this).val() === '0') {
                     $('#select-time').css('display', 'none');
+                } else if ($(this).val() === '2') {
+                    $('#WinnerCount').val(1);
+                    $('#WinnerCount').attr('readonly', 'true');
                 } else {
                     $('#select-time').css('display', 'block');
                 }
