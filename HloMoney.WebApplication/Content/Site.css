@@ -306,6 +306,14 @@ a {
 
 .contest-time {
   font-size: 20px; }
+  .contest-time-fixed {
+    position: fixed;
+    top: 28px;
+    left: 30px;
+    z-index: 1000;
+    background-color: #53405c;
+    padding: 2px 23px;
+    border: 1px solid; }
 
 .contest-part {
   float: right;

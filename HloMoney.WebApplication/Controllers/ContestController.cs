@@ -359,14 +359,20 @@
             }
         }
 
-        public ActionResult GetContestTime(int id, DateTime dateTime)
+        public ActionResult GetContestTime(int id)
         {
-            ViewBag.Time = dateTime;
             ViewBag.Contest = id;
+
+            ViewBag.Time = new EntityQueryHandler<Contest, DateTime>(Container)
+                .Handle(new EntityQuery<Contest, DateTime>
+                {
+                    Id = id,
+                    Projector = new CommonProjector<Contest, DateTime>(x => x.EndTime ?? DateTime.Now)
+                });
 
             return PartialView("_ContestTimeHelper");
         }
-
+        
         [Authorize]
         public JsonResult TakePart(int contestId)
         {
@@ -428,12 +434,13 @@
         {
             return new List<SelectListItem>()
             {
-                new SelectListItem()
-                {
-                    Text = Resource.ContestTypeStandart,
-                    Value = ((int)ContestType.Standart).ToString(),
-                    Selected = false
-                },
+                //TODO: в будущем возможно вернуть этот тип. Пока смысла в нем особого нет
+                //new SelectListItem()
+                //{
+                //    Text = Resource.ContestTypeStandart,
+                //    Value = ((int)ContestType.Standart).ToString(),
+                //    Selected = false
+                //},
                 new SelectListItem()
                 {
                     Text = Resource.ContestTypeStandartTime,

@@ -463,7 +463,7 @@
     <Content Include="Views\Shared\_ActiveContest.cshtml" />
     <Content Include="Views\Shared\_EndedContest.cshtml" />
     <Content Include="Views\Contest\_ContestMembers.cshtml" />
-    <Content Include="Views\Contest\_CommentPartial.cshtml" />
+    <Content Include="Views\Shared\_CommentPartial.cshtml" />
     <Content Include="Views\Contest\EndedDetails.cshtml" />
     <Content Include="Views\Shared\_ContestTimeHelper.cshtml" />
     <Content Include="Views\Contest\CommentDetails.cshtml" />

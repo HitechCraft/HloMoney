@@ -4,7 +4,10 @@
 @{
     ViewBag.Title = "Конкурс #" + Model.Id;
 }
-@Html.Action("GetContestTime", new { id = Model.Id, dateTime = Model.EndTime })
+<div id="contest-time">
+    @Html.Action("GetContestTime", new {id = Model.Id})
+</div>
+
 <div class="text-center">
     <h1 class="page-title">
         @ViewBag.Title
@@ -41,9 +44,9 @@
     </div>
 </div>
 
-@Html.Action("ContestMembers", new { contestId = Model.Id })
+<div id="contest-members">@Html.Action("ContestMembers", new { contestId = Model.Id })</div>
 
-@Html.Partial("_CommentPartial")
+@Html.Action("GetCommentPartial", "Comment", new { contestId = Model.Id})
 
 <script type="text/javascript">
     function TakePart(id) {
@@ -63,5 +66,32 @@
             });
     }
 
+    function ReloadMembers() {
+        $.get('@Url.Action("ContestMembers")',
+            { contestId: parseInt('@Model.Id') },
+            function (responce) {
+                $('#contest-members').html(responce);
+            });
+    }
+
+    function ReloadContestTime() {
+        $.get('@Url.Action("GetContestTime")',
+            { id: parseInt('@Model.Id') },
+            function (responce) {
+                $('#contest-time').html(responce);
+            });
+    }
+
+    $(window)
+        .on('scroll',
+            function () {
+                if (document.body.scrollTop > 500) {
+                    $('#time-left').addClass('contest-time-fixed');
+                } else {
+                    $('#time-left').removeClass('contest-time-fixed');
+                }
+            });
+
     VK.Widgets.Like("vk_like", { type: "button", verb: 1, height: 30 });
 </script>
+

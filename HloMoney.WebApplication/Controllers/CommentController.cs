@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using HloMoney.BL.CQRS.Command;
+using HloMoney.Core.Models.Enum;
 using HloMoney.Core.Repository.Specification;
+using HloMoney.WebApplication.Mapper;
 
 namespace HloMoney.WebApplication.Controllers
 {
@@ -45,7 +47,7 @@ namespace HloMoney.WebApplication.Controllers
                     ContestId = contestId
                 });
 
-                return Json(new {status = "OK", message = "Успешно"});
+                return Json(new { status = "OK", message = "Успешно" });
             }
             catch (Exception e)
             {
@@ -70,6 +72,23 @@ namespace HloMoney.WebApplication.Controllers
             .TakeRange((current - 1) * this.CommentOnLoad, current * this.CommentOnLoad);
 
             return PartialView("_CommentPartialList", vm.OrderByDescending(x => x.Date));
+        }
+
+        public ActionResult GetCommentPartial(int contestId)
+        {
+            ViewBag.IsCommentType = new EntityQueryHandler<Contest, bool>(this.Container)
+                   .Handle(new EntityQuery<Contest, bool>
+                   {
+                       Id = contestId,
+                       Projector = new CommonProjector<Contest, bool>(x => x.Type == ContestType.CommentTime)
+                   });
+
+            return PartialView("_CommentPartial", new EntityQueryHandler<Contest, ContestViewModel>(this.Container)
+                .Handle(new EntityQuery<Contest, ContestViewModel>
+                {
+                    Id = contestId,
+                    Projector = this.Container.Resolve<IProjector<Contest, ContestViewModel>>()
+                }));
         }
 
         #endregion

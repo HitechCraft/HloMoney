@@ -35,15 +35,21 @@ namespace HloMoney.BL.CQRS.Command
                 Date = DateTime.Now
             });
 
-            if (contest.Type == ContestType.CommentTime &&
-                !contestPartRep.Exist(new ContestPartByContestSpec(contest.Id) & new ContestPartByUserSpec(command.AuthorId)))
+            if (contest.Type == ContestType.CommentTime)
             {
-                contestPartRep.Add(new ContestPart
+                if (
+                    !contestPartRep.Exist(new ContestPartByContestSpec(contest.Id) &
+                                          new ContestPartByUserSpec(command.AuthorId)))
                 {
-                    Contest = contest,
-                    Partner = command.AuthorId
-                });
-                
+
+                    contestPartRep.Add(new ContestPart
+                    {
+                        Contest = contest,
+                        Partner = command.AuthorId
+                    });
+
+                }
+
                 //TODO: Поразмыслить над тем как назначать время для конкурсов с комментариями
                 contest.EndTime = DateTime.Now.AddMinutes(10);
 

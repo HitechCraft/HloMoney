@@ -26,20 +26,34 @@
             var contestWinnerRep = GetRepository<ContestWinner>();
             
             var contest = contestRep.GetEntity(command.ContestId);
-            
-            //select winners
-            if(contest.WinnerCount > contestPartRep.Count() || contestPartRep.Count() < command.MinPartCount)
-                throw new Exception("Участников конкурса не достаточно!");
 
-            var parts = contestPartRep.Query(new ContestPartByContestSpec(contest.Id));
-            var winnerNumbers = RandomHelper.GetRandomInts(contest.WinnerCount, parts.Count);
-
-            for (int i = 0; i < contest.WinnerCount; i++)
+            if (contest.Type != ContestType.CommentTime && contest.Type != ContestType.Standart)
             {
+                //select winners
+                if (contest.WinnerCount > contestPartRep.Count() || contestPartRep.Count() < command.MinPartCount)
+                    throw new Exception("Участников конкурса не достаточно!");
+
+                var parts = contestPartRep.Query(new ContestPartByContestSpec(contest.Id));
+                var winnerNumbers = RandomHelper.GetRandomInts(contest.WinnerCount, parts.Count);
+
+                for (int i = 0; i < contest.WinnerCount; i++)
+                {
+                    contestWinnerRep.Add(new ContestWinner
+                    {
+                        Part = parts.ToArray()[winnerNumbers[i]],
+                        Place = i + 1
+                    });
+                }
+            }
+
+            if (contest.Type != ContestType.CommentTime)
+            {
+                var part = contestPartRep.Query(new ContestPartByContestSpec(contest.Id)).Last();
+
                 contestWinnerRep.Add(new ContestWinner
                 {
-                    Part = parts.ToArray()[winnerNumbers[i]],
-                    Place = i + 1
+                    Part = part,
+                    Place = 1
                 });
             }
 
