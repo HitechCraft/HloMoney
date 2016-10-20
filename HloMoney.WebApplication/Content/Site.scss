@@ -442,16 +442,6 @@ a {
             font-weight: bold;
         }
 
-        .state {
-            h4 {
-                margin-bottom: 0px;
-            }
-
-            #time-left {
-                font-size: 70px;
-            }
-        }
-
         .members {
 
             h3 {
@@ -518,6 +508,20 @@ a {
             border: 2px solid #3a5269;
             border-radius: 32px;
         }
+    }
+}
+
+.state {
+    margin-bottom: 35px;
+    font-size: 41px;
+
+    h4 {
+        font-size: 30px;
+    }
+
+    span {
+        color: $orange-color;
+        font-weight: bold;
     }
 }
 

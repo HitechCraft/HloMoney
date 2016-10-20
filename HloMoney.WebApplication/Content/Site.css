@@ -326,10 +326,6 @@ a {
     font-size: 37px;
     margin: 0 0 22px 0px;
     font-weight: bold; }
-  .contest-current .state h4 {
-    margin-bottom: 0px; }
-  .contest-current .state #time-left {
-    font-size: 70px; }
   .contest-current .members h3 {
     margin: 7px 0 11px 0;
     font-weight: bold; }
@@ -370,6 +366,15 @@ a {
     max-width: 64px;
     border: 2px solid #3a5269;
     border-radius: 32px; }
+
+.state {
+  margin-bottom: 35px;
+  font-size: 41px; }
+  .state h4 {
+    font-size: 30px; }
+  .state span {
+    color: #ff7f0b;
+    font-weight: bold; }
 
 .winners-title {
   font-size: 55px; }

@@ -359,6 +359,14 @@
             }
         }
 
+        public ActionResult GetContestTime(int id, DateTime dateTime)
+        {
+            ViewBag.Time = dateTime;
+            ViewBag.Contest = id;
+
+            return PartialView("_ContestTimeHelper");
+        }
+
         [Authorize]
         public JsonResult TakePart(int contestId)
         {

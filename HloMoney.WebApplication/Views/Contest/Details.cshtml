@@ -4,59 +4,65 @@
 @{
     ViewBag.Title = "Конкурс #" + Model.Id;
 }
-<div class="text-center">
-    <h1 class="page-title">
-        @ViewBag.Title
+@Html.Action("GetContestTime", new {id = Model.Id, dateTime = Model.EndTime})
+    <div class="text-center">
+        <h1 class="page-title">
+            @ViewBag.Title
 
-        @if (User.IsInRole("Administrator"))
-        {
-            @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
-        }
-        <div id="vk_like"></div>
-    </h1>
-    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart)
-    {
-        if (Html.Action("CheckPart", new {contestId = Model.Id}).ToString() == "False")
-        {
-            <a class="btn btn-success btn-lg" href="javascript:TakePart('@Model.Id')">Участвовать!</a>
-        }
-        else
-        {
-            <h1>Вы участвуете!</h1>
-        }
-    }
-
-    <p class="contest-gift">Приз: @Model.Gift</p>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        @if (Model.Image != null)
+            @if (User.IsInRole("Administrator"))
             {
-            <img alt="" class="contest-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" />
-        }
-        else
+                @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+            }
+            <div id="vk_like"></div>
+        </h1>
+        @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart)
         {
-            <img alt="" class="contest-image" src="~/Content/Images/no-image.png" />
+            if (Html.Action("CheckPart", new { contestId = Model.Id }).ToString() == "False")
+            {
+                <a class="btn btn-success btn-lg" href="javascript:TakePart('@Model.Id')">Участвовать!</a>
+            }
+            else
+            {
+                <h1 class="text-success" style="margin-bottom: 70px;font-weight: bold">Вы участвуете!</h1>
+            }
         }
-        <div class="contest-description">
-            @Html.Raw(Model.Description)
+
+        <p class="contest-gift">Приз: @Model.Gift</p>
+        <div class="state">
+            <h4>Окончание через:</h4>
+            <span id="time-left" class="time-left"></span>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model.Image != null)
+            {
+                <img alt="" class="contest-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" />
+            }
+            else
+            {
+                <img alt="" class="contest-image" src="~/Content/Images/no-image.png" />
+            }
+            <div class="contest-description">
+                @Html.Raw(Model.Description)
+            </div>
         </div>
     </div>
-</div>
 
-@Html.Action("ContestMembers", new { contestId = Model.Id })
+    @Html.Action("ContestMembers", new { contestId = Model.Id })
 
-@Html.Partial("_CommentPartial")
+    @Html.Partial("_CommentPartial")
 
-<script type="text/javascript">
-    function TakePart(id) {
-        $.post('@Url.Action("TakePart")',
-            { contestId: parseInt(id) },
-            function(responce) {
-                if (responce.status === "OK") document.location.reload();
-                else growlError(responce.message);
-            });
-    }
+    <script type="text/javascript">
+        function TakePart(id) {
+            $.post('@Url.Action("TakePart")',
+                { contestId: parseInt(id) },
+                function (responce) {
+                    if (responce.status === "OK") document.location.reload();
+                    else growlError(responce.message);
+                });
+        }
 
-    VK.Widgets.Like("vk_like", { type: "button", verb: 1, height: 30 });
-</script>
+        VK.Widgets.Like("vk_like", { type: "button", verb: 1, height: 30 });
+    </script>
