@@ -44,8 +44,6 @@
     </div>
 </div>
 
-<div id="contest-members">@Html.Action("ContestMembers", new { contestId = Model.Id })</div>
-
 @Html.Action("GetCommentPartial", "Comment", new { contestId = Model.Id})
 
 <script type="text/javascript">
@@ -63,14 +61,6 @@
             { contestId: parseInt('@Model.Id') },
             function(responce) {
                 $('#comment-part').html(responce);
-            });
-    }
-
-    function ReloadMembers() {
-        $.get('@Url.Action("ContestMembers")',
-            { contestId: parseInt('@Model.Id') },
-            function (responce) {
-                $('#contest-members').html(responce);
             });
     }
 

@@ -35,7 +35,7 @@ namespace HloMoney.BL.CQRS.Command
                 Date = DateTime.Now
             });
 
-            if (contest.Type == ContestType.CommentTime)
+            if (contest.Type == ContestType.CommentTime && contest.Status == ContestStatus.Started)
             {
                 if (
                     !contestPartRep.Exist(new ContestPartByContestSpec(contest.Id) &

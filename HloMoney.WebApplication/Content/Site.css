@@ -450,6 +450,8 @@ footer {
     background-size: 100% 100%;
     margin: 0 auto;
     margin-top: 18px; }
+  .report-author-name {
+    color: #ff7f0b; }
   .report-title {
     font-weight: bold;
     font-size: 25px; }

@@ -46,7 +46,7 @@
                 }
             }
 
-            if (contest.Type != ContestType.CommentTime)
+            if (contest.Type == ContestType.CommentTime)
             {
                 var part = contestPartRep.Query(new ContestPartByContestSpec(contest.Id)).Last();
 
