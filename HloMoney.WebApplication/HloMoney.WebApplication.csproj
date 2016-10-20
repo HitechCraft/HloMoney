@@ -470,6 +470,8 @@
     <Content Include="Views\Shared\_ContestTimeHelper.cshtml" />
     <Content Include="Views\Contest\CommentDetails.cshtml" />
     <Content Include="Views\Contest\_CommentPartCheckPartial.cshtml" />
+    <Content Include="Views\Shared\_CommentPartialList.cshtml" />
+    <Content Include="Views\Shared\_CommentNewPartialList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

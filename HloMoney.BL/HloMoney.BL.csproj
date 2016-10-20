@@ -67,6 +67,8 @@
     <Compile Include="CQRS\Query\Base\IQuery.cs" />
     <Compile Include="CQRS\Query\Base\IQueryExecutor.cs" />
     <Compile Include="CQRS\Query\Base\IQueryHandler.cs" />
+    <Compile Include="CQRS\Query\CommentNewQuery.cs" />
+    <Compile Include="CQRS\Query\CommentNewQueryHandler.cs" />
     <Compile Include="CQRS\Query\Entity\EntityLastQuery.cs" />
     <Compile Include="CQRS\Query\Entity\EntityLastQueryHandler.cs" />
     <Compile Include="CQRS\Query\Entity\EntityExistsQuery.cs" />

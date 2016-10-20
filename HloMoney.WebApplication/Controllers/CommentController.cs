@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using HloMoney.BL.CQRS.Command;
+using HloMoney.BL.CQRS.Query;
 using HloMoney.Core.Models.Enum;
 using HloMoney.Core.Repository.Specification;
 using HloMoney.WebApplication.Mapper;
@@ -21,7 +22,7 @@ namespace HloMoney.WebApplication.Controllers
 
     public class CommentController : BaseController
     {
-        public int CommentOnLoad => 10;
+        public int CommentOnLoad => 3;
 
         #region Constructors
 
@@ -59,7 +60,7 @@ namespace HloMoney.WebApplication.Controllers
 
         #region Actions
 
-        public ActionResult GetCommentList(int? page, int contestId)
+        public JsonResult GetCommentList(int? page, int contestId)
         {
             var current = page ?? 1;
 
@@ -69,9 +70,28 @@ namespace HloMoney.WebApplication.Controllers
                     Specification = new CommentByContestSpec(contestId),
                     Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
                 })
-            .TakeRange((current - 1) * this.CommentOnLoad, current * this.CommentOnLoad);
+                .Reverse()
+            .TakeRange((current - 1) * this.CommentOnLoad, current * this.CommentOnLoad).Reverse();
 
-            return PartialView("_CommentPartialList", vm.OrderByDescending(x => x.Date));
+            return Json(new { content = RenderRazorViewToString("_CommentPartialList", vm), lastComment = vm.Any() ? vm.Last().Id : 0 }, JsonRequestBehavior.AllowGet);
+        }
+        
+        public JsonResult GetNewCommentList(int contestId, int lastCommentId)
+        {
+            if (lastCommentId != 0)
+            {
+                var vm = new CommentNewQueryHandler<Comment, CommentViewModel>(this.Container)
+                .Handle(new CommentNewQuery<Comment, CommentViewModel>
+                {
+                    LastCommentId = lastCommentId,
+                    Specification = new CommentByContestSpec(contestId),
+                    Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
+                });
+
+                return Json(new { status = "OK", content = RenderRazorViewToString("_CommentNewPartialList", vm), lastComment = vm.Any() ? vm.Last().Id : 0 }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new {status = "NO"}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetCommentPartial(int contestId)

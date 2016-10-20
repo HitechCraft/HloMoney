@@ -104,7 +104,7 @@
     <Compile Include="Repository\Specification\ISpecification.cs" />
     <Compile Include="Repository\Specification\User\ReportByUserSpec.cs" />
     <Compile Include="Web\Json.cs" />
-    <Compile Include="Web\WebClient.cs" />
+    <Compile Include="Web\WebClientHelper.cs" />
     <Compile Include="Models\Json\JsonVkUserInfo.cs" />
     <Compile Include="Models\Json\JsonVkResponse.cs" />
     <Compile Include="Models\Enum\VkUserStatus.cs" />

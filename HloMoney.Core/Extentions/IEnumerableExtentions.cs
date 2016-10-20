@@ -36,15 +36,21 @@ namespace HloMoney.Core.Extentions
             return limitedList;
         }
 
-        public static IList<T> Randomize<T>(this IList<T> target)
+        /// <summary>
+        /// Returns randomized list of object
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="target">Target list</param>
+        /// <returns></returns>
+        public static IEnumerable<T> Randomize<T>(this IList<T> target)
         {
-            Random RndNumberGenerator = new Random();
+            var random = new Random();
 
             SortedList<int, T> newList = new SortedList<int, T>();
 
             foreach (T item in target)
             {
-                newList.Add(RndNumberGenerator.Next(), item);
+                newList.Add(random.Next(), item);
             }
 
             target.Clear();

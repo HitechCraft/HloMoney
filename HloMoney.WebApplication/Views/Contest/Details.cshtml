@@ -52,7 +52,7 @@
 
     @Html.Action("ContestMembers", new { contestId = Model.Id })
 
-    @Html.Partial("_CommentPartial")
+    @Html.Action("GetCommentPartial", "Comment", new { contestId = Model.Id })
 
     <script type="text/javascript">
         function TakePart(id) {

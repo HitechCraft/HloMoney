@@ -1,6 +1,9 @@
 ﻿@model HloMoney.WebApplication.Models.ContestViewModel
 <div class="comments">
     <h1>Комментарии</h1>
+    <div id="comments">
+        @*Html.Action("GetCommentList", "Comment", new { contestId = Model.Id })*@
+    </div>
     @if (User.Identity.IsAuthenticated)
     {
         <div class="well">
@@ -20,12 +23,23 @@
     {
         <h3>Чтобы оставить комментарий вы должны @Html.ActionLink("войти", "Auth", "Account", new { returnUrl = Url.Action("Details", "Contest", new { id = Model.Id }) }, null)</h3>
     }
-    <div id="comments">
-        @Html.Action("GetCommentList", "Comment", new { contestId = Model.Id })
-    </div>
 </div>
 
 <script type="text/javascript">
+
+    window.LastComment = null;
+
+    $(document)
+        .on('ready',
+            function () {
+                LoadComments();
+
+                setInterval(function () {
+                    if (window.LastComment != null) {
+                        LoadNewComments();
+                    }
+                }, 1000);
+            });
 
     $('#comment-text')
         .on('input',
@@ -50,7 +64,7 @@
                     $('#comment-error').text(responce.message);
                 } else {
                     $('#comment-text').val('');
-                    LoadComments();
+                    LoadNewComments();
                 }
             });
     }
@@ -59,7 +73,8 @@
         $.get('@Url.Action("GetCommentList", "Comment")',
             { page: 1, contestId: parseInt('@Model.Id') },
             function (responce) {
-                $('#comments').html(responce);
+                $('#comments').html(responce.content);
+                window.LastComment = (responce.lastComment !== "0" ? responce.lastComment : null);
                 @if (ViewBag.IsCommentType != null && ViewBag.IsCommentType)
                 {
                     <text>
@@ -68,6 +83,26 @@
                     //Перезагружаем время
                     ReloadContestTime();
                     </text>
+                }
+            });
+    }
+
+    function LoadNewComments() {
+        $.get('@Url.Action("GetNewCommentList", "Comment")',
+            { contestId: parseInt('@Model.Id'), lastCommentId: parseInt(window.LastComment) },
+            function (responce) {
+                if (responce.status === "OK") {
+                    $('#comments').append(responce.content);
+                    window.LastComment = responce.lastComment;
+                    @if (ViewBag.IsCommentType != null && ViewBag.IsCommentType)
+                    {
+                        <text>
+                        //при загрузке проверяет участие. Находится в CommentDetails.cshtml
+                        CheckPart();
+                        //Перезагружаем время
+                        ReloadContestTime();
+                        </text>
+                    }
                 }
             });
     }

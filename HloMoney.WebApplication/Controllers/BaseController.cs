@@ -1,4 +1,5 @@
-﻿using HloMoney.BL.CQRS.Command.Base;
+﻿using System.IO;
+using HloMoney.BL.CQRS.Command.Base;
 using HloMoney.BL.CQRS.Query.Base;
 
 namespace HloMoney.WebApplication.Controllers
@@ -39,6 +40,21 @@ namespace HloMoney.WebApplication.Controllers
         public TResult Project<TSource, TResult>(TSource source)
         {
             return Container.Resolve<IProjector<TSource, TResult>>().Project(source);
+        }
+
+        public string RenderRazorViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                                                                         viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                                             ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
     }
 }
