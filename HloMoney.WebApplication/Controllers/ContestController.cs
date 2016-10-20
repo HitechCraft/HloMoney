@@ -392,7 +392,7 @@
                 CommandExecutor.Execute(new ContestTakePartCommand
                 {
                     ContestId = contestId,
-                    UserId = CurrentUser.Info.Id
+                    UserId = CurrentUser.Id
                 });
 
                 return Json(new { status = "OK", message = "Вы успешно приняли участие! Ожидайте окончания конкурса" });
@@ -415,8 +415,7 @@
                             Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
                         });
 
-                return comments.Last().AuthorName ==
-                       $"{this.CurrentUser.Info.FirstName} {this.CurrentUser.Info.LastName}";
+                return comments.Last().AuthorName == this.CurrentUser.FullName;
             }
             catch (Exception)
             {
@@ -430,7 +429,7 @@
             return new EntityExistsQueryHandler<ContestPart>(Container)
                 .Handle(new EntityExistsQuery<ContestPart>
                 {
-                    Specification = new ContestPartByContestSpec(contestId) & new ContestPartByUserSpec(CurrentUser.Info.Id)
+                    Specification = new ContestPartByContestSpec(contestId) & new ContestPartByUserSpec(CurrentUser.Id)
                 });
         }
 

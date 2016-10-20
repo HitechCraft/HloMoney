@@ -6,5 +6,9 @@
     {
         UserInfo Info { get; }
         UserInfo GetUserInfo();
+
+        string Id { get; }
+        string FullName { get; }
+        string Avatar { get; }
     }
 }

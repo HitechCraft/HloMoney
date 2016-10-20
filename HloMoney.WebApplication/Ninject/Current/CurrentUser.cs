@@ -17,6 +17,10 @@
 
         public UserInfo Info => _info ?? (_info = this.GetUserInfo());
 
+        public string Id => Info.Id;
+        public string FullName => $"{Info.FirstName} {Info.LastName}";
+        public string Avatar => Info.AvatarLink;
+
         public CurrentUser(IContainer container)
         {
             this._container = container;

@@ -42,7 +42,7 @@ namespace HloMoney.WebApplication.Controllers
 
                 this.CommandExecutor.Execute(new CommentCreateCommand
                 {
-                    AuthorId = this.CurrentUser.Info.Id,
+                    AuthorId = this.CurrentUser.Id,
                     Text = text,
                     ContestId = contestId
                 });

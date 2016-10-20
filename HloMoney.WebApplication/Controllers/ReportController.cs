@@ -41,7 +41,7 @@
             if (new EntityExistsQueryHandler<Report>(this.Container)
                 .Handle(new EntityExistsQuery<Report>()
                 {
-                    Specification = new ReportByUserSpec(this.CurrentUser.Info.Id)
+                    Specification = new ReportByUserSpec(this.CurrentUser.Id)
                 }))
             {
                 return View("AlreadyReported", new ReportCreateViewModel());
@@ -57,7 +57,7 @@
             if (new EntityExistsQueryHandler<Report>(this.Container)
                 .Handle(new EntityExistsQuery<Report>()
                 {
-                    Specification = new ReportByUserSpec(this.CurrentUser.Info.Id)
+                    Specification = new ReportByUserSpec(this.CurrentUser.Id)
                 }))
             {
                 return View("AlreadyReported");
@@ -71,7 +71,7 @@
                 {
                     this.CommandExecutor.Execute(new ReportCreateCommand
                     {
-                        AuthorId = this.CurrentUser.Info.Id,
+                        AuthorId = this.CurrentUser.Id,
                         Title = vm.Title,
                         Text = vm.Text, 
                         Mark = (float)Math.Round(vm.Mark, 2)
@@ -116,7 +116,7 @@
             return new EntityExistsQueryHandler<Report>(this.Container)
                 .Handle(new EntityExistsQuery<Report>
                 {
-                    Specification = new ReportByUserSpec(this.CurrentUser.Info.Id)
+                    Specification = new ReportByUserSpec(this.CurrentUser.Id)
                 });
         }
 

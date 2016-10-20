@@ -14,7 +14,7 @@
         private static string ApiBaseUrl => "http://api.vk.com/";
         private static string ApiVersion => "5.53";
         private static string UserInfoFields => "bdate,photo_max,online";
-
+        
         public static JsonVkUserInfo GetUsersInfo(string userIds)
         {
             return WebRequestExecutor.GetVkUserInfoResponse($"{ApiBaseUrl}method/users.get", userIds, UserInfoFields,
