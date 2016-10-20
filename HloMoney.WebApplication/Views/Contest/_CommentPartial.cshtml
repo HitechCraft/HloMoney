@@ -58,6 +58,8 @@
             $.get('@Url.Action("GetCommentList", "Comment")',
                 { page: 1, contestId: parseInt('@Model.Id') },
                 function (responce) {
+                    //при загрузке проверяет участие. Находится в CommentDetails.cshtml
+                    CheckPart();
                     $('#comments').html(responce);
                 });
         }

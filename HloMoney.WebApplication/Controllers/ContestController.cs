@@ -322,7 +322,7 @@
                 return PartialView("_GlobalContest");
             }
         }
-
+        
         public bool CheckContestActivity(int contestId)
         {
             try
@@ -389,6 +389,27 @@
         }
 
         [Authorize]
+        public bool CheckCommentPartAvailable(int contestId)
+        {
+            try
+            {
+                var comments = new EntityListQueryHandler<Comment, CommentViewModel>(Container)
+                        .Handle(new EntityListQuery<Comment, CommentViewModel>
+                        {
+                            Specification = new CommentByContestSpec(contestId),
+                            Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
+                        });
+
+                return comments.Last().AuthorName ==
+                       $"{this.CurrentUser.Info.FirstName} {this.CurrentUser.Info.LastName}";
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        [Authorize]
         public bool CheckPart(int contestId)
         {
             return new EntityExistsQueryHandler<ContestPart>(Container)
@@ -396,6 +417,11 @@
                 {
                     Specification = new ContestPartByContestSpec(contestId) & new ContestPartByUserSpec(CurrentUser.Info.Id)
                 });
+        }
+
+        public ActionResult ContestCommentPartChecker(int contestId)
+        {
+            return PartialView("_CommentPartCheckPartial", contestId);
         }
 
         private IEnumerable<SelectListItem> GetTypeList()
