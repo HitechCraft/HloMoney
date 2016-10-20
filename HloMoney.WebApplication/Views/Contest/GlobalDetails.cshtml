@@ -22,7 +22,11 @@
         @*<div id="vk_like"></div>*@
     </h1>
     <p class="contest-gift">Приз: @Model.Gift</p>
-    <a href="#" class="btn btn-success btn-lg">Принять участие!</a>
+
+    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart && Html.Action("CheckPart", new { contestId = Model.Id }).ToString() == "False")
+    {
+        <a href="javascript:TakePart('@Model.Id')" class="btn btn-success btn-lg">Принять участие!</a>
+    }
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -45,8 +49,8 @@
                         growlSuccess(responce.message);
 
                         setTimeout(function () {
-                            document.location = '@Url.Action("Index", "Home")';
-                        },
+                                document.location = '@Url.Action("Index", "Home")';
+                            },
                             2000);
                     } else {
                         growlError(responce.message);
@@ -56,5 +60,13 @@
     </script>
 }
 <script type="text/javascript">
+    function TakePart(id) {
+        $.post('@Url.Action("TakePart")',
+            { contestId: parseInt(id) },
+            function (responce) {
+                if (responce.status === "OK") document.location.reload();
+                else growlError(responce.message);
+            });
+    }
     VK.Widgets.Like("vk_like", { type: "button", verb: 1, height: 30 });
 </script>

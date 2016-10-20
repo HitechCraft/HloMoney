@@ -106,6 +106,15 @@ namespace HloMoney.WebApplication {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Описание.
+        /// </summary>
+        internal static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Оценка должна быть в интервале от 1 до 5.
         /// </summary>
         internal static string ErrorReportMarkLength {

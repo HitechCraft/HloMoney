@@ -110,6 +110,15 @@ a {
             float: left;
             margin-right: 15px;
         }
+
+        &-winner {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            background-repeat: no-repeat;
+            background-size: auto 100%;
+            margin: 20px 0;
+        }
     }
 
     span {
@@ -490,11 +499,31 @@ a {
     &-winner {
         margin-bottom: 12px;
 
+        &-place {
+            color: $orange-color;
+        }
+
         img {
             max-width: 64px;
             border: 2px solid #3a5269;
             border-radius: 32px;
         }
+    }
+}
+
+.winners {
+
+    &-title {
+        font-size: 55px;
+    }
+
+    h1 {
+    }
+
+    h2 {
+    }
+
+    h3 {
     }
 }
 

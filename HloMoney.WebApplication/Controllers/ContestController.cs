@@ -1,4 +1,5 @@
-﻿using HloMoney.Core.Extentions;
+﻿using HloMoney.BL.CQRS.Query;
+using HloMoney.Core.Extentions;
 using HloMoney.Core.Repository.Specification;
 using HloMoney.Core.Repository.Specification.User;
 using WebGrease.Css.Extensions;
@@ -156,6 +157,10 @@ namespace HloMoney.WebApplication.Controllers
                         Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                     });
 
+                if (!this.CheckContestActivity(vm.Id)) return RedirectToAction("Details", id);
+
+                if (vm.Status == ContestStatus.Ended) return View("EndedDetails", vm);
+
                 switch (vm.Type)
                 {
                     case ContestType.CommentTime:
@@ -229,7 +234,7 @@ namespace HloMoney.WebApplication.Controllers
                             Specification = !new ContestIsActiveSpec() & !new ContestIsGlobalSpec(),
                             Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                         });
-                
+
                 return PartialView("_EndedContest", vm.Limit(this.ContestsOnPage));
             }
             catch (Exception e)
@@ -278,6 +283,72 @@ namespace HloMoney.WebApplication.Controllers
             {
                 return PartialView("_GlobalContest");
             }
+        }
+
+        public bool CheckContestActivity(int contestId)
+        {
+            try
+            {
+                var vm = new EntityQueryHandler<Contest, ContestViewModel>(this.Container)
+                    .Handle(new EntityQuery<Contest, ContestViewModel>
+                    {
+                        Id = contestId,
+                        Projector = this.Container.Resolve<IProjector<Contest, ContestViewModel>>()
+                    });
+
+                if (vm.EndTime < DateTime.Now && vm.Status == ContestStatus.Started)
+                {
+                    this.CommandExecutor.Execute(new ContestEndCommand
+                    {
+                        ContestId = contestId
+                    });
+
+                    this.CommandExecutor.Execute(new ContestSelectWinnersCommand()
+                    {
+                        ContestId = contestId,
+                        WinnerCount = vm.WinnerCount
+                    });
+
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+        }
+
+        [Authorize]
+        public JsonResult TakePart(int contestId)
+        {
+            try
+            {
+                if (this.CheckPart(contestId)) throw new Exception("Вы уже приняли участие!");
+
+                this.CommandExecutor.Execute(new ContestTakePartCommand
+                {
+                    ContestId = contestId,
+                    UserId = this.CurrentUser.Info.Id
+                });
+
+                return Json(new { status = "OK", message = "Вы успешно приняли участие! Ожидайте окончания конкурса" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "NO", message = "Ошибка: " + e.Message });
+            }
+        }
+
+        [Authorize]
+        public bool CheckPart(int contestId)
+        {
+            return new EntityExistsQueryHandler<ContestPart>(this.Container)
+                .Handle(new EntityExistsQuery<ContestPart>
+                {
+                    Specification = new ContestPartByContestSpec(contestId) & new ContestPartByUserSpec(this.CurrentUser.Info.Id)
+                });
         }
 
         private IEnumerable<SelectListItem> GetTypeList()

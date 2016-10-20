@@ -14,7 +14,7 @@
                         <p>Победител@(contest.WinnerCount > 1 ? "и" : "ь"):</p>
                         @foreach (var winner in contest.Winners)
                     {
-                            <img src="@winner.WinnerAvatar" />
+                            <img src="@winner.Avatar" />
                         }
                     </div>
                     @Html.ActionLink("Подробнее", "Details", "Contest", new { id = contest.Id }, new { @class = "btn btn-primary" })

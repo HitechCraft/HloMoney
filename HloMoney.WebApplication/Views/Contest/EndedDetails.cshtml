@@ -1,0 +1,46 @@
+﻿@model HloMoney.WebApplication.Models.ContestViewModel
+@{
+    ViewBag.Title = "Конкурс #" + Model.Id;
+}
+<div class="text-center">
+    <h1 class="page-title">
+        @ViewBag.Title (завершен)
+        <div id="vk_like"></div>
+    </h1>
+    <p class="contest-gift">Приз: @Model.Gift</p>
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model.Winners.Any())
+            {
+                <h1 class="winners-title">Победител@(Model.Winners.Count > 1 ? "и" : "ь")</h1>
+                if (Model.Winners.Count > 1)
+                {
+                    <div class="winners">
+                        @foreach (var winner in Model.Winners)
+                        {
+                            <h@(winner.Place)>
+                                <span class="contest-winner-place">@winner.Place место:</span> <br />
+                                <img class="user-avatar-winner" src="@winner.Avatar" title="@winner.Name" /> <br />@winner.Name
+                            </h@(winner.Place)>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <h1>
+                        <img class="user-avatar-winner" src="@Model.Winners[0].Avatar" title="@Model.Winners[0].Name" /> <br />@Model.Winners[0].Name
+                    </h1>
+                }
+            }
+            else
+            {
+                <h2>Победители не были выбраны!</h2>
+            }
+        </div>
+    </div>
+</div>
+@Html.Partial("_CommentPartial")
+
+<script type="text/javascript">
+    VK.Widgets.Like("vk_like", { type: "button", verb: 1, height: 30 });
+</script>

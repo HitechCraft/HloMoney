@@ -21,6 +21,8 @@
 
         [Required]
         [Display(Name = "Кол-во победителей в конкурсе")]
+        [MinLength(1, ErrorMessage = "Минимальное число победителей - 1")]
+        [MaxLength(3, ErrorMessage = "Максимальное число победителей - 3")]
         public int WinnerCount { get; set; }
 
         [Display(Name = "Тип конкурса")]

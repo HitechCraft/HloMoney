@@ -22,8 +22,9 @@
                 .ForMember(dst => dst.Comments, ext => ext.MapFrom(src => src.Comments));
 
             this.ConfigurationStore.CreateMap<ContestWinner, WinnerViewModel>()
-                .ForMember(dst => dst.WinnerName, ext => ext.MapFrom(src => VkApiHelper.GetUserName(src.Part.Partner)))
-                .ForMember(dst => dst.WinnerAvatar, ext => ext.MapFrom(src => VkApiHelper.GetUserAvatar(src.Part.Partner)));
+                .ForMember(dst => dst.Name, ext => ext.MapFrom(src => VkApiHelper.GetUserName(src.Part.Partner)))
+                .ForMember(dst => dst.Avatar, ext => ext.MapFrom(src => VkApiHelper.GetUserAvatar(src.Part.Partner)))
+                .ForMember(dst => dst.Place, ext => ext.MapFrom(src => src.Place));
 
             this.ConfigurationStore.CreateMap<Comment, CommentViewModel>()
                 .ForMember(dst => dst.ContestId, ext => ext.MapFrom(src => src.Contest.Id))

@@ -135,4 +135,7 @@
   <data name="ErrorReportMarkLength" xml:space="preserve">
     <value>Оценка должна быть в интервале от 1 до 5</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
 </root>

@@ -4,25 +4,27 @@
 @{
     ViewBag.Title = "Конкурс #" + Model.Id;
 }
-<h1 class="page-title">
-    @ViewBag.Title
+<div class="text-center">
+    <h1 class="page-title">
+        @ViewBag.Title
 
-    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart)
+        @if (User.IsInRole("Administrator"))
+        {
+            @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+        }
+        <div id="vk_like"></div>
+    </h1>
+    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart && Html.Action("CheckPart", new { contestId = Model.Id }).ToString() == "False")
     {
-        <a class="btn btn-success" href="javascript:TakePart('@Model.Id')">Участвовать!</a>
+        <a class="btn btn-success btn-lg" href="javascript:TakePart('@Model.Id')">Участвовать!</a>
     }
 
-    @if (User.IsInRole("Administrator"))
-    {
-        @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
-    }
-    <div id="vk_like"></div>
-</h1>
-<p class="contest-gift">Приз: @Model.Gift</p>
+    <p class="contest-gift">Приз: @Model.Gift</p>
+</div>
 <div class="row">
     <div class="col-md-12">
         @if (Model.Image != null)
-        {
+            {
             <img alt="" class="contest-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" />
         }
         else
@@ -40,5 +42,14 @@
 @Html.Partial("_CommentPartial")
 
 <script type="text/javascript">
+    function TakePart(id) {
+        $.post('@Url.Action("TakePart")',
+            { contestId: parseInt(id) },
+            function(responce) {
+                if (responce.status === "OK") document.location.reload();
+                else growlError(responce.message);
+            });
+    }
+
     VK.Widgets.Like("vk_like", { type: "button", verb: 1, height: 30 });
 </script>

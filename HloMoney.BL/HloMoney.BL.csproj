@@ -48,6 +48,12 @@
     <Compile Include="CQRS\Command\Comment\CommentCreateCommand.cs" />
     <Compile Include="CQRS\Command\Comment\CommentRemoveCommandHandler.cs" />
     <Compile Include="CQRS\Command\Comment\CommentCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Contest\ContestTakePartCommand.cs" />
+    <Compile Include="CQRS\Command\Contest\ContestTakePartCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Contest\ContestSelectWinnersCommand.cs" />
+    <Compile Include="CQRS\Command\Contest\ContestEndCommand.cs" />
+    <Compile Include="CQRS\Command\Contest\ContestSelectWinnersCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Contest\ContestEndCommandHandler.cs" />
     <Compile Include="CQRS\Command\Contest\ContestRemoveCommand.cs" />
     <Compile Include="CQRS\Command\Contest\ContestUpdateCommand.cs" />
     <Compile Include="CQRS\Command\Contest\ContestCreateCommand.cs" />

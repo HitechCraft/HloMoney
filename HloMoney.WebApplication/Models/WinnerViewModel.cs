@@ -2,8 +2,10 @@
 {
     public class WinnerViewModel
     {
-        public string WinnerName { get; set; }
+        public string Name { get; set; }
 
-        public string WinnerAvatar { get; set; }
+        public string Avatar { get; set; }
+
+        public int Place { get; set; }
     }
 }

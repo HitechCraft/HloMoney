@@ -83,6 +83,7 @@
     <Compile Include="Extentions\IEnumerableExtentions.cs" />
     <Compile Include="Extentions\StringExtentions.cs" />
     <Compile Include="Helper\LogHelper.cs" />
+    <Compile Include="Helper\RandomHelper.cs" />
     <Compile Include="Helper\VkApiHelper.cs" />
     <Compile Include="Models\Enum\ContestStatus.cs" />
     <Compile Include="Models\Enum\ContestType.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Repository\Specification\Composite\OrSpecification.cs" />
     <Compile Include="Repository\Specification\CommentByContestSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestIsActiveSpec.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestPartByUserSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestWinnerSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestIsGlobalSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestPartByContestSpec.cs" />

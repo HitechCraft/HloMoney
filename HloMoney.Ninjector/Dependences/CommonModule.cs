@@ -20,6 +20,9 @@
             Bind(typeof(ICommandHandler<ContestCreateCommand>)).To(typeof(ContestCreateCommandHandler));
             Bind(typeof(ICommandHandler<ContestUpdateCommand>)).To(typeof(ContestUpdateCommandHandler));
             Bind(typeof(ICommandHandler<ContestRemoveCommand>)).To(typeof(ContestRemoveCommandHandler));
+            Bind(typeof(ICommandHandler<ContestEndCommand>)).To(typeof(ContestEndCommandHandler));
+            Bind(typeof(ICommandHandler<ContestSelectWinnersCommand>)).To(typeof(ContestSelectWinnersCommandHandler));
+            Bind(typeof(ICommandHandler<ContestTakePartCommand>)).To(typeof(ContestTakePartCommandHandler));
 
             Bind(typeof(ICommandHandler<CommentCreateCommand>)).To(typeof(CommentCreateCommandHandler));
             Bind(typeof(ICommandHandler<CommentRemoveCommand>)).To(typeof(CommentRemoveCommandHandler));
