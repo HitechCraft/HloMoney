@@ -28,7 +28,7 @@
             var contest = contestRep.GetEntity(command.ContestId);
             
             //select winners
-            if(contest.WinnerCount > contestPartRep.Count())
+            if(contest.WinnerCount > contestPartRep.Count() || contestPartRep.Count() < command.MinPartCount)
                 throw new Exception("Участников конкурса не достаточно!");
 
             var parts = contestPartRep.Query(new ContestPartByContestSpec(contest.Id));

@@ -1,10 +1,4 @@
-﻿using HloMoney.BL.CQRS.Query;
-using HloMoney.Core.Extentions;
-using HloMoney.Core.Repository.Specification;
-using HloMoney.Core.Repository.Specification.User;
-using WebGrease.Css.Extensions;
-
-namespace HloMoney.WebApplication.Controllers
+﻿namespace HloMoney.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -20,6 +14,10 @@ namespace HloMoney.WebApplication.Controllers
     using Manager;
     using System.Collections.Generic;
     using Core.Models.Enum;
+    using Core.Extentions;
+    using Core.Repository.Specification;
+    using Core.Repository.Specification.User;
+    using WebGrease.Css.Extensions;
 
     #endregion
 
@@ -28,6 +26,8 @@ namespace HloMoney.WebApplication.Controllers
         #region Properties
 
         public int ContestsOnPage => 3;
+
+        public int MinParts => 10;
 
         #endregion
 
@@ -45,7 +45,7 @@ namespace HloMoney.WebApplication.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
-            ViewBag.Types = this.GetTypeList();
+            ViewBag.Types = GetTypeList();
 
             return View();
         }
@@ -61,7 +61,7 @@ namespace HloMoney.WebApplication.Controllers
                 {
                     var uploadImage = Request.Files["uploadContestImage"];
 
-                    this.CommandExecutor.Execute(new ContestCreateCommand
+                    CommandExecutor.Execute(new ContestCreateCommand
                     {
                         Description = vm.Description,
                         Gift = vm.Gift,
@@ -79,7 +79,7 @@ namespace HloMoney.WebApplication.Controllers
                 }
             }
 
-            ViewBag.Types = this.GetTypeList();
+            ViewBag.Types = GetTypeList();
 
             return View(vm);
         }
@@ -90,14 +90,14 @@ namespace HloMoney.WebApplication.Controllers
         {
             try
             {
-                var vm = new EntityQueryHandler<Contest, ContestEditViewModel>(this.Container)
+                var vm = new EntityQueryHandler<Contest, ContestEditViewModel>(Container)
                     .Handle(new EntityQuery<Contest, ContestEditViewModel>
                     {
                         Id = id,
-                        Projector = this.Container.Resolve<IProjector<Contest, ContestEditViewModel>>()
+                        Projector = Container.Resolve<IProjector<Contest, ContestEditViewModel>>()
                     });
 
-                ViewBag.Types = this.GetTypeList();
+                ViewBag.Types = GetTypeList();
 
                 return View(vm);
             }
@@ -121,7 +121,7 @@ namespace HloMoney.WebApplication.Controllers
                     if (uploadImage != null && uploadImage.ContentLength > 0)
                         vm.Image = ImageManager.GetImageBytes(uploadImage);
 
-                    this.CommandExecutor.Execute(new ContestUpdateCommand
+                    CommandExecutor.Execute(new ContestUpdateCommand
                     {
                         Id = vm.Id,
                         Description = vm.Description,
@@ -139,7 +139,7 @@ namespace HloMoney.WebApplication.Controllers
                 }
             }
 
-            ViewBag.Types = this.GetTypeList();
+            ViewBag.Types = GetTypeList();
 
             return View(vm);
         }
@@ -166,9 +166,13 @@ namespace HloMoney.WebApplication.Controllers
                             Projector = Container.Resolve<IProjector<ContestWinner, WinnerViewModel>>()
                         }));
 
-                if (!this.CheckContestActivity(vm.Id)) return RedirectToAction("Details", id);
+                if (!CheckContestActivity(vm.Id)) return RedirectToAction("Details", id);
 
-                if (vm.Status == ContestStatus.Ended) return View("EndedDetails", vm);
+                if (vm.Status == ContestStatus.Ended)
+                {
+                    ViewBag.WinnersError = GetWinnersError(vm.Id);
+                    return View("EndedDetails", vm);
+                }
                 
                 switch (vm.Type)
                 {
@@ -186,12 +190,28 @@ namespace HloMoney.WebApplication.Controllers
             }
         }
 
+        private string GetWinnersError(int contestId)
+        {
+            var partsCount = new EntityCountQueryHandler<ContestPart>(Container)
+                .Handle(new EntityCountQuery<ContestPart>
+                {
+                    Specification = new ContestPartByContestSpec(contestId)
+                });
+
+            if (partsCount < this.MinParts)
+            {
+                return "Минимальное кол-во участников " + this.MinParts + " (приняло участие всего " + partsCount + ")";
+            }
+
+            return null;
+        }
+
         [HttpPost]
         public JsonResult Delete(int? id)
         {
             try
             {
-                this.CommandExecutor.Execute(new ContestRemoveCommand
+                CommandExecutor.Execute(new ContestRemoveCommand
                 {
                     Id = id.Value
                 });
@@ -222,7 +242,7 @@ namespace HloMoney.WebApplication.Controllers
                             Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                         });
 
-                if (vm.Count <= this.ContestsOnPage) ViewBag.AllShowed = true;
+                if (vm.Count <= ContestsOnPage) ViewBag.AllShowed = true;
 
                 return PartialView("_ActiveContest", (all != null && all.Value ? vm : vm.Limit(3)));
             }
@@ -253,7 +273,7 @@ namespace HloMoney.WebApplication.Controllers
                             Projector = Container.Resolve<IProjector<ContestWinner, WinnerViewModel>>()
                         })));
 
-                return PartialView("_EndedContest", vm.Limit(this.ContestsOnPage));
+                return PartialView("_EndedContest", vm.Limit(ContestsOnPage));
             }
             catch (Exception e)
             {
@@ -307,24 +327,25 @@ namespace HloMoney.WebApplication.Controllers
         {
             try
             {
-                var vm = new EntityQueryHandler<Contest, ContestViewModel>(this.Container)
+                var vm = new EntityQueryHandler<Contest, ContestViewModel>(Container)
                     .Handle(new EntityQuery<Contest, ContestViewModel>
                     {
                         Id = contestId,
-                        Projector = this.Container.Resolve<IProjector<Contest, ContestViewModel>>()
+                        Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                     });
 
                 if (vm.EndTime < DateTime.Now && vm.Status == ContestStatus.Started)
                 {
-                    this.CommandExecutor.Execute(new ContestEndCommand
+                    CommandExecutor.Execute(new ContestEndCommand
                     {
                         ContestId = contestId
                     });
 
-                    this.CommandExecutor.Execute(new ContestSelectWinnersCommand()
+                    CommandExecutor.Execute(new ContestSelectWinnersCommand()
                     {
                         ContestId = contestId,
-                        WinnerCount = vm.WinnerCount
+                        WinnerCount = vm.WinnerCount,
+                        MinPartCount = this.MinParts
                     });
 
                     return false;
@@ -343,12 +364,12 @@ namespace HloMoney.WebApplication.Controllers
         {
             try
             {
-                if (this.CheckPart(contestId)) throw new Exception("Вы уже приняли участие!");
+                if (CheckPart(contestId)) throw new Exception("Вы уже приняли участие!");
 
-                this.CommandExecutor.Execute(new ContestTakePartCommand
+                CommandExecutor.Execute(new ContestTakePartCommand
                 {
                     ContestId = contestId,
-                    UserId = this.CurrentUser.Info.Id
+                    UserId = CurrentUser.Info.Id
                 });
 
                 return Json(new { status = "OK", message = "Вы успешно приняли участие! Ожидайте окончания конкурса" });
@@ -362,10 +383,10 @@ namespace HloMoney.WebApplication.Controllers
         [Authorize]
         public bool CheckPart(int contestId)
         {
-            return new EntityExistsQueryHandler<ContestPart>(this.Container)
+            return new EntityExistsQueryHandler<ContestPart>(Container)
                 .Handle(new EntityExistsQuery<ContestPart>
                 {
-                    Specification = new ContestPartByContestSpec(contestId) & new ContestPartByUserSpec(this.CurrentUser.Info.Id)
+                    Specification = new ContestPartByContestSpec(contestId) & new ContestPartByUserSpec(CurrentUser.Info.Id)
                 });
         }
 

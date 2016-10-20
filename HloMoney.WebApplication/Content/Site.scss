@@ -488,16 +488,26 @@ a {
         }
 
         &-list {
+
             .active {
+                display: inline-block;
+                width: 33%;
                 margin-bottom: 30px;
                 padding-top: 60px;
                 padding-bottom: 60px;
+                float: none;
+                margin: 0 auto;
             }
         }
     }
 
     &-winner {
         margin-bottom: 12px;
+        min-height: 102px;
+
+        &-error {
+            padding: 33px;
+        }
 
         &-place {
             color: $orange-color;

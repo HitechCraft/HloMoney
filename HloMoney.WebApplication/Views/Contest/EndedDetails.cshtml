@@ -35,6 +35,10 @@
             else
             {
                 <h2>Победители не были выбраны!</h2>
+                if (ViewBag.WinnersError != null)
+                {
+                    <h2>@ViewBag.WinnersError</h2>
+                }
             }
         </div>
     </div>

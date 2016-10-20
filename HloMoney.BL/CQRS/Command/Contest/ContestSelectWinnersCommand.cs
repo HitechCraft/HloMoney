@@ -5,5 +5,7 @@
         public int ContestId { get; set; }
         
         public int WinnerCount { get; set; }
+
+        public int MinPartCount { get; set; }
     }
 }

@@ -8,6 +8,9 @@
         {
             <h2>Идет глобальный розыгрыш!</h2>
             <h3>
+                <strong>Окончание: <span class="text-warning">@Model.EndTime</span></strong>
+            </h3>
+            <h3>
                 <strong>Приз: @Model.Gift</strong>
             </h3>
             @Html.ActionLink("Принять участие!!!", "Details", "Contest", new { id = Model.Id }, new { @class = "btn btn-warning btn-lg", @id = "takepart" })

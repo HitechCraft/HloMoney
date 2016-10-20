@@ -351,12 +351,19 @@ a {
   .contest-actives h3.title, .contest-ended h3.title {
     margin: 0 0 10px 0px; }
   .contest-actives-list .active, .contest-ended-list .active {
+    display: inline-block;
+    width: 33%;
     margin-bottom: 30px;
     padding-top: 60px;
-    padding-bottom: 60px; }
+    padding-bottom: 60px;
+    float: none;
+    margin: 0 auto; }
 
 .contest-winner {
-  margin-bottom: 12px; }
+  margin-bottom: 12px;
+  min-height: 102px; }
+  .contest-winner-error {
+    padding: 33px; }
   .contest-winner-place {
     color: #ff7f0b; }
   .contest-winner img {

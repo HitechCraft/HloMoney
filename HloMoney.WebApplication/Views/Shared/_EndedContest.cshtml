@@ -11,10 +11,17 @@
                 <div class="col-md-4 active">
                     <h3 class="title">Конкурс #@contest.Id</h3>
                     <div class="contest-winner">
-                        <p>Победител@(contest.WinnerCount > 1 ? "и" : "ь"):</p>
-                        @foreach (var winner in contest.Winners)
-                    {
-                            <img src="@winner.Avatar" />
+                        @if (contest.Winners.Any())
+                        {
+                            <p>Победител@(contest.WinnerCount > 1 ? "и" : "ь"):</p>
+                            foreach (var winner in contest.Winners)
+                            {
+                                <img src="@winner.Avatar"/>
+                            }
+                        }
+                        else
+                        {
+                            <p class="contest-winner-error">Победитель не был выбран!</p>
                         }
                     </div>
                     @Html.ActionLink("Подробнее", "Details", "Contest", new { id = contest.Id }, new { @class = "btn btn-primary" })
