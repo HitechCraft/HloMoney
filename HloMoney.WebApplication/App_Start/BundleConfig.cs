@@ -15,6 +15,7 @@ namespace HloMoney.WebApplication
                         "~/Scripts/jgrowl.alerts.js",
                         "~/Scripts/jquery.ui.widget.js",
                         "~/Scripts/jquery-ui.min.js",
+                        "~/Scripts/jquery-ui-timepicker.js",
                         "~/Scripts/jquery.fileupload.js",
                         "~/Scripts/tinymce/tinymce.min.js",
                         "~/Scripts/loader.js"));
@@ -35,6 +36,7 @@ namespace HloMoney.WebApplication
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/jquery-ui.css",
+                      "~/Content/DateTimePicker.css",
                       "~/Content/jquery.jgrowl.css"));
         }
     }

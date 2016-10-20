@@ -73,7 +73,14 @@
                         EndTime = vm.EndTime
                     });
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Details", new
+                    {
+                        id = new EntityLastQueryHandler<Contest, int>(this.Container)
+                            .Handle(new EntityLastQuery<Contest, int>
+                            {
+                                Projector = new CommonProjector<Contest, int>(x => x.Id)
+                            })
+                    });
                 }
                 catch (Exception e)
                 {
