@@ -157,10 +157,19 @@ namespace HloMoney.WebApplication.Controllers
                         Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                     });
 
+                //TODO: маппер не заполняет сущности. Разобраться!
+                vm.Winners = new List<WinnerViewModel>();
+                vm.Winners.AddRange(new EntityListQueryHandler<ContestWinner, WinnerViewModel>(Container)
+                        .Handle(new EntityListQuery<ContestWinner, WinnerViewModel>
+                        {
+                            Specification = new ContestWinnerSpec(vm.Id),
+                            Projector = Container.Resolve<IProjector<ContestWinner, WinnerViewModel>>()
+                        }));
+
                 if (!this.CheckContestActivity(vm.Id)) return RedirectToAction("Details", id);
 
                 if (vm.Status == ContestStatus.Ended) return View("EndedDetails", vm);
-
+                
                 switch (vm.Type)
                 {
                     case ContestType.CommentTime:
@@ -234,6 +243,15 @@ namespace HloMoney.WebApplication.Controllers
                             Specification = !new ContestIsActiveSpec() & !new ContestIsGlobalSpec(),
                             Projector = Container.Resolve<IProjector<Contest, ContestViewModel>>()
                         });
+
+                //TODO: маппер не заполняет сущности. Разобраться!
+                vm.ForEach(x => x.Winners.Clear());
+                vm.ForEach(x => x.Winners.AddRange(new EntityListQueryHandler<ContestWinner, WinnerViewModel>(Container)
+                        .Handle(new EntityListQuery<ContestWinner, WinnerViewModel>
+                        {
+                            Specification = new ContestWinnerSpec(x.Id),
+                            Projector = Container.Resolve<IProjector<ContestWinner, WinnerViewModel>>()
+                        })));
 
                 return PartialView("_EndedContest", vm.Limit(this.ContestsOnPage));
             }

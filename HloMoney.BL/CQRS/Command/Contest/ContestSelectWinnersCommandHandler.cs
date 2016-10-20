@@ -44,6 +44,8 @@
             }
 
             contestWinnerRep.Dispose();
+            contestPartRep.Dispose();
+            contestRep.Dispose();
         }
     }
 }

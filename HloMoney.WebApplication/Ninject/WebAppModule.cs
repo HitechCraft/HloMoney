@@ -24,6 +24,7 @@
             Bind(typeof(IProjector<Report, ReportCreateViewModel>)).To(typeof(ReportToReportCreateViewModelMapper));
 
             Bind(typeof(IProjector<Comment, CommentViewModel>)).To(typeof(CommentToCommentViewModelMapper));
+            Bind(typeof(IProjector<ContestWinner, WinnerViewModel>)).To(typeof(ContestWinnerToWinnerViewModelMapper));
         }
     }
 }

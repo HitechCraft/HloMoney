@@ -14,9 +14,16 @@
         }
         <div id="vk_like"></div>
     </h1>
-    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart && Html.Action("CheckPart", new { contestId = Model.Id }).ToString() == "False")
+    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart)
     {
-        <a class="btn btn-success btn-lg" href="javascript:TakePart('@Model.Id')">Участвовать!</a>
+        if (Html.Action("CheckPart", new {contestId = Model.Id}).ToString() == "False")
+        {
+            <a class="btn btn-success btn-lg" href="javascript:TakePart('@Model.Id')">Участвовать!</a>
+        }
+        else
+        {
+            <h1>Вы участвуете!</h1>
+        }
     }
 
     <p class="contest-gift">Приз: @Model.Gift</p>
