@@ -23,9 +23,16 @@
     </h1>
     <p class="contest-gift">Приз: @Model.Gift</p>
 
-    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart && Html.Action("CheckPart", new { contestId = Model.Id }).ToString() == "False")
+    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart)
     {
-        <a href="javascript:TakePart('@Model.Id')" class="btn btn-success btn-lg">Принять участие!</a>
+        if (Html.Action("CheckPart", new { contestId = Model.Id }).ToString() == "False")
+        {
+            <a href="javascript:TakePart('@Model.Id')" class="btn btn-success btn-lg">Принять участие!</a>
+        }
+        else
+        {
+            <h1>Вы участвуете!</h1>
+        }
     }
 </div>
 <div class="row">
@@ -49,8 +56,8 @@
                         growlSuccess(responce.message);
 
                         setTimeout(function () {
-                                document.location = '@Url.Action("Index", "Home")';
-                            },
+                            document.location = '@Url.Action("Index", "Home")';
+                        },
                             2000);
                     } else {
                         growlError(responce.message);
