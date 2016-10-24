@@ -83,7 +83,7 @@ namespace HloMoney.WebApplication.Controllers
                 {
                     Specification = new CommentByContestSpec(contestId),
                     Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
-                })
+                }).OrderByDescending(x => x.Id)
             .TakeRange((current - 1) * this.CommentOnLoad, current * this.CommentOnLoad);
 
             return PartialView("_CommentPartialList", vm);

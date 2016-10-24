@@ -269,6 +269,14 @@
     <Content Include="Content\Images\bg.jpg" />
     <Content Include="Content\Images\contest-desc.jpg" />
     <Content Include="Content\Images\empty-stars.png" />
+    <Content Include="Content\Images\faq\1.jpg" />
+    <Content Include="Content\Images\faq\2.jpg" />
+    <Content Include="Content\Images\faq\3.jpg" />
+    <Content Include="Content\Images\faq\4.jpg" />
+    <Content Include="Content\Images\faq\5.jpg" />
+    <Content Include="Content\Images\faq\6.jpg" />
+    <Content Include="Content\Images\faq\7.jpg" />
+    <Content Include="Content\Images\faq\8.jpg" />
     <Content Include="Content\Images\full-stars.png" />
     <Content Include="Content\Images\loader.gif" />
     <Content Include="Content\Images\logo.png" />
