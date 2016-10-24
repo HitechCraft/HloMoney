@@ -60,7 +60,21 @@ namespace HloMoney.WebApplication.Controllers
 
         #region Actions
 
-        public JsonResult GetCommentList(int? page, int contestId)
+        [HttpGet]
+        public bool IsAllCommentsLoaded(int? index, int contestId)
+        {
+            var current = index ?? 1;
+
+            var reportCount = new EntityCountQueryHandler<Comment>(this.Container)
+                .Handle(new EntityCountQuery<Comment>
+                {
+                    Specification = new CommentByContestSpec(contestId)
+                });
+
+            return current * this.CommentOnLoad >= reportCount;
+        }
+
+        public ActionResult GetCommentList(int? page, int contestId)
         {
             var current = page ?? 1;
 
@@ -70,10 +84,9 @@ namespace HloMoney.WebApplication.Controllers
                     Specification = new CommentByContestSpec(contestId),
                     Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
                 })
-                .Reverse()
-            .TakeRange((current - 1) * this.CommentOnLoad, current * this.CommentOnLoad).Reverse();
+            .TakeRange((current - 1) * this.CommentOnLoad, current * this.CommentOnLoad);
 
-            return Json(new { content = RenderRazorViewToString("_CommentPartialList", vm), lastComment = vm.Any() ? vm.Last().Id : 0 }, JsonRequestBehavior.AllowGet);
+            return PartialView("_CommentPartialList", vm);
         }
         
         public JsonResult GetNewCommentList(int contestId, int lastCommentId)

@@ -1,9 +1,7 @@
 ﻿@model HloMoney.WebApplication.Models.ContestViewModel
 <div class="comments">
     <h1>Комментарии</h1>
-    <div id="comments">
-        @*Html.Action("GetCommentList", "Comment", new { contestId = Model.Id })*@
-    </div>
+
     @if (User.Identity.IsAuthenticated)
     {
         <div class="well">
@@ -23,23 +21,41 @@
     {
         <h3>Чтобы оставить комментарий вы должны @Html.ActionLink("войти", "Auth", "Account", new { returnUrl = Url.Action("Details", "Contest", new { id = Model.Id }) }, null)</h3>
     }
+    <div id="comments">
+        @Html.Action("GetCommentList", "Comment", new { contestId = Model.Id })
+    </div>
+    <div class="btn-group-justified">
+        <a href="javascript:loadMoreComments()" class="btn btn-custom btn-lg" id="load-more">Показать еще</a>
+    </div>
 </div>
 
 <script type="text/javascript">
-
+    var pageIndex = 1;
     window.LastComment = null;
 
     $(document)
         .on('ready',
             function () {
-                LoadComments();
-
-                setInterval(function () {
-                    if (window.LastComment != null) {
-                        LoadNewComments();
-                    }
-                }, 1000);
+                checkCommentLoading();
             });
+
+    function checkCommentLoading() {
+        $.get('@Url.Action("IsAllCommentsLoaded", "Comment")',
+            { index: parseInt(pageIndex), contestId: parseInt('@Model.Id') },
+            function (responce) {
+                if (responce === "True") {
+                    $('#load-more').css('display', 'none');
+                }
+            });
+    }
+
+    function loadMoreComments() {
+        $('#load-more').addClass('disabled');
+        $('#load-more').html('<div id="loader"></div>');
+        pageIndex++;
+        new imageLoader('startAnimation()');
+        LoadComments();
+    }
 
     $('#comment-text')
         .on('input',
@@ -64,16 +80,20 @@
                     $('#comment-error').text(responce.message);
                 } else {
                     $('#comment-text').val('');
-                    LoadNewComments();
+                    LoadComments();
                 }
             });
     }
 
     function LoadComments() {
         $.get('@Url.Action("GetCommentList", "Comment")',
-            { page: 1, contestId: parseInt('@Model.Id') },
+            { page: parseInt(pageIndex), contestId: parseInt('@Model.Id') },
             function (responce) {
-                $('#comments').html(responce.content);
+                new imageLoader('stopAnimation()');
+                $('#comments').append(responce);
+                $('#load-more').removeClass('disabled');
+                $('#load-more').html('Показать еще');
+                checkCommentLoading();
                 window.LastComment = (responce.lastComment !== "0" ? responce.lastComment : null);
                 @if (ViewBag.IsCommentType != null && ViewBag.IsCommentType)
                 {

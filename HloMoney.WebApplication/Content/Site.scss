@@ -616,6 +616,10 @@ footer {
 .report {
     margin-bottom: 40px;
 
+    &-none{
+
+    }
+
     &:after {
         clear: both;
         content: " ";

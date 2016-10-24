@@ -3,7 +3,7 @@ var cWidth = 40;
 var cHeight = 40;
 var cTotalFrames = 8;
 var cFrameWidth = 40;
-var cImageSrc = '../Scripts/images/loader.png';
+var cImageSrc = '../../Scripts/images/loader.png';
 
 var cImageTimeout = false;
 var cIndex = 0;
