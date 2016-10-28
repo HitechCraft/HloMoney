@@ -1,9 +1,8 @@
-﻿using HloMoney.Core.Helper;
-
-namespace HloMoney.WebApplication.Mapper
+﻿namespace HloMoney.WebApplication.Mapper
 {
     using Models;
     using Core.Entity;
+    using Core.Helper;
 
     public class CommentToCommentViewModelMapper : BaseMapper<Comment, CommentViewModel>
     {
