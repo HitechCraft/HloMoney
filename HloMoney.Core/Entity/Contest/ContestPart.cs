@@ -17,9 +17,9 @@
         public virtual Contest Contest { get; set; }
 
         /// <summary>
-        /// User vk id, that took contest part
+        /// User, that took contest part
         /// </summary>
-        public virtual string Partner { get; set; }
+        public virtual UserInfo Partner { get; set; }
 
         /// <summary>
         /// Winner reference

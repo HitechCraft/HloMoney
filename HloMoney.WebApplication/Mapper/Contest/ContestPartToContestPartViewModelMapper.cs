@@ -9,8 +9,8 @@
         public ContestPartToContestPartViewModelMapper()
         {
             this.ConfigurationStore.CreateMap<ContestPart, ContestPartViewModel>()
-                .ForMember(dst => dst.PartnerName, ext => ext.MapFrom(src => VkApiHelper.GetUserName(src.Partner)))
-                .ForMember(dst => dst.PartnerAvatar, ext => ext.MapFrom(src => VkApiHelper.GetUserAvatar(src.Partner)));
+                .ForMember(dst => dst.PartnerName, ext => ext.MapFrom(src => src.Partner.Name))
+                .ForMember(dst => dst.PartnerAvatar, ext => ext.MapFrom(src => src.Partner.Avatar));
         }
     }
 }

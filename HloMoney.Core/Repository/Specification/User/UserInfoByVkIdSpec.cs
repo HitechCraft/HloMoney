@@ -8,28 +8,28 @@
 
     #endregion
 
-    public class ReportByUserSpec : BaseSpecification<Report>
+    public class UserInfoByVkIdSpec : BaseSpecification<UserInfo>
     {
         #region Private Fields
 
-        private readonly string _userId;
+        private readonly string _vkId;
 
         #endregion
 
         #region Constructor
 
-        public ReportByUserSpec(string userId)
+        public UserInfoByVkIdSpec(string vkId)
         {
-            this._userId = userId;
+            this._vkId = vkId;
         }
 
         #endregion
 
         #region Expression
 
-        public override Expression<Func<Report, bool>> IsSatisfiedBy()
+        public override Expression<Func<UserInfo, bool>> IsSatisfiedBy()
         {
-            return report => report.Author.VkId == this._userId;
+            return userInfo => userInfo.VkId == this._vkId;
         }
 
         #endregion

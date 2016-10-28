@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NHibernate\Mappings\UserInfoOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ReportOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ContestOverrides.cs" />
     <Compile Include="NHibernate\Helper\AutomappingHelper.cs" />

@@ -19,12 +19,13 @@
         public override void Handle(ReportCreateCommand command)
         {
             var reportRep = GetRepository<Report>();
+            var userInfoRep = this.GetRepository<UserInfo>();
 
             reportRep.Add(new Report
             {
                 Title = command.Title,
                 Text = command.Text,
-                Author = command.AuthorId,
+                Author = userInfoRep.GetEntity(command.AuthorId),
                 Mark = command.Mark,
                 Date = DateTime.Now
             });

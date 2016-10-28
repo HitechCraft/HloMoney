@@ -22,6 +22,7 @@ namespace HloMoney.BL.CQRS.Command
         {
             var contestPartRep = GetRepository<ContestPart>();
             var contesRep = GetRepository<Contest>();
+            var userInfoRep = this.GetRepository<UserInfo>();
 
             if (
                 contestPartRep.Exist(new ContestPartByContestSpec(command.ContestId) &
@@ -31,7 +32,7 @@ namespace HloMoney.BL.CQRS.Command
             contestPartRep.Add(new ContestPart
             {
                 Contest = contesRep.GetEntity(command.ContestId),
-                Partner = command.UserId
+                Partner = userInfoRep.GetEntity(command.UserId)
             });
 
             contestPartRep.Dispose();

@@ -29,6 +29,8 @@
 
             Bind(typeof(ICommandHandler<ReportCreateCommand>)).To(typeof(ReportCreateCommandHandler));
 
+            Bind(typeof(ICommandHandler<UserInfoCreateCommand>)).To(typeof(UserInfoCreateCommandHandler));
+
             Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>));
             Bind(typeof(IUnitOfWork)).To(typeof(NHibernateUnitOfWork));
 

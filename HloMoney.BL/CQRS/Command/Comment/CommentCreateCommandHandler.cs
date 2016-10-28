@@ -24,13 +24,14 @@ namespace HloMoney.BL.CQRS.Command
             var commentRep = this.GetRepository<Comment>();
             var contestRep = this.GetRepository<Contest>();
             var contestPartRep = this.GetRepository<ContestPart>();
+            var userInfoRep = this.GetRepository<UserInfo>();
 
             var contest = contestRep.GetEntity(command.ContestId);
 
             commentRep.Add(new Comment
             {
                 Text = command.Text,
-                Author = command.AuthorId,
+                Author = userInfoRep.GetEntity(command.AuthorId),
                 Contest = contest,
                 Date = DateTime.Now
             });
@@ -45,7 +46,7 @@ namespace HloMoney.BL.CQRS.Command
                     contestPartRep.Add(new ContestPart
                     {
                         Contest = contest,
-                        Partner = command.AuthorId
+                        Partner = userInfoRep.GetEntity(command.AuthorId)
                     });
 
                 }

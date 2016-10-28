@@ -1,4 +1,4 @@
-﻿using HloMoney.Core.DI;
+﻿using HloMoney.Core.Entity;
 
 namespace HloMoney.WebApplication.Controllers
 {
@@ -11,6 +11,10 @@ namespace HloMoney.WebApplication.Controllers
     using Models;
     using System;
     using Core.Helper;
+    using HloMoney.BL.CQRS.Command;
+    using HloMoney.BL.CQRS.Query.Entity;
+    using HloMoney.Core.DI;
+    using HloMoney.Core.Repository.Specification.User;
 
     [Authorize]
     public class AccountController : BaseController
@@ -89,6 +93,7 @@ namespace HloMoney.WebApplication.Controllers
                 switch (result)
                 {
                     case SignInStatus.Success:
+                        this.CheckerInfo(loginInfo.Login.ProviderKey);
                         return RedirectToLocal(returnUrl);
                     default:
                         var info = await AuthenticationManager.GetExternalLoginInfoAsync();
@@ -99,6 +104,8 @@ namespace HloMoney.WebApplication.Controllers
                             Email = loginInfo.Email
                         };
                         var createUser = await UserManager.CreateAsync(user);
+
+                        this.CheckerInfo(loginInfo.Login.ProviderKey);
 
                         if (createUser.Succeeded)
                         {
@@ -117,6 +124,23 @@ namespace HloMoney.WebApplication.Controllers
             {
                 LogHelper.Error("Ошибка входа: " + e);
                 return null;
+            }
+        }
+
+        private void CheckerInfo(string vkId)
+        {
+            if (!new EntityExistsQueryHandler<UserInfo>(this.Container)
+                            .Handle(new EntityExistsQuery<UserInfo>
+                            {
+                                Specification = new UserInfoByVkIdSpec(vkId)
+                            }))
+            {
+                this.CommandExecutor.Execute(new UserInfoCreateCommand
+                {
+                    Avatar = VkApiHelper.GetUserAvatar(vkId),
+                    Name = VkApiHelper.GetUserName(vkId),
+                    VkId = vkId
+                });
             }
         }
 

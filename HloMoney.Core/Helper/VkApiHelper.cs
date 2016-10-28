@@ -1,4 +1,6 @@
-﻿namespace HloMoney.Core.Helper
+﻿using System.Net;
+
+namespace HloMoney.Core.Helper
 {
     using System;
     using System.Linq;
@@ -41,8 +43,22 @@
                 return String.Empty;
             }
         }
+        
+        public static byte[] GetUserAvatar(string userId)
+        {
+            try
+            {
+                var webClient = new WebClient();
 
-        public static string GetUserAvatar(string userId)
+                return webClient.DownloadData(GetUserAvatarLink(userId));
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        private static string GetUserAvatarLink(string userId)
         {
             try
             {
@@ -55,7 +71,6 @@
                 return String.Empty;
             }
         }
-
         #endregion
     }
 }

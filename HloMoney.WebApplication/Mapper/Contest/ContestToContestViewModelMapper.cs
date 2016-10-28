@@ -22,14 +22,14 @@
                 .ForMember(dst => dst.Comments, ext => ext.MapFrom(src => src.Comments));
 
             this.ConfigurationStore.CreateMap<ContestWinner, WinnerViewModel>()
-                .ForMember(dst => dst.Name, ext => ext.MapFrom(src => VkApiHelper.GetUserName(src.Part.Partner)))
-                .ForMember(dst => dst.Avatar, ext => ext.MapFrom(src => VkApiHelper.GetUserAvatar(src.Part.Partner)))
+                .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Part.Partner.Name))
+                .ForMember(dst => dst.Avatar, ext => ext.MapFrom(src => src.Part.Partner.Avatar))
                 .ForMember(dst => dst.Place, ext => ext.MapFrom(src => src.Place));
 
             this.ConfigurationStore.CreateMap<Comment, CommentViewModel>()
                 .ForMember(dst => dst.ContestId, ext => ext.MapFrom(src => src.Contest.Id))
-                .ForMember(dst => dst.AuthorName, ext => ext.MapFrom(src => VkApiHelper.GetUserName(src.Author)))
-                .ForMember(dst => dst.AuthorAvatar, ext => ext.MapFrom(src => VkApiHelper.GetUserAvatar(src.Author)))
+                .ForMember(dst => dst.AuthorName, ext => ext.MapFrom(src => src.Author.Name))
+                .ForMember(dst => dst.AuthorAvatar, ext => ext.MapFrom(src => src.Author.Avatar))
                 .ForMember(dst => dst.Date, ext => ext.MapFrom(src => src.Date));
         }
     }

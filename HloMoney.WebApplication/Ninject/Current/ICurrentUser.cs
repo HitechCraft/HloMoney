@@ -4,8 +4,8 @@
 
     public interface ICurrentUser
     {
-        UserInfo Info { get; }
-        UserInfo GetUserInfo();
+        UserInfoViewModel Info { get; }
+        UserInfoViewModel GetUserInfo();
 
         string Id { get; }
         string FullName { get; }

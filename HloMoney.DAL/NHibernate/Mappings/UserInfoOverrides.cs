@@ -15,10 +15,10 @@
         {
             mapping.Table("UserInfo");
 
-            mapping.Id(x => x.Id)
-                .GeneratedBy.Increment();
+            mapping.Map(x => x.Id)
+                .Generated.Insert();
 
-            mapping.Map(x => x.VkId)
+            mapping.Id(x => x.VkId)
                 .Length(128)
                 .Column("VkId")
                 .Not.Nullable();

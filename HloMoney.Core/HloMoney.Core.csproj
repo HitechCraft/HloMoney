@@ -80,6 +80,7 @@
     <Compile Include="Entity\Contest\ContestPart.cs" />
     <Compile Include="Entity\Contest\ContestWinner.cs" />
     <Compile Include="Entity\User\Report.cs" />
+    <Compile Include="Entity\User\UserInfo.cs" />
     <Compile Include="Extentions\IEnumerableExtentions.cs" />
     <Compile Include="Extentions\StringExtentions.cs" />
     <Compile Include="Helper\LogHelper.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Repository\Specification\Contest\ContestIsGlobalSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestPartByContestSpec.cs" />
     <Compile Include="Repository\Specification\ISpecification.cs" />
+    <Compile Include="Repository\Specification\User\UserInfoByVkIdSpec.cs" />
     <Compile Include="Repository\Specification\User\ReportByUserSpec.cs" />
     <Compile Include="Web\Json.cs" />
     <Compile Include="Web\WebClientHelper.cs" />

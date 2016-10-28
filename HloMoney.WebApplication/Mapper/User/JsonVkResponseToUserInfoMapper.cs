@@ -4,11 +4,11 @@
     using Models;
     using System;
 
-    public class JsonVkResponseToUserInfoMapper : BaseMapper<JsonVkResponse, UserInfo>
+    public class JsonVkResponseToUserInfoMapper : BaseMapper<JsonVkResponse, UserInfoViewModel>
     {
         public JsonVkResponseToUserInfoMapper()
         {
-            this.ConfigurationStore.CreateMap<JsonVkResponse, UserInfo>()
+            this.ConfigurationStore.CreateMap<JsonVkResponse, UserInfoViewModel>()
                 .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.id))
                 .ForMember(dst => dst.FirstName, ext => ext.MapFrom(src => src.first_name))
                 .ForMember(dst => dst.LastName, ext => ext.MapFrom(src => src.last_name))

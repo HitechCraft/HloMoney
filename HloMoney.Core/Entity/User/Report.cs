@@ -21,9 +21,9 @@
         /// </summary>
         public virtual string Text { get; set; }
         /// <summary>
-        /// User Vk id
+        /// User
         /// </summary>
-        public virtual string Author { get; set; }
+        public virtual UserInfo Author { get; set; }
         /// <summary>
         /// User service mark
         /// </summary>

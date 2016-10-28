@@ -18,9 +18,9 @@
         public virtual string Text { get; set; }
 
         /// <summary>
-        /// Author Vk id
+        /// Author
         /// </summary>
-        public virtual string Author { get; set; }
+        public virtual UserInfo Author { get; set; }
 
         /// <summary>
         /// Contest this comment belong

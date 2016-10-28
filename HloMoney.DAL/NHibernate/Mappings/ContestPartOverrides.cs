@@ -21,7 +21,7 @@
                 .Column("Contest")
                 .Not.Nullable();
 
-            mapping.Map(x => x.Partner)
+            mapping.References(x => x.Partner)
                 .Column("Partner")
                 .Not.Nullable();
 

@@ -29,7 +29,7 @@
 
         public override Expression<Func<ContestPart, bool>> IsSatisfiedBy()
         {
-            return contestPart => contestPart.Partner == this._userId;
+            return contestPart => contestPart.Partner.VkId == this._userId;
         }
 
         #endregion
