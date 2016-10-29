@@ -34,6 +34,7 @@ namespace HloMoney.WebApplication.Controllers
 
         #region CRUD
 
+        [ValidateInput(false)]
         public JsonResult Create(string text, int contestId)
         {
             try
