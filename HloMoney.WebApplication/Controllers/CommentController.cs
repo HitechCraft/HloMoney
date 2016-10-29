@@ -74,39 +74,6 @@ namespace HloMoney.WebApplication.Controllers
             return current * this.CommentOnLoad >= reportCount;
         }
 
-        public ActionResult GetCommentList(int? page, int contestId)
-        {
-            var current = page ?? 1;
-
-            var vm = new EntityListQueryHandler<Comment, CommentViewModel>(this.Container)
-                .Handle(new EntityListQuery<Comment, CommentViewModel>
-                {
-                    Specification = new CommentByContestSpec(contestId),
-                    Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
-                }).OrderByDescending(x => x.Id)
-            .TakeRange((current - 1) * this.CommentOnLoad, current * this.CommentOnLoad);
-
-            return PartialView("_CommentPartialList", vm);
-        }
-        
-        public JsonResult GetNewCommentList(int contestId, int lastCommentId)
-        {
-            if (lastCommentId != 0)
-            {
-                var vm = new CommentNewQueryHandler<Comment, CommentViewModel>(this.Container)
-                .Handle(new CommentNewQuery<Comment, CommentViewModel>
-                {
-                    LastCommentId = lastCommentId,
-                    Specification = new CommentByContestSpec(contestId),
-                    Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
-                });
-
-                return Json(new { status = "OK", content = RenderRazorViewToString("_CommentNewPartialList", vm), lastComment = vm.Any() ? vm.Last().Id : 0 }, JsonRequestBehavior.AllowGet);
-            }
-
-            return Json(new {status = "NO"}, JsonRequestBehavior.AllowGet);
-        }
-
         public ActionResult GetCommentPartial(int contestId)
         {
             ViewBag.IsCommentType = new EntityQueryHandler<Contest, bool>(this.Container)
@@ -122,6 +89,74 @@ namespace HloMoney.WebApplication.Controllers
                     Id = contestId,
                     Projector = this.Container.Resolve<IProjector<Contest, ContestViewModel>>()
                 }));
+        }
+
+        public ActionResult GetCommentList(int? page, int contestId)
+        {
+            var current = page ?? 1;
+
+            var vm = new EntityListQueryHandler<Comment, CommentViewModel>(this.Container)
+                .Handle(new EntityListQuery<Comment, CommentViewModel>
+                {
+                    Specification = new CommentByContestSpec(contestId),
+                    Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
+                })
+                .OrderByDescending(x => x.Id)
+                .TakeRange((current - 1) * this.CommentOnLoad, current * this.CommentOnLoad)
+                .ToList();
+
+            //Comments is sort descending. That last is first
+            ViewBag.FirstComment = (vm.Any() ? vm.Last().Id : 0);
+            ViewBag.LastComment = (vm.Any() ? vm.First().Id : 0);
+            
+            return PartialView("_CommentPartialList", vm);
+        }
+        
+        public ActionResult GetNewCommentList(int contestId, int lastCommentId)
+        {
+            if (lastCommentId != 0)
+            {
+                var vm = new CommentNewQueryHandler<Comment, CommentViewModel>(this.Container)
+                .Handle(new CommentNewQuery<Comment, CommentViewModel>
+                {
+                    LastCommentId = lastCommentId,
+                    Specification = new CommentByContestSpec(contestId),
+                    Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
+                });
+
+                ViewBag.LastComment = (vm.Any() ? vm.Last().Id : 0);
+
+                return PartialView("_CommentPartialList", vm);
+            }
+
+            return null;
+        }
+
+        public ActionResult GetOldCommentList(int contestId, int lastCommentId)
+        {
+            if (lastCommentId != 0)
+            {
+                var vm = new CommentOldQueryHandler<Comment, CommentViewModel>(this.Container)
+                .Handle(new CommentOldQuery<Comment, CommentViewModel>
+                {
+                    LastCommentId = lastCommentId,
+                    Specification = new CommentByContestSpec(contestId),
+                    Projector = this.Container.Resolve<IProjector<Comment, CommentViewModel>>()
+                });
+                
+                return PartialView("_CommentPartialList", vm);
+            }
+
+            return null;
+        }
+
+        public int GetCommentCount(int contestId)
+        {
+            return new EntityCountQueryHandler<Comment>(this.Container)
+                .Handle(new EntityCountQuery<Comment>
+                {
+                    Specification = new CommentByContestSpec(contestId)
+                });
         }
 
         #endregion

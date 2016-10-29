@@ -20,7 +20,7 @@
                         {
                             <h@(winner.Place)>
                                 <span class="contest-winner-place">@winner.Place место:</span> <br />
-                                <img class="user-avatar-winner" src="@winner.Avatar" title="@winner.Name" /> <br />@winner.Name
+                                <img class="user-avatar-winner" src="data:image/jpeg; base64,@Convert.ToBase64String(winner.Avatar)" title="@winner.Name" /> <br />@winner.Name
                             </h@(winner.Place)>
                         }
                     </div>
@@ -28,7 +28,7 @@
                 else
                 {
                     <h1>
-                        <img class="user-avatar-winner" src="@Model.Winners[0].Avatar" title="@Model.Winners[0].Name" /> <br />@Model.Winners[0].Name
+                        <img class="user-avatar-winner" src="data:image/jpeg; base64,@Convert.ToBase64String(Model.Winners[0].Avatar)" title="@Model.Winners[0].Name" /> <br />@Model.Winners[0].Name
                     </h1>
                 }
             }

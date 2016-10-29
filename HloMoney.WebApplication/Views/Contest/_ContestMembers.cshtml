@@ -9,7 +9,7 @@
             @foreach (var member in Model)
             {
                 <div class="col-md-4 member">
-                    <img src="@member.PartnerAvatar" title="@member.PartnerName"/>
+                    <img src="data:image/jpeg; base64,@Convert.ToBase64String(member.PartnerAvatar)" title="@member.PartnerName"/>
                 </div>
             }
         </div>

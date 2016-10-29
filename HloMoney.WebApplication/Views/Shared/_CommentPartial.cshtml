@@ -22,39 +22,41 @@
         <h3>Чтобы оставить комментарий вы должны @Html.ActionLink("войти", "Auth", "Account", new { returnUrl = Url.Action("Details", "Contest", new { id = Model.Id }) }, null)</h3>
     }
     <div id="comments">
-        @Html.Action("GetCommentList", "Comment", new { contestId = Model.Id })
     </div>
     <div class="btn-group-justified">
-        <a href="javascript:loadMoreComments()" class="btn btn-custom btn-lg" id="load-more">Показать еще</a>
+        <a href="javascript:loadMoreComments()" class="btn btn-custom btn-lg" id="load-more">Показать все (<span id="comment-count"></span>)</a>
     </div>
 </div>
 
 <script type="text/javascript">
-    var pageIndex = 1;
-    window.LastComment = null;
+    //var pageIndex = 1;
+    window.FirstComment = 0;
+    window.LastComment = 0;
 
     $(document)
         .on('ready',
             function () {
-                checkCommentLoading();
+                LoadComments();
+                setInterval(function () {
+                    if (typeof CheckPart !== 'undefined' && $.isFunction(CheckPart)) {
+                        CheckPart();
+                    }
+                    LoadNewComments();
+                    },
+                1000);
             });
-
-    function checkCommentLoading() {
-        $.get('@Url.Action("IsAllCommentsLoaded", "Comment")',
-            { index: parseInt(pageIndex), contestId: parseInt('@Model.Id') },
-            function (responce) {
-                if (responce === "True") {
-                    $('#load-more').css('display', 'none');
-                }
-            });
-    }
 
     function loadMoreComments() {
         $('#load-more').addClass('disabled');
         $('#load-more').html('<div id="loader"></div>');
-        pageIndex++;
         new imageLoader('startAnimation()');
-        LoadComments();
+
+        $.get('@Url.Action("GetOldCommentList", "Comment")',
+            { contestId: parseInt('@Model.Id'), lastCommentId: parseInt(window.FirstComment) },
+            function (responce) {
+                $('#comments').append(responce);
+                $('#load-more').css('display', 'none');
+            });
     }
 
     $('#comment-text')
@@ -80,21 +82,39 @@
                     $('#comment-error').text(responce.message);
                 } else {
                     $('#comment-text').val('');
-                    LoadComments();
                 }
+            });
+    }
+
+    function GetCommentCount() {
+        $.get('@Url.Action("GetCommentCount", "Comment")',
+            { contestId: parseInt('@Model.Id') },
+            function (responce) {
+                $('#comment-count').text(responce);
             });
     }
 
     function LoadComments() {
         $.get('@Url.Action("GetCommentList", "Comment")',
-            { page: parseInt(pageIndex), contestId: parseInt('@Model.Id') },
+            { page: null, contestId: parseInt('@Model.Id') },
             function (responce) {
                 new imageLoader('stopAnimation()');
                 $('#comments').append(responce);
                 $('#load-more').removeClass('disabled');
-                $('#load-more').html('Показать еще');
-                checkCommentLoading();
-                window.LastComment = (responce.lastComment !== "0" ? responce.lastComment : null);
+                $('#load-more').html('Показать все (<span id="comment-count"></span>)');
+
+                GetCommentCount();
+
+                if ($('#last-comment').val() !== '0') {
+                    window.LastComment = $('#last-comment').val();
+                }
+
+                $('#last-comment').remove();
+
+                if ($('#first-comment').val() !== '0') {
+                    window.FirstComment = $('#first-comment').val();
+                }
+                $('#first-comment').remove();
                 @if (ViewBag.IsCommentType != null && ViewBag.IsCommentType)
                 {
                     <text>
@@ -111,36 +131,23 @@
         $.get('@Url.Action("GetNewCommentList", "Comment")',
             { contestId: parseInt('@Model.Id'), lastCommentId: parseInt(window.LastComment) },
             function (responce) {
-                if (responce.status === "OK") {
-                    $('#comments').append(responce.content);
-                    window.LastComment = responce.lastComment;
+                if (responce !== 'Null') {
+                    $('#comments').prepend(responce);
+                    if ($('#last-comment').val() !== '0') {
+                        window.LastComment = $('#last-comment').val();
+                    }
+                    $('#last-comment').remove();
                     @if (ViewBag.IsCommentType != null && ViewBag.IsCommentType)
                     {
                         <text>
-                        //при загрузке проверяет участие. Находится в CommentDetails.cshtml
-                        CheckPart();
-                        //Перезагружаем время
-                        ReloadContestTime();
-                        </text>
+                    //при загрузке проверяет участие. Находится в CommentDetails.cshtml
+                    CheckPart();
+                    //Перезагружаем время
+                    ReloadContestTime();
+                    </text>
                     }
                 }
             });
     }
 
-    function DeleteContest(contestId) {
-        $.post('@Url.Action("Delete")',
-            { id: parseInt(contestId) },
-            function (responce) {
-                if (responce.status === "OK") {
-                    growlSuccess(responce.message);
-
-                    setTimeout(function () {
-                        document.location = '@Url.Action("Index", "Home")';
-                    },
-                        2000);
-                } else {
-                    growlError(responce.message);
-                }
-            });
-    }
 </script>

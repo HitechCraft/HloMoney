@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<HloMoney.WebApplication.Models.CommentViewModel>
 
+<input type="hidden" id="first-comment" value="@ViewBag.FirstComment" />
+<input type="hidden" id="last-comment" value="@ViewBag.LastComment"/>
+
 @if (Model != null && Model.Any())
 {
     foreach (var comment in Model)
@@ -17,8 +20,4 @@
             </div>
         </div>
     }
-}
-else
-{
-    <h2>Комментариев пока нет!</h2>
 }

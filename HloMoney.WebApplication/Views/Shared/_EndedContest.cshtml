@@ -16,7 +16,7 @@
                             <p>Победител@(contest.WinnerCount > 1 ? "и" : "ь"):</p>
                             foreach (var winner in contest.Winners)
                             {
-                                <img src="@winner.Avatar"/>
+                                <img src="data:image/jpeg; base64,@Convert.ToBase64String(winner.Avatar)"/>
                             }
                         }
                         else

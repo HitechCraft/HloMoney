@@ -334,6 +334,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
     <Content Include="Scripts\tinymce\license.txt" />
+    <Content Include="Scripts\scroller.js" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\anchor\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\autolink\plugin.min.js" />
@@ -478,8 +479,6 @@
     <Content Include="Views\Shared\_ContestTimeHelper.cshtml" />
     <Content Include="Views\Contest\CommentDetails.cshtml" />
     <Content Include="Views\Contest\_CommentPartCheckPartial.cshtml" />
-    <Content Include="Views\Shared\_CommentPartialList.cshtml" />
-    <Content Include="Views\Shared\_CommentNewPartialList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

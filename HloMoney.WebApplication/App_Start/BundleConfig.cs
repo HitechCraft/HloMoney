@@ -17,6 +17,7 @@ namespace HloMoney.WebApplication
                         "~/Scripts/jquery-ui.min.js",
                         "~/Scripts/jquery-ui-timepicker.js",
                         "~/Scripts/jquery.fileupload.js",
+                        "~/Scripts/scroller.js",
                         "~/Scripts/tinymce/tinymce.min.js",
                         "~/Scripts/loader.js"));
 
