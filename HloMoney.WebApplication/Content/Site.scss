@@ -311,6 +311,11 @@ a {
             min-height: 121px;
             margin-top: 15px;
         }
+
+        &-part {
+            margin: 70px;
+            font-weight: bold;
+        }
     }
 
     .well {
@@ -616,8 +621,7 @@ footer {
 .report {
     margin-bottom: 40px;
 
-    &-none{
-
+    &-none {
     }
 
     &:after {
@@ -649,8 +653,8 @@ footer {
             margin-top: 18px;
         }
 
-        &-name{
-            color: $orange-color;   
+        &-name {
+            color: $orange-color;
         }
     }
 

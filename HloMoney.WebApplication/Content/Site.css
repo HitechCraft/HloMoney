@@ -241,6 +241,9 @@ a {
     .comments .comment-text {
       min-height: 121px;
       margin-top: 15px; }
+    .comments .comment-part {
+      margin: 70px;
+      font-weight: bold; }
   .comments .well {
     background-color: transparent;
     border: 0; }

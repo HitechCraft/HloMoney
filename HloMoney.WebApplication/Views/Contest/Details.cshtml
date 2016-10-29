@@ -4,7 +4,14 @@
 @{
     ViewBag.Title = "Конкурс #" + Model.Id;
 }
-@Html.Action("GetContestTime", new {id = Model.Id, dateTime = Model.EndTime})
+@Html.Action("GetContestTime", new { id = Model.Id, dateTime = Model.EndTime })
+<style type="text/css">
+    body {
+        background-image: url('data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)');
+    }
+</style>
+<link rel="StyleSheet" href="~/Content/GlobalStyles.css" type="text/css" media="all">
+
     <div class="text-center">
         <h1 class="page-title">
             @ViewBag.Title
