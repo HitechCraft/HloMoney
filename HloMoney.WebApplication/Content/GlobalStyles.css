@@ -12,6 +12,9 @@ a {
 .content-wrapper {
   background: rgba(44, 62, 80, 0.62); }
 
+.contest-blur {
+  background: rgba(44, 62, 80, 0.62); }
+
 .global-title {
   text-align: center; }
   .global-title .btn {

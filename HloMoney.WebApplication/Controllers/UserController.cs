@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
     using Core.DI;
+    using System;
 
     public class UserController : BaseController
     {
@@ -15,9 +16,9 @@
             return View();
         }
 
-        public byte[] UserAvatarLink()
+        public string UserAvatar()
         {
-            return this.CurrentUser.Info.Avatar;
+            return Convert.ToBase64String(this.CurrentUser.Info.Avatar);
         }
     }
 }
