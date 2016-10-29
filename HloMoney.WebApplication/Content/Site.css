@@ -219,6 +219,11 @@ a {
 .page-splitter {
   margin: 50px 0; }
 
+#comment-part {
+  margin: 46px 0;
+  font-size: 23px;
+  font-weight: bold; }
+
 .comments {
   margin-bottom: 40px; }
   .comments h1 {

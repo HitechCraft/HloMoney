@@ -36,13 +36,16 @@
     $(document)
         .on('ready',
             function () {
+                GetCommentCount();
                 LoadComments();
                 setInterval(function () {
-                    if (typeof CheckPart !== 'undefined' && $.isFunction(CheckPart)) {
-                        CheckPart();
+                    if ($('#comment-count').text() !== '0') {
+                        if (typeof CheckPart !== 'undefined' && $.isFunction(CheckPart)) {
+                            CheckPart();
+                        }
+                        LoadNewComments();
                     }
-                    LoadNewComments();
-                    },
+                },
                 1000);
             });
 
@@ -90,7 +93,12 @@
         $.get('@Url.Action("GetCommentCount", "Comment")',
             { contestId: parseInt('@Model.Id') },
             function (responce) {
-                $('#comment-count').text(responce);
+                if (responce === '0') {
+                    $('#comments').html('<h2>Комментариев нет</h2>');
+                    $('#load-more').css('display', 'none');
+                }
+
+                $('#comment-count').html(responce);
             });
     }
 
@@ -118,11 +126,11 @@
                 @if (ViewBag.IsCommentType != null && ViewBag.IsCommentType)
                 {
                     <text>
-                    //при загрузке проверяет участие. Находится в CommentDetails.cshtml
-                    CheckPart();
-                    //Перезагружаем время
-                    ReloadContestTime();
-                    </text>
+                //при загрузке проверяет участие. Находится в CommentDetails.cshtml
+                CheckPart();
+                //Перезагружаем время
+                ReloadContestTime();
+                </text>
                 }
             });
     }

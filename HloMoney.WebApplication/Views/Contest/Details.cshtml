@@ -16,23 +16,24 @@
         @ViewBag.Title
 
         @if (User.IsInRole("Administrator"))
-            {
+        {
             @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
         }
         <div id="vk_like"></div>
     </h1>
-    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart)
-    {
-        if (Html.Action("CheckPart", new { contestId = Model.Id }).ToString() == "False")
+    <div id="comment-part">
+        @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart)
         {
-            <a class="btn btn-success btn-lg" href="javascript:TakePart('@Model.Id')">Участвовать!</a>
+            if (Html.Action("CheckPart", new { contestId = Model.Id }).ToString() == "False")
+            {
+                <a class="btn btn-success btn-lg" href="javascript:TakePart('@Model.Id')">Участвовать!</a>
+            }
+            else
+            {
+                <h1 class="text-success" style="margin-bottom: 70px;font-weight: bold">Вы участвуете!</h1>
+            }
         }
-        else
-        {
-            <h1 class="text-success" style="margin-bottom: 70px;font-weight: bold">Вы участвуете!</h1>
-        }
-    }
-
+    </div>
     <p class="contest-gift">Приз: @Model.Gift</p>
     <div class="state">
         <h4>Окончание через:</h4>
@@ -42,14 +43,6 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        @if (Model.Image != null)
-            {
-            <img alt="" class="contest-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" />
-        }
-        else
-        {
-            <img alt="" class="contest-image" src="~/Content/Images/no-image.png" />
-        }
         <div class="contest-description">
             @Html.Raw(Model.Description)
         </div>

@@ -262,6 +262,14 @@ a {
     }
 }
 
+#comment {
+    &-part {
+        margin: 46px 0;
+        font-size: 23px;
+        font-weight: bold;
+    }
+}
+
 .comments {
 
     h1 {
