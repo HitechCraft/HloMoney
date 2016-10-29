@@ -232,7 +232,7 @@
     <Compile Include="Mapper\Contest\ContestWinnerToWinnerViewModelMapper.cs" />
     <Compile Include="Mapper\User\ReportToReportCreateViewModelMapper.cs" />
     <Compile Include="Mapper\User\ReportToReportViewModelMapper.cs" />
-    <Compile Include="Mapper\User\JsonVkResponseToUserInfoMapper.cs" />
+    <Compile Include="Mapper\User\UserInfoToUserInfoViewModelMapper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\ContestEditViewModel.cs" />
@@ -243,7 +243,7 @@
     <Compile Include="Models\MemberViewModel.cs" />
     <Compile Include="Models\ReportCreateViewModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
-    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Models\WinnerViewModel.cs" />
     <Compile Include="Ninject\Current\CurrentUser.cs" />
     <Compile Include="Ninject\Current\ICurrentUser.cs" />

@@ -10,7 +10,7 @@
         public ContestWinnerToWinnerViewModelMapper()
         {
             this.ConfigurationStore.CreateMap<ContestWinner, WinnerViewModel>()
-                .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Part.Partner.Name))
+                .ForMember(dst => dst.Name, ext => ext.MapFrom(src => $"{src.Part.Partner.FirstName} {src.Part.Partner.LastName}"))
                 .ForMember(dst => dst.Avatar, ext => ext.MapFrom(src => src.Part.Partner.Avatar))
                 .ForMember(dst => dst.Place, ext => ext.MapFrom(src => src.Place));
         }

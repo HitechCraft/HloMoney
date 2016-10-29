@@ -1,8 +1,8 @@
-USE [HloMoney]
+USE [HloMoneyNew]
 GO
 
 CREATE TABLE [dbo].[UserInfo](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[VkId] [nvarchar](128) NOT NULL,
 	[Name] [nvarchar](128) NOT NULL,
 	[Avatar] [varbinary](MAX) NOT NULL,

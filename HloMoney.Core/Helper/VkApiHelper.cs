@@ -44,13 +44,13 @@ namespace HloMoney.Core.Helper
             }
         }
         
-        public static byte[] GetUserAvatar(string userId)
+        public static byte[] GetUserAvatar(string userId, string avatarLink = "")
         {
             try
             {
                 var webClient = new WebClient();
 
-                return webClient.DownloadData(GetUserAvatarLink(userId));
+                return webClient.DownloadData(String.IsNullOrEmpty(avatarLink) ? GetUserAvatarLink(userId) : avatarLink);
             }
             catch (Exception)
             {

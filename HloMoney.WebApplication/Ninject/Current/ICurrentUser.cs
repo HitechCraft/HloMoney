@@ -9,6 +9,6 @@
 
         string Id { get; }
         string FullName { get; }
-        string Avatar { get; }
+        byte[] Avatar { get; }
     }
 }

@@ -25,7 +25,9 @@
                 VkId = command.VkId,
                 Avatar = command.Avatar,
                 IsSynchron = true,
-                Name = command.Name,
+                FirstName  = command.FirstName,
+                BirthDate = command.BirthDate,
+                LastName = command.LastName,
                 LastUpdate = DateTime.Now
             });
 

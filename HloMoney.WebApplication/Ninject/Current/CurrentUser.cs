@@ -1,19 +1,22 @@
-﻿using HloMoney.BL.CQRS.Command;
-using HloMoney.BL.CQRS.Command.Base;
-using HloMoney.BL.CQRS.Query.Entity;
-using HloMoney.Core.Entity;
-using HloMoney.Core.Repository.Specification.User;
-
-namespace HloMoney.WebApplication.Ninject.Current
+﻿namespace HloMoney.WebApplication.Ninject.Current
 {
+    #region Using Directives
+
     using System.Linq;
     using Core.DI;
     using Core.Helper;
-    using Core.Models.Json;
     using Models;
     using System.Web;
     using Core.Projector;
     using Microsoft.AspNet.Identity;
+    using System;
+    using HloMoney.BL.CQRS.Command;
+    using HloMoney.BL.CQRS.Command.Base;
+    using HloMoney.BL.CQRS.Query.Entity;
+    using HloMoney.Core.Entity;
+    using HloMoney.Core.Repository.Specification.User;
+
+    #endregion
 
     public class CurrentUser : ICurrentUser
     {
@@ -25,7 +28,7 @@ namespace HloMoney.WebApplication.Ninject.Current
 
         public string Id => Info.Id;
         public string FullName => $"{Info.FirstName} {Info.LastName}";
-        public string Avatar => Info.AvatarLink;
+        public byte[] Avatar => Info.Avatar;
 
         public CurrentUser(IContainer container)
         {
@@ -41,12 +44,8 @@ namespace HloMoney.WebApplication.Ninject.Current
             {
                 var userVkLogin = user.Logins.FirstOrDefault(x => x.LoginProvider == "Vkontakte");
                 this.CheckerInfo(userVkLogin != null ? userVkLogin.ProviderKey : "0");
-                //TODO: закончить
-                var source =
-                    VkApiHelper.GetUsersInfo(userVkLogin != null ? userVkLogin.ProviderKey : "0").response;
-
-                return this._container.Resolve<IProjector<JsonVkResponse, UserInfoViewModel>>()
-                    .Project(source.First());
+                
+                return this.GetUserInfo(userVkLogin != null ? userVkLogin.ProviderKey : "0");
             }
 
             return null;
@@ -60,13 +59,27 @@ namespace HloMoney.WebApplication.Ninject.Current
                                 Specification = new UserInfoByVkIdSpec(vkId)
                             }))
             {
+                var info = VkApiHelper.GetUsersInfo(vkId).response.First();
+
                 this._container.Resolve<ICommandExecutor>().Execute(new UserInfoCreateCommand
                 {
-                    Avatar = VkApiHelper.GetUserAvatar(vkId),
-                    Name = VkApiHelper.GetUserName(vkId),
+                    Avatar = VkApiHelper.GetUserAvatar(vkId, info.photo_max),
+                    FirstName = info.first_name,
+                    LastName = info.last_name,
+                    BirthDate = (String.IsNullOrEmpty(info.bdate) ? null : (DateTime?)DateTime.Parse(info.bdate)),
                     VkId = vkId
                 });
             }
+        }
+
+        private UserInfoViewModel GetUserInfo(string vkId)
+        {
+            return new EntityQueryHandler<UserInfo, UserInfoViewModel>(this._container)
+                .Handle(new EntityQuery<UserInfo, UserInfoViewModel>
+                {
+                    Id = vkId,
+                    Projector = this._container.Resolve<IProjector<UserInfo, UserInfoViewModel>>()
+                });
         }
     }
 }

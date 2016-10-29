@@ -23,10 +23,19 @@
                 .Column("VkId")
                 .Not.Nullable();
             
-            mapping.Map(x => x.Name)
+            mapping.Map(x => x.FirstName)
                 .Length(128)
-                .Column("Name")
+                .Column("FirstName")
                 .Not.Nullable();
+
+            mapping.Map(x => x.LastName)
+                .Length(128)
+                .Column("LastName")
+                .Not.Nullable();
+
+            mapping.Map(x => x.BirthDate)
+                .Column("BirthDate")
+                .Nullable();
 
             mapping.Map(x => x.Avatar)
                 .Length(Int32.MaxValue)

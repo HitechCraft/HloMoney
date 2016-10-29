@@ -1,4 +1,5 @@
-﻿using HloMoney.Core.Entity;
+﻿using System.Linq;
+using HloMoney.Core.Entity;
 
 namespace HloMoney.WebApplication.Controllers
 {
@@ -135,10 +136,14 @@ namespace HloMoney.WebApplication.Controllers
                                 Specification = new UserInfoByVkIdSpec(vkId)
                             }))
             {
+                var info = VkApiHelper.GetUsersInfo(vkId).response.First();
+
                 this.CommandExecutor.Execute(new UserInfoCreateCommand
                 {
-                    Avatar = VkApiHelper.GetUserAvatar(vkId),
-                    Name = VkApiHelper.GetUserName(vkId),
+                    Avatar = VkApiHelper.GetUserAvatar(vkId, info.photo_max),
+                    FirstName = info.first_name,
+                    LastName = info.last_name,
+                    BirthDate = (String.IsNullOrEmpty(info.bdate) ? null : (DateTime?)DateTime.Parse(info.bdate)),
                     VkId = vkId
                 });
             }

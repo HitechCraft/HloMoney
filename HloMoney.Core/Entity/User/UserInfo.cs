@@ -13,13 +13,21 @@
         /// </summary>
         public virtual string VkId { get; set; }
         /// <summary>
-        /// Use Name
+        /// Use first Name
         /// </summary>
-        public virtual string Name { get; set; }
+        public virtual string FirstName { get; set; }
+        /// <summary>
+        /// Use last Name
+        /// </summary>
+        public virtual string LastName { get; set; }
         /// <summary>
         /// User avatar
         /// </summary>
         public virtual byte[] Avatar { get; set; }
+        /// <summary>
+        /// User birth date
+        /// </summary>
+        public virtual DateTime? BirthDate { get; set; }
         /// <summary>
         /// Synchronize this info with info in vk?
         /// </summary>
