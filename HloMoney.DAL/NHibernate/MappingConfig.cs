@@ -29,7 +29,11 @@
                 .Add(AutoMap.AssemblyOf<Comment>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<CommentOverrides>())
                 .Add(AutoMap.AssemblyOf<Report>(autoMapHelper)
-                    .UseOverridesFromAssemblyOf<ReportOverrides>());
+                    .UseOverridesFromAssemblyOf<ReportOverrides>())
+                .Add(AutoMap.AssemblyOf<UserInfo>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<UserInfoOverrides>())
+                .Add(AutoMap.AssemblyOf<TimeIncrement>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<TimeIncrementOverrides>());
         }
     }
 }
