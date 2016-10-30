@@ -1,0 +1,29 @@
+﻿@model IEnumerable<HloMoney.WebApplication.Models.ReportViewModel>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var report in Model)
+    {
+        <hr />
+        <div class="report">
+            <div class="report-avatar-col">
+                <div class="report-author-avatar" style="background-image: url(data:image/jpeg; base64,@Convert.ToBase64String(report.AuthorAvatar)'));"></div>
+            </div>
+            <div class="report-text-col">
+                <p><span class="report-title">@report.AuthorName: @report.Title</span></p>
+                <div class="report-mark">
+                    <div class="report-mark-bg"></div>
+                    <div class="report-mark-fill" style="width: @((173f/5*report.Mark).ToString().Replace(',', '.'))px" title="Оценка: @(report.Mark)"></div>
+                </div>
+                <p>@report.Text</p>
+                <p>
+                    <strong>Дата:</strong> @report.Date
+                </p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <h3>Отзывов пока нет! Будь первым</h3>
+}

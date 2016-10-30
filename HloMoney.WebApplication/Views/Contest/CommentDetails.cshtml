@@ -1,0 +1,85 @@
+﻿@using HloMoney.Core.Models.Enum
+@using HloMoney.Core.Models.Json
+@model HloMoney.WebApplication.Models.ContestViewModel
+@{
+    ViewBag.Title = "Конкурс #" + Model.Id;
+}
+<div id="contest-time">
+    @Html.Action("GetContestTime", new {id = Model.Id})
+</div>
+<style type="text/css">
+    body {
+        background-image: url('data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)');
+    }
+</style>
+<link rel="StyleSheet" href="~/Content/GlobalStyles.css" type="text/css" media="all">
+
+<div class="text-center">
+    <h1 class="page-title">
+        @ViewBag.Title
+
+        @if (User.IsInRole("Administrator"))
+        {
+            @Html.ActionLink("Изменить", "Edit", new {id = Model.Id}, new {@class = "btn btn-default"})
+        }
+        <div id="vk_like"></div>
+    </h1>
+
+    <div id="comment-part">@Html.Action("ContestCommentPartChecker", new { contestId = Model.Id })</div>
+
+    <p class="contest-gift">Приз: @Model.Gift</p>
+    <div class="state">
+        <h4>Окончание через:</h4>
+        <span id="time-left" class="time-left"></span>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="contest-description">
+            @Html.Raw(Model.Description)
+        </div>
+    </div>
+</div>
+
+@Html.Action("GetCommentPartial", "Comment", new { contestId = Model.Id})
+
+<script type="text/javascript">
+    function TakePart(id) {
+        $.post('@Url.Action("TakePart")',
+            { contestId: parseInt(id) },
+            function (responce) {
+                if (responce.status === "OK") document.location.reload();
+                else growlError(responce.message);
+            });
+    }
+
+    function CheckPart() {
+        $.get('@Url.Action("ContestCommentPartChecker")',
+            { contestId: parseInt('@Model.Id') },
+            function(responce) {
+                $('#comment-part').html(responce);
+            });
+    }
+
+    function ReloadContestTime() {
+        $.get('@Url.Action("GetContestTime")',
+            { id: parseInt('@Model.Id') },
+            function (responce) {
+                $('#contest-time').html(responce);
+            });
+    }
+
+    $(window)
+        .on('scroll',
+            function () {
+                if (document.body.scrollTop > 500) {
+                    $('#time-left').addClass('contest-time-fixed');
+                } else {
+                    $('#time-left').removeClass('contest-time-fixed');
+                }
+            });
+
+    VK.Widgets.Like("vk_like", { type: "button", verb: 1, height: 30 });
+</script>
+

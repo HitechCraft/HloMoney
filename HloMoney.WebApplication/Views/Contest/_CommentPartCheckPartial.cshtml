@@ -1,0 +1,16 @@
+﻿@model int
+@if (Html.Action("CheckPart", new { contestId = Model }).ToString() == "False")
+{
+    <span class="text-warning">Добавьте комментарий, чтобы участвовать!</span>
+}
+else
+{
+    if (Html.Action("CheckCommentPartAvailable", new { contestId = Model }).ToString() == "True")
+    {
+        <h1 class="text-success">Вы участвуете!</h1>
+    }
+    else
+    {
+        <h1 class="text-danger">Кто-то добавил комментарий! Чтобы участвовать, добавьте новый!</h1>
+    }
+}

@@ -9,23 +9,52 @@
 
 <div class="project-status">
     @*<div class="stats">
-        <span class="title">78</span>
-        <span class="value">Розыгрышей</span>
-    </div>
-    <div class="stats">
-        <span class="title">1200</span>
-        <span class="value">Участников</span>
-    </div>
-    <div class="stats">
-        <span class="title">133</span>
-        <span class="value">На сайте</span>
-    </div>
-    <div class="stats">
-        <span class="title">43255</span>
-        <span class="value">Сумма выплат</span>
-    </div>*@
+            <span class="title">78</span>
+            <span class="value">Розыгрышей</span>
+        </div>
+        <div class="stats">
+            <span class="title">1200</span>
+            <span class="value">Участников</span>
+        </div>
+        <div class="stats">
+            <span class="title">133</span>
+            <span class="value">На сайте</span>
+        </div>
+        <div class="stats">
+            <span class="title">43255</span>
+            <span class="value">Сумма выплат</span>
+        </div>*@
 </div>
 
-<div class="lottery-current">
-    @Html.Action("Current", "Contest")
+<div class="contest-current">
+    @if (User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Добавить конкурс", "Create", "Contest", null, new { @class = "btn btn-warning btn-lg"})
+    }
+    @Html.Action("GlobalContest", "Contest")
+    @Html.Action("ActiveContests", "Contest")
+    @Html.Action("EndedContests", "Contest")
 </div>
+
+<script type="text/javascript">
+
+    function loadAllActives() {
+        $('#load-more').addClass('disabled');
+        $('#load-all').html('<div id="loader"></div>');
+        new imageLoader('startAnimation()');
+        getAllActives();
+    }
+
+    function getAllActives() {
+        $.get('@Url.Action("ActiveContests", "Contest")',
+            { all: true },
+            function (responce) {
+                new imageLoader('stopAnimation()');
+                $('#load-more').removeClass('disabled');
+                $('.contest-actives').html('');
+                $('.contest-actives').html(responce);
+
+                $('#load-more').html('Показать все');
+            });
+    }
+</script>

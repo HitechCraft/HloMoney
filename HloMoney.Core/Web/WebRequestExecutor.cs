@@ -14,7 +14,7 @@ namespace HloMoney.Core.Web
                 .AddParam("v", version)
                 .AddParam("lang", "ru");
 
-            return WebClient.GetResponseJson<JsonVkUserInfo>(request);
+            return WebClientHelper.GetResponseJson<JsonVkUserInfo>(request);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace HloMoney.Core.Models.Json
 
         public string bdate { get; set; }
 
-        public string photo_200_orig { get; set; }
+        public string photo_max { get; set; }
 
         public VkUserStatus online { get; set; }
     }

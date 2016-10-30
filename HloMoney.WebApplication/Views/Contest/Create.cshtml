@@ -5,13 +5,13 @@
 
 <h2 class="page-title">@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Create", "Contest", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Contest", FormMethod.Post, new { enctype = "multipart/form-data", id = "contest-create" }))
 {
     <div class="row">
         <div class="col-md-6">
             @Html.AntiForgeryToken()
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummaryStyled(false)
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Description)
@@ -26,43 +26,92 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Создать" class="btn btn-primary" />
-                @Html.ActionLink("Отмена", "Index", "Home", null, new { @class = "btn btn-primary" })
+                @Html.LabelFor(model => model.Type)
+                @Html.DropDownListFor(model => model.Type, ViewBag.Types as IEnumerable<SelectListItem>, new {@class = "form-control", @id = "type"})
+                @Html.ValidationMessageFor(model => model.Type, "", new {@class = "text-danger"})
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.WinnerCount)
+                @Html.EditorFor(model => model.WinnerCount, new { htmlAttributes = new { @class = "form-control", type = "number", min = 1, max = 3 } })
+                @Html.ValidationMessageFor(model => model.WinnerCount, "", new { @class = "text-danger" })
+            </div>
+
+            <div id="select-time">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EndTime)
+                    @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control", @id = "endtime" } })
+                    @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
         <div class="col-md-6">
             <label>Изображение</label>
             <br />
-            <img alt="" id="contest-image" src="~/Content/Images/no-image.jpg" />
+            <img alt="" id="contest-image" src="~/Content/Images/no-image.png" />
 
             <div class="form-group image-changer">
                 <a href="#" class="btn btn-primary">Выбрать изображение</a>
                 <input type="file" name="uploadContestImage" id="uploadContestImage" />
             </div>
         </div>
+    </div>
 
+    <div class="form-group">
+        <a href="javascript:submit()" class="btn btn-primary">Добавить конкурс</a>
+        @Html.ActionLink("Отмена", "Index", "Home", null, new { @class = "btn btn-primary" })
     </div>
 }
 
 <script type="text/javascript">
 
-    tinymce.init({ selector: 'textarea' });
+    $(function () {
+        $("#endtime").datetimepicker({ dateFormat: 'dd.mm.yy', timeFormat: 'HH:mm'});
+    });
+
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'code'
+    });
+
+    $('#type')
+        .on('change',
+            function () {
+                $('#WinnerCount').removeAttr('readonly');
+                if ($(this).val() === '0') {
+                    $('#select-time').css('display', 'none');
+                } else if ($(this).val() === '2') {
+                    $('#WinnerCount').val(1);
+                    $('#WinnerCount').attr('readonly', 'true');
+                } else {
+                    $('#select-time').css('display', 'block');
+                }
+            });
 
     function readURL(input) {
-
         if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            if ($.inArray(input.files[0].type, ["image/png", "image/jpg", "image/jpeg", "image/gif"]) !== -1) {
+                var reader = new FileReader();
 
-            reader.onload = function(e) {
-                $('#contest-image').attr('src', e.target.result);
+                reader.onload = function(e) {
+                    $('#contest-image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                growlError("Изображение должно иметь формат: jpeg/jpg, png или gif!");
+
+                $('#uploadContestImage').val('');
             }
-
-            reader.readAsDataURL(input.files[0]);
         }
     }
 
     $("#uploadContestImage")
-        .change(function() {
+        .change(function () {
             readURL(this);
         });
+
+    function submit() {
+        $('#contest-create').submit();
+    }
 </script>

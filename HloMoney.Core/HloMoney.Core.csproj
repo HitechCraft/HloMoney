@@ -75,9 +75,16 @@
     <Compile Include="DI\BaseContainer.cs" />
     <Compile Include="DI\IContainer.cs" />
     <Compile Include="Entity\Base\BaseEntity.cs" />
-    <Compile Include="Entity\Lottery\Contest.cs" />
+    <Compile Include="Entity\User\Comment.cs" />
+    <Compile Include="Entity\Contest\Contest.cs" />
+    <Compile Include="Entity\Contest\ContestPart.cs" />
+    <Compile Include="Entity\Contest\ContestWinner.cs" />
+    <Compile Include="Entity\User\Report.cs" />
+    <Compile Include="Entity\User\UserInfo.cs" />
+    <Compile Include="Extentions\IEnumerableExtentions.cs" />
     <Compile Include="Extentions\StringExtentions.cs" />
     <Compile Include="Helper\LogHelper.cs" />
+    <Compile Include="Helper\RandomHelper.cs" />
     <Compile Include="Helper\VkApiHelper.cs" />
     <Compile Include="Models\Enum\ContestStatus.cs" />
     <Compile Include="Models\Enum\ContestType.cs" />
@@ -89,9 +96,17 @@
     <Compile Include="Repository\Specification\Composite\AndSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\NotSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\OrSpecification.cs" />
+    <Compile Include="Repository\Specification\CommentByContestSpec.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestIsActiveSpec.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestPartByUserSpec.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestWinnerSpec.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestIsGlobalSpec.cs" />
+    <Compile Include="Repository\Specification\Contest\ContestPartByContestSpec.cs" />
     <Compile Include="Repository\Specification\ISpecification.cs" />
+    <Compile Include="Repository\Specification\User\UserInfoByVkIdSpec.cs" />
+    <Compile Include="Repository\Specification\User\ReportByUserSpec.cs" />
     <Compile Include="Web\Json.cs" />
-    <Compile Include="Web\WebClient.cs" />
+    <Compile Include="Web\WebClientHelper.cs" />
     <Compile Include="Models\Json\JsonVkUserInfo.cs" />
     <Compile Include="Models\Json\JsonVkResponse.cs" />
     <Compile Include="Models\Enum\VkUserStatus.cs" />
@@ -101,9 +116,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\Specification\Contest\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

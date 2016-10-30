@@ -1,11 +1,10 @@
 ﻿namespace HloMoney.WebApplication.Models
 {
     using System;
-    using Core.Models.Enum;
 
-    public class UserInfo
+    public class UserInfoViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string FirstName { get; set; }
 
@@ -13,8 +12,10 @@
 
         public DateTime? BirthDate { get; set; }
 
-        public string AvatarLink { get; set; }
+        public byte[] Avatar { get; set; }
 
-        public VkUserStatus Status { get; set; }
+        public bool IsSynchron { get; set; }
+
+        public DateTime LastUpdate { get; set; }
     }
 }

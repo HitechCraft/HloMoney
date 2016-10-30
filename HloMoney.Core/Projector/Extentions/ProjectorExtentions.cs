@@ -18,5 +18,10 @@
         {
             return collection.Select(projector.ProjectFunc());
         }
+
+        public static ICollection<TResult> Project<TSource, TResult>(this ICollection<TSource> collection, IProjector<TSource, TResult> projector)
+        {
+            return collection.Select(projector.ProjectFunc()).ToList();
+        }
     }
 }

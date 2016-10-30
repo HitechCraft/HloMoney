@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Отзывы пользователей";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+@if (!User.Identity.IsAuthenticated || Html.Action("IsAlreadyReported").ToString() == "False")
+{
+    @Html.ActionLink("Оставить отзыв", "Create", null, new { @class = "btn btn-success", @style = "margin-bottom: 50px;" })
+}
+<div class="report-mark-overall">
+    @if (ViewBag.OverallMark != null && ViewBag.OverallMark > 0)
+    {
+        <h3>Общая оценка пользователей: @ViewBag.OverallMark</h3>
+    }
+</div>
+
+<div id="reports">
+    @Html.Action("GetReportList")
+</div>
+
+<div class="btn-group-justified">
+    <a href="javascript:loadMoreReports()" class="btn btn-custom btn-lg" id="load-more">Показать еще</a>
+</div>
+
+<script type="text/javascript">
+    var pageIndex = 1;
+
+    $(document)
+        .on('ready',
+            function() {
+                checkReportLoading();
+            });
+
+    function checkReportLoading() {
+        $.get('@Url.Action("IsAllReportsLoaded")',
+            { index: parseInt(pageIndex) },
+            function (responce) {
+                if (responce === "True") {
+                    $('#load-more').css('display', 'none');
+                }
+            });
+    }
+
+    function loadMoreReports() {
+        $('#load-more').addClass('disabled');
+        $('#load-more').html('<div id="loader"></div>');
+        pageIndex++;
+        new imageLoader('startAnimation()');
+        getReports();
+    }
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() === $(document).height() - $(window).height()) {
+            
+        }
+    });
+
+    function getReports() {
+        $.get('@Url.Action("GetReportList")',
+            { page: pageIndex },
+            function (responce) {
+                new imageLoader('stopAnimation()');
+                $('#reports').append(responce);
+                $('#load-more').removeClass('disabled');
+                $('#load-more').html('Показать еще');
+                checkReportLoading();
+            });
+    }
+
+</script>

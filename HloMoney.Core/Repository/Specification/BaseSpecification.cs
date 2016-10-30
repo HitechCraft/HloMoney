@@ -18,19 +18,19 @@
     {
         public abstract Expression<Func<TEntity, bool>> IsSatisfiedBy();
         
-        public static ISpecification<TEntity> operator &(
-            ISpecification<TEntity> specLeft, BaseSpecification<TEntity> specRight)
+        public static BaseSpecification<TEntity> operator &(
+            BaseSpecification<TEntity> specLeft, BaseSpecification<TEntity> specRight)
         {
             return new AndSpecification<TEntity>(specLeft, specRight);
         }
 
-        public static ISpecification<TEntity> operator |(
-            ISpecification<TEntity> specLeft, BaseSpecification<TEntity> specRight)
+        public static BaseSpecification<TEntity> operator |(
+            BaseSpecification<TEntity> specLeft, BaseSpecification<TEntity> specRight)
         {
             return new OrSpecification<TEntity>(specLeft, specRight);
         }
 
-        public static ISpecification<TEntity> operator !(BaseSpecification<TEntity> wrapped)
+        public static BaseSpecification<TEntity> operator !(BaseSpecification<TEntity> wrapped)
         {
             return new NotSpecification<TEntity>(wrapped);
         }

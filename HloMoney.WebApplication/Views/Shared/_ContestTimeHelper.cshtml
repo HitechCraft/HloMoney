@@ -1,0 +1,72 @@
+﻿﻿<script type="text/javascript">
+    var now = moment('@DateTime.Now', 'DD.MM.YYYY hh:mm:ss');
+    var end = moment('@ViewBag.Time', 'DD.MM.YYYY hh:mm:ss');
+
+    $(document)
+        .on('ready',
+            function () {
+
+                setInterval(function () {
+                    now.add(1, 'seconds');
+                    setTime();
+                },
+                    1000);
+            });
+
+    function setTime() {
+
+        var timeString = "";
+
+        if (end.isAfter(now)) {
+            var d = moment.duration(end.diff(now), 'milliseconds');
+
+            var days = Math.floor(d.asDays());
+            var hours = Math.floor(d.asHours()) - days * 24;
+            var mins = Math.floor(d.asMinutes()) - hours * 60 - days * 24 * 60;
+            var sec = Math.floor(d.asSeconds()) - days * 24 * 60 * 60 - hours * 60 * 60 - mins * 60;
+
+            if (days > 0) {
+                timeString += days + " д. ";
+            }
+
+            if (hours > 0) {
+                timeString += hours + " ч. ";
+            }
+
+            if (mins > 0) {
+                timeString += mins + " мин. ";
+            }
+
+            if (sec > 0) {
+                timeString += sec + " сек. ";
+            }
+        }
+
+        $('#time-left').text('');
+
+        if (timeString === "") {
+            $.get('@Url.Action("CheckContestActivity", "Contest")',
+                { contestId: parseInt('@ViewBag.Contest') },
+                function (responce) {
+                    if (responce === "False") {
+                        setTimeout(function () {
+                            document.location = '@Url.Action("Details", "Contest", new {id = ViewBag.Contest })';
+                        },
+                            2000);
+                    }
+                });
+            $('#time-left').text("0 сек.");
+            disableTakingPart();
+        } else {
+            $('#time-left').text(timeString);
+        }
+    }
+
+    function disableTakingPart() {
+        if (!$('#takepart').hasClass('disabled')) {
+            $('#takepart').addClass('disabled');
+            $('#takepart').attr('href', '#');
+            $('#takepart').text('Идет завершение конкурса');
+        }
+    }
+</script>

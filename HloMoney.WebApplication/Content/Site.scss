@@ -3,23 +3,41 @@
 
 html, body {
     min-width: 767px;
+    font-size: 20px;
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
 }
 
 body {
-    background-color: $white-color;
-    padding-bottom: 20px;
-    color: $blue-color;
+    //background-image: url(Images/bg.jpg);
+    background-color: $viol-color;
+    background-attachment: fixed;
+    background-size: 100% auto;
+    color: $white-color;
 }
 
 .body {
     &-content {
+        position: relative;
         padding-left: 15px;
         padding-right: 15px;
+        min-height: 100%;
+    }
+}
+
+.content {
+    &-wrapper {
+        background: transparent;
+        min-height: 100%;
     }
 }
 
 .dl-horizontal dt {
     white-space: normal;
+}
+
+.wrapper {
+    min-height: 100%;
 }
 
 input,
@@ -28,20 +46,46 @@ textarea {
     max-width: 280px;
 }
 
+.form-group {
+    input, select, textarea {
+        max-width: 100% !important;
+    }
+}
+
+hr {
+    border-top: 1px solid rgba(230, 230, 230, 0.12);
+}
+
 a {
-    color: $blue-color;
+    color: $white-color;
     outline: none;
     cursor: pointer;
 
     &:hover {
-        background: $white-color;
-        color: $green-color;
+        background: transparent;
+        color: $orange-color;
         text-decoration: none;
     }
 
     &:focus {
-        background: $white-color;
-        color: $green-color;
+        background: transparent;
+        color: $orange-color;
+    }
+}
+
+.validation {
+    h4 {
+        font-size: 25px;
+    }
+
+    &-summary {
+        &-errors {
+            ul {
+                padding: 0;
+                list-style: none;
+                font-weight: bold;
+            }
+        }
     }
 }
 
@@ -51,7 +95,6 @@ a {
         width: 128px;
         height: 128px;
         border-radius: 88px;
-        border: 2px solid $blue-color;
         background-position: center;
         background-repeat: no-repeat;
         background-size: auto 100%;
@@ -61,12 +104,20 @@ a {
             width: 55px;
             height: 55px;
             border-radius: 50px;
-            border: 2px solid $blue-color;
             background-position: center;
             background-repeat: no-repeat;
             background-size: auto 100%;
             float: left;
             margin-right: 15px;
+        }
+
+        &-winner {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            background-repeat: no-repeat;
+            background-size: auto 100%;
+            margin: 20px 0;
         }
     }
 
@@ -83,22 +134,22 @@ a {
 }
 
 .navbar {
-    background: $white-color;
-    color: $blue-color;
+    background: transparent;
+    color: $white-color;
     font-weight: bold;
 
     &-brand {
         padding: 26px 33px 22px 17px;
         font-size: 29px;
         height: 69px;
-        color: $blue-color;
+        color: $orange-color;
     }
 
     &-nav {
         li {
             a {
                 font-size: 20px;
-                padding: 24px 20px;
+                padding: 27px 20px;
             }
 
             a.login {
@@ -121,7 +172,7 @@ a {
 .nav {
     li {
         a {
-            color: $blue-color;
+            color: $white-color;
 
             &:hover {
                 background-color: transparent;
@@ -154,8 +205,8 @@ a {
 }
 
 .header {
-    background: $white-color;
-    margin-top: -60px;
+    background: transparent;
+    margin-bottom: 80px !important;
 
     .logo {
         background-image: url(./Images/logo.png);
@@ -203,6 +254,7 @@ a {
 .page {
     &-title {
         font-size: 60px;
+        margin: 30px 0 45px 0;
     }
 
     &-splitter {
@@ -210,10 +262,95 @@ a {
     }
 }
 
+#comment {
+    &-part {
+        margin: 46px 0;
+        font-size: 23px;
+        font-weight: bold;
+    }
+}
+
 .comments {
+
     h1 {
         font-size: 54px;
         margin: 55px 0;
+        text-align: center;
+    }
+
+    h2 {
+        margin: 40px 0;
+    }
+
+    .comment {
+        margin: 0;
+        padding: 20px 0;
+
+        &-avatar-col {
+            width: 25%;
+            float: left;
+        }
+
+        &-text-col {
+            width: 75%;
+            float: left;
+        }
+
+        &-author {
+            &-avatar {
+                width: 160px;
+                height: 160px;
+                border-radius: 100px;
+                border: 2px solid #2c3e50;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                margin: 0 auto;
+                margin-top: 18px;
+            }
+        }
+
+        &-title {
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        &-text {
+            min-height: 121px;
+            margin-top: 15px;
+        }
+
+        &-part {
+            margin: 70px;
+            font-weight: bold;
+        }
+    }
+
+    .well {
+        background-color: transparent;
+        border: 0;
+
+        h3 {
+            margin-top: 0;
+        }
+
+        textarea {
+            background-color: rgba(255, 255, 255, 0.08);
+            outline-color: #563f59;
+            outline-width: 10px;
+            color: #fff;
+            min-height: 170px;
+            resize: none;
+            font-size: 20px;
+        }
+    }
+
+    margin-bottom: 40px;
+
+    &:after {
+        clear: both;
+        content: " ";
+        display: table;
     }
 }
 
@@ -221,10 +358,11 @@ a {
     &-image {
         max-width: 500px;
         max-height: 500px;
+        border: 1px solid #2c3e50;
     }
 }
 
-.lottery {
+.contest {
     &-gift {
         font-size: 35px;
         font-weight: bold;
@@ -232,10 +370,55 @@ a {
     }
 
     &-description {
-        font-size: 24px;
+        text-align: center;
+        margin-top: 65px;
+
+        h1, h2, h3, h4 {
+            line-height: 50px;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 35px;
+        }
+
+        h2 {
+            font-size: 25px;
+        }
+
+        h3 {
+            font-size: 18px;
+        }
+
+        h4 {
+            font-size: 12px;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
     }
 
     &-members {
+
+        h1 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .member {
+            width: 33.333333333%;
+            float: left;
+            text-align: center;
+
+            img {
+                width: 180px;
+                border: 2px solid #2c3e50;
+                border-radius: 90px;
+            }
+        }
+
         h1 {
             font-size: 54px;
             margin: 55px 0;
@@ -244,6 +427,16 @@ a {
 
     &-time {
         font-size: 20px;
+
+        &-fixed {
+            position: fixed;
+            top: 28px;
+            left: 30px;
+            z-index: 1000;
+            background-color: #53405c;
+            padding: 2px 23px;
+            border: 1px solid;
+        }
     }
 
     &-part {
@@ -253,7 +446,8 @@ a {
     }
 
     &-image {
-        max-width: 100%;
+        border: 1px solid rgb(173, 136, 189);
+        width: 100%;
     }
 
     &-current {
@@ -262,7 +456,6 @@ a {
         h2 {
             font-size: 50px;
             font-weight: bold;
-            margin-top: 55px;
             margin-bottom: 35px;
         }
 
@@ -270,21 +463,6 @@ a {
             font-size: 37px;
             margin: 0 0 22px 0px;
             font-weight: bold;
-        }
-
-        .state {
-            h4 {
-                margin-bottom: 0px;
-            }
-
-            #time-left {
-                font-size: 70px;
-            }
-        }
-
-        .btn {
-            margin: 45px 0;
-            font-size: 35px;
         }
 
         .members {
@@ -300,6 +478,89 @@ a {
                 display: table;
             }
         }
+    }
+
+    &-global {
+        margin: 87px 0 50px 0;
+
+        .btn {
+            margin: 45px 0;
+            font-size: 35px;
+        }
+    }
+
+    &-actives, &-ended {
+        margin: 26px 0 47px 0;
+
+        h3 {
+            margin: 0 0 43px 0px;
+        }
+
+        h3.title {
+            margin: 0 0 10px 0px;
+        }
+
+        &-list {
+
+            .active {
+                display: inline-block;
+                width: 33%;
+                margin-bottom: 30px;
+                padding-top: 60px;
+                padding-bottom: 60px;
+                float: none;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &-winner {
+        margin-bottom: 12px;
+        min-height: 102px;
+
+        &-error {
+            padding: 33px;
+        }
+
+        &-place {
+            color: $orange-color;
+        }
+
+        img {
+            max-width: 64px;
+            border: 2px solid #3a5269;
+            border-radius: 32px;
+        }
+    }
+}
+
+.state {
+    margin-bottom: 35px;
+    font-size: 41px;
+
+    h4 {
+        font-size: 30px;
+    }
+
+    span {
+        color: $orange-color;
+        font-weight: bold;
+    }
+}
+
+.winners {
+
+    &-title {
+        font-size: 55px;
+    }
+
+    h1 {
+    }
+
+    h2 {
+    }
+
+    h3 {
     }
 }
 
@@ -346,7 +607,8 @@ footer {
 }
 
 #vk_like {
-    float: right;
+    position: absolute !important;
+    right: 0;
 }
 
 .howplay {
@@ -361,5 +623,151 @@ footer {
             max-width: 1000px;
             border: 1px solid;
         }
+    }
+}
+
+.report {
+    margin-bottom: 40px;
+
+    &-none {
+    }
+
+    &:after {
+        clear: both;
+        content: " ";
+        display: table;
+    }
+
+    &-avatar-col {
+        width: 33.33333333%;
+        float: left;
+    }
+
+    &-text-col {
+        width: 66.66666666%;
+        float: left;
+    }
+
+    &-author {
+        &-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 100px;
+            border: 2px solid #2c3e50;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            margin: 0 auto;
+            margin-top: 18px;
+        }
+
+        &-name {
+            color: $orange-color;
+        }
+    }
+
+    &-title {
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    &-mark {
+        margin-bottom: 60px;
+        cursor: pointer;
+
+        &-bg {
+            position: absolute;
+            background: url('Images/empty-stars.png') no-repeat;
+            width: 173px;
+            height: 33px;
+        }
+
+        &-overall {
+            margin: -43px 4px 64px 4px;
+        }
+
+        &-fill {
+            position: absolute;
+            background: url('Images/full-stars.png') no-repeat;
+            width: 0;
+            height: 33px;
+        }
+
+        &-text {
+            font-size: 25px;
+            font-weight: bold;
+        }
+    }
+}
+
+span.loader {
+    display: block;
+    background: url(Images/loader.gif) no-repeat;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+}
+
+.btn-custom {
+    color: $white-color;
+    background-color: rgba(158, 123, 175, 0.63);
+    border-color: rgb(128, 91, 146);
+
+    &:hover {
+        color: $white-color;
+        background-color: rgba(158, 123, 175, 0.80);
+        border-color: rgb(128, 91, 146);
+    }
+
+    &:focus {
+        color: $white-color;
+        background-color: rgba(158, 123, 175, 0.80);
+        border-color: rgb(128, 91, 146);
+    }
+}
+
+//SCROLLER STYLES
+
+.cd {
+    &-top {
+        position: fixed;
+        padding: 18px 23px;
+        bottom: 10px;
+        right: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        border: 1px solid $white-color;
+        overflow: hidden;
+        /* text-indent: 100%; */
+        white-space: nowrap;
+        background-color: #2c3e50;
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+        -moz-transition: opacity .3s 0s, visibility 0s .3s;
+        transition: opacity .3s 0s, visibility 0s .3s;
+    }
+
+    &-top.cd-is-visible, &-top.cd-fade-out, .no-touch &-top:hover {
+        -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+        -moz-transition: opacity .3s 0s, visibility 0s 0s;
+        transition: opacity .3s 0s, visibility 0s 0s;
+    }
+
+    &-is-visible {
+        /* the button becomes visible */
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &-fade-out {
+        /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+        opacity: .5;
+    }
+}
+
+.no {
+    &-touch .cd-top:hover {
+        background-color: $viol-color;
+        opacity: 1;
     }
 }

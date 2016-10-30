@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HloMoney.DAL.NHibernate.Mappings
+﻿namespace HloMoney.DAL.NHibernate.Mappings
 {
     #region Using Directives
 
@@ -8,6 +6,7 @@ namespace HloMoney.DAL.NHibernate.Mappings
     using FluentNHibernate.Automapping.Alterations;
     using Core.Entity;
     using Core.Models.Enum;
+    using System;
 
     #endregion
 
@@ -18,7 +17,7 @@ namespace HloMoney.DAL.NHibernate.Mappings
             mapping.Table("Contest");
 
             mapping.Id(x => x.Id)
-                .GeneratedBy.Identity();
+                .GeneratedBy.Increment();
 
             mapping.Map(x => x.Description)
                 .Length(2000)
@@ -34,6 +33,34 @@ namespace HloMoney.DAL.NHibernate.Mappings
                 .Length(Int32.MaxValue)
                 .Column("Image")
                 .Nullable();
+
+            mapping.Map(x => x.WinnerCount)
+                .Column("WinnerCount")
+                .Not.Nullable();
+
+            mapping.Map(x => x.Type)
+                .CustomType<ContestType>()
+                .Column("Type")
+                .Not.Nullable();
+
+            mapping.Map(x => x.Status)
+                .CustomType<ContestStatus>()
+                .Column("Status")
+                .Not.Nullable();
+
+            mapping.Map(x => x.StartTime)
+                .Column("StartTime")
+                .Nullable();
+
+            mapping.Map(x => x.EndTime)
+                .Column("EndTime")
+                .Nullable();
+
+            mapping.HasMany(x => x.Parts)
+                .Cascade.All();
+
+            mapping.HasMany(x => x.Comments)
+                .Cascade.All();
         }
     }
 }

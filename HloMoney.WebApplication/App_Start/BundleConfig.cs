@@ -15,8 +15,11 @@ namespace HloMoney.WebApplication
                         "~/Scripts/jgrowl.alerts.js",
                         "~/Scripts/jquery.ui.widget.js",
                         "~/Scripts/jquery-ui.min.js",
+                        "~/Scripts/jquery-ui-timepicker.js",
                         "~/Scripts/jquery.fileupload.js",
-                        "~/Scripts/tinymce/tinymce.min.js"));
+                        "~/Scripts/scroller.js",
+                        "~/Scripts/tinymce/tinymce.min.js",
+                        "~/Scripts/loader.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -33,6 +36,8 @@ namespace HloMoney.WebApplication
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
+                      "~/Content/jquery-ui.css",
+                      "~/Content/DateTimePicker.css",
                       "~/Content/jquery.jgrowl.css"));
         }
     }

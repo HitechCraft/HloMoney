@@ -1,0 +1,17 @@
+﻿@using HloMoney.Core.Models.Json
+@model IEnumerable<HloMoney.WebApplication.Models.ContestPartViewModel>
+
+<div class="contest-members">
+    @if (Model != null && Model.Any())
+    {
+        <h1>Участники</h1>
+        <div class="row contest-members-list">
+            @foreach (var member in Model)
+            {
+                <div class="col-md-4 member">
+                    <img src="data:image/jpeg; base64,@Convert.ToBase64String(member.PartnerAvatar)" title="@member.PartnerName"/>
+                </div>
+            }
+        </div>
+    }
+</div>

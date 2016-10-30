@@ -1,0 +1,84 @@
+﻿@using HloMoney.Core.Models.Enum
+@using HloMoney.Core.Models.Json
+@model HloMoney.WebApplication.Models.ContestViewModel
+@{
+    ViewBag.Title = "Глобальный Конкурс";
+}
+@Html.Action("GetContestTime", new { id = Model.Id, dateTime = Model.EndTime })
+<style type="text/css">
+    body {
+        background-image: url('data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)');
+    }
+</style>
+<div id="vk_like"></div>
+<link rel="StyleSheet" href="~/Content/GlobalStyles.css" type="text/css" media="all">
+<div class="global-title">
+    <h1 class="page-title">
+        @ViewBag.Title
+        @*@if (User.IsInRole("Administrator"))
+            {
+                @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+                <a class="btn btn-default" href="javascript:DeleteContest('@Model.Id')">Удалить</a>
+            }*@
+        @*<div id="vk_like"></div>*@
+    </h1>
+    <p class="contest-gift">Приз: @Model.Gift</p>
+
+    @if (Model.Type != ContestType.CommentTime && Model.Type != ContestType.Standart)
+    {
+        if (Html.Action("CheckPart", new { contestId = Model.Id }).ToString() == "False")
+        {
+            <a href="javascript:TakePart('@Model.Id')" class="btn btn-success btn-lg">Принять участие!</a>
+        }
+        else
+        {
+            <h1 class="text-success" style="margin-bottom: 70px;font-weight: bold">Вы участвуете!</h1>
+        }
+    }
+    <div class="state" style="margin-bottom: 0;">
+        <h4>Окончание через:</h4>
+        <span id="time-left" class="time-left"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="contest-description">@Html.Raw(Model.Description)</div>
+    </div>
+</div>
+
+@Html.Action("ContestMembers", new { contestId = Model.Id })
+
+@Html.Partial("_CommentPartial")
+
+@if (User.IsInRole("Administrator"))
+{
+    <script type="text/javascript">
+        function DeleteContest(contestId) {
+            $.post('@Url.Action("Delete")',
+                { id: parseInt(contestId) },
+                function (responce) {
+                    if (responce.status === "OK") {
+                        growlSuccess(responce.message);
+
+                        setTimeout(function () {
+                            document.location = '@Url.Action("Index", "Home")';
+                        },
+                            2000);
+                    } else {
+                        growlError(responce.message);
+                    }
+                });
+        }
+    </script>
+}
+<script type="text/javascript">
+    function TakePart(id) {
+        $.post('@Url.Action("TakePart")',
+            { contestId: parseInt(id) },
+            function (responce) {
+                if (responce.status === "OK") document.location.reload();
+                else growlError(responce.message);
+            });
+    }
+    VK.Widgets.Like("vk_like", { type: "button", verb: 1, height: 30 });
+</script>
