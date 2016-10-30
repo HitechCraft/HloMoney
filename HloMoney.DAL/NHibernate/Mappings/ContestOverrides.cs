@@ -56,6 +56,9 @@
                 .Column("EndTime")
                 .Nullable();
 
+            mapping.HasOne(x => x.Increment)
+                .PropertyRef(x => x.Contest);
+
             mapping.HasMany(x => x.Parts)
                 .Cascade.All();
 

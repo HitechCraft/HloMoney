@@ -10,10 +10,10 @@
         /// <summary>
         /// The contest
         /// </summary>
-        public Contest Contest { get; set; }
+        public virtual Contest Contest { get; set; }
         /// <summary>
         /// Time increment value (seconds)
         /// </summary>
-        public float Increment { get; set; }
+        public virtual float Increment { get; set; }
     }
 }

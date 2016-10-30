@@ -13,6 +13,8 @@
 
         public ContestType Type { get; set; }
 
+        public float Increment { get; set; }
+
         public int WinnerCount { get; set; }
         
         public DateTime? EndTime { get; set; }

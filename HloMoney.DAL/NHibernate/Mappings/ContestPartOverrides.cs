@@ -25,7 +25,8 @@
                 .Column("Partner")
                 .Not.Nullable();
 
-            mapping.HasOne(x => x.Winner);
+            mapping.HasOne(x => x.Winner)
+                .PropertyRef(x => x.Part);
         }
     }
 }

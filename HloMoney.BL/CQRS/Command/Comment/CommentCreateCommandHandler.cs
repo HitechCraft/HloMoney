@@ -1,4 +1,5 @@
-﻿using HloMoney.Core.Repository.Specification;
+﻿using System.Linq;
+using HloMoney.Core.Repository.Specification;
 using HloMoney.Core.Repository.Specification.User;
 
 namespace HloMoney.BL.CQRS.Command
@@ -25,6 +26,7 @@ namespace HloMoney.BL.CQRS.Command
             var contestRep = this.GetRepository<Contest>();
             var contestPartRep = this.GetRepository<ContestPart>();
             var userInfoRep = this.GetRepository<UserInfo>();
+            var timeIncrRep = GetRepository<TimeIncrement>();
 
             var contest = contestRep.GetEntity(command.ContestId);
 
@@ -51,8 +53,9 @@ namespace HloMoney.BL.CQRS.Command
 
                 }
 
-                //TODO: Поразмыслить над тем как назначать время для конкурсов с комментариями
-                contest.EndTime = DateTime.Now.AddMinutes(10);
+                var timeIncr = timeIncrRep.Query(new TimeIncrementByContestSpec(contest.Id)).First();
+                
+                contest.EndTime = DateTime.Now.AddMinutes(timeIncr.Increment);
 
                 contestRep.Update(contest);
             }

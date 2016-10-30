@@ -27,8 +27,14 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Type)
-                @Html.DropDownListFor(model => model.Type, ViewBag.Types as IEnumerable<SelectListItem>, new {@class = "form-control", @id = "type"})
+                @Html.DropDownListFor(model => model.Type, ViewBag.Types as IEnumerable<SelectListItem>, new {@class = "form-control", @id = "type" })
                 @Html.ValidationMessageFor(model => model.Type, "", new {@class = "text-danger"})
+            </div>
+
+            <div class="form-group" id="increment-block">
+                @Html.LabelFor(model => model.Increment)
+                @Html.EditorFor(model => model.Increment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Increment, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
@@ -66,6 +72,10 @@
 <script type="text/javascript">
 
     $(function () {
+        if ($(this).val() !== '2') {
+            $('#increment-block').css('display', 'none');
+        }
+
         $("#endtime").datetimepicker({ dateFormat: 'dd.mm.yy', timeFormat: 'HH:mm'});
     });
 
@@ -78,13 +88,20 @@
         .on('change',
             function () {
                 $('#WinnerCount').removeAttr('readonly');
+
+                if ($(this).val() !== '2') {
+                    $('#increment-block').css('display', 'none');
+                }
+
                 if ($(this).val() === '0') {
                     $('#select-time').css('display', 'none');
                 } else if ($(this).val() === '2') {
                     $('#WinnerCount').val(1);
                     $('#WinnerCount').attr('readonly', 'true');
+                    $('#increment-block').css('display', 'block');
                 } else {
                     $('#select-time').css('display', 'block');
+                    $('#increment-block').css('display', 'none');
                 }
             });
 

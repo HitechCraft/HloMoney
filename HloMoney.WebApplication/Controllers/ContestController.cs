@@ -57,6 +57,8 @@
         {
             if(vm.WinnerCount < 1 || vm.WinnerCount > 3) ModelState.AddModelError(String.Empty, "Минимальное кол-во участников - 1, максимальное - 3");
 
+            if(vm.Type == ContestType.CommentTime && vm.Increment <= 0) ModelState.AddModelError("Increment", "Необходимо указать время продления конкурса");
+
             if (ModelState.IsValid)
             {
                 try
@@ -68,6 +70,7 @@
                         Description = vm.Description,
                         Gift = vm.Gift,
                         Image = ImageManager.GetImageBytes(uploadImage),
+                        Increment = vm.Increment,
                         WinnerCount = vm.Type != ContestType.CommentTime ? vm.WinnerCount : 1,
                         Type = vm.Type,
                         EndTime = vm.EndTime
@@ -105,7 +108,7 @@
                         Id = id,
                         Projector = Container.Resolve<IProjector<Contest, ContestEditViewModel>>()
                     });
-
+                
                 ViewBag.Types = GetTypeList();
 
                 return View(vm);
@@ -136,6 +139,7 @@
                         Description = vm.Description,
                         Gift = vm.Gift,
                         Image = vm.Image,
+                        Increment = vm.Increment,
                         WinnerCount = vm.Type != ContestType.CommentTime ? vm.WinnerCount : 1,
                         EndTime = vm.EndTime
                     });
@@ -426,11 +430,13 @@
         [Authorize]
         public bool CheckPart(int contestId)
         {
-            return new EntityExistsQueryHandler<ContestPart>(Container)
+            var isTakedPart = new EntityExistsQueryHandler<ContestPart>(Container)
                 .Handle(new EntityExistsQuery<ContestPart>
                 {
                     Specification = new ContestPartByContestSpec(contestId) & new ContestPartByUserSpec(CurrentUser.Id)
                 });
+
+            return isTakedPart;
         }
 
         public ActionResult ContestCommentPartChecker(int contestId)

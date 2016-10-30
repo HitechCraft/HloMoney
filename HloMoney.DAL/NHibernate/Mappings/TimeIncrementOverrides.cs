@@ -13,10 +13,10 @@
     {
         public void Override(AutoMapping<TimeIncrement> mapping)
         {
-            mapping.Table("UserInfo");
+            mapping.Table("TimeIncrement");
 
-            mapping.Map(x => x.Id)
-                .Generated.Insert();
+            mapping.Id(x => x.Id)
+                .GeneratedBy.Increment();
 
             mapping.References(x => x.Contest)
                 .Column("Contest")

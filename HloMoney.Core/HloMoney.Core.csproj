@@ -75,6 +75,7 @@
     <Compile Include="DI\BaseContainer.cs" />
     <Compile Include="DI\IContainer.cs" />
     <Compile Include="Entity\Base\BaseEntity.cs" />
+    <Compile Include="Entity\Contest\TimeIncrement.cs" />
     <Compile Include="Entity\User\Comment.cs" />
     <Compile Include="Entity\Contest\Contest.cs" />
     <Compile Include="Entity\Contest\ContestPart.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Repository\Specification\Composite\NotSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\OrSpecification.cs" />
     <Compile Include="Repository\Specification\CommentByContestSpec.cs" />
+    <Compile Include="Repository\Specification\Contest\TimeIncrementByContestSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestIsActiveSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestPartByUserSpec.cs" />
     <Compile Include="Repository\Specification\Contest\ContestWinnerSpec.cs" />

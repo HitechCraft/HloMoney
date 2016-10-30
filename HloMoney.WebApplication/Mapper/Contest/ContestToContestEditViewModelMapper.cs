@@ -14,6 +14,7 @@
                 .ForMember(dst => dst.Image, ext => ext.MapFrom(src => src.Image))
                 .ForMember(dst => dst.WinnerCount, ext => ext.MapFrom(src => src.WinnerCount))
                 .ForMember(dst => dst.Type, ext => ext.MapFrom(src => src.Type))
+                .ForMember(dst => dst.Increment, ext => ext.MapFrom(src => (src.Increment != null ? src.Increment.Increment : 0)))
                 .ForMember(dst => dst.EndTime, ext => ext.MapFrom(src => src.EndTime));
         }
     }

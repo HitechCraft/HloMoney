@@ -38,6 +38,7 @@
             function () {
                 GetCommentCount();
                 LoadComments();
+
                 setInterval(function () {
                     if ($('#comment-count').text() !== '0') {
                         if (typeof CheckPart !== 'undefined' && $.isFunction(CheckPart)) {
@@ -85,6 +86,10 @@
                     $('#comment-error').text(responce.message);
                 } else {
                     $('#comment-text').val('');
+                    LoadComments();
+                    if (typeof CheckPart !== 'undefined' && $.isFunction(CheckPart)) {
+                        CheckPart();
+                    }
                 }
             });
     }
@@ -107,7 +112,7 @@
             { page: null, contestId: parseInt('@Model.Id') },
             function (responce) {
                 new imageLoader('stopAnimation()');
-                $('#comments').append(responce);
+                $('#comments').html(responce);
                 $('#load-more').removeClass('disabled');
                 $('#load-more').html('Показать все (<span id="comment-count"></span>)');
 
@@ -144,6 +149,7 @@
                     if ($('#last-comment').val() !== '0') {
                         window.LastComment = $('#last-comment').val();
                     }
+                    GetCommentCount();
                     $('#last-comment').remove();
                     @if (ViewBag.IsCommentType != null && ViewBag.IsCommentType)
                     {

@@ -55,6 +55,11 @@
         public virtual DateTime? EndTime { get; set; }
 
         /// <summary>
+        /// Contest time increment
+        /// </summary>
+        public virtual TimeIncrement Increment { get; set; }
+
+        /// <summary>
         /// Parts of this contest
         /// </summary>
         public virtual ISet<ContestPart> Parts { get; set; }

@@ -11,6 +11,8 @@
 
         public string AuthorName { get; set; }
 
+        public float Increment { get; set; }
+
         public byte[] AuthorAvatar { get; set; }
 
         public DateTime Date { get; set; }

@@ -29,13 +29,19 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Type)
-                @Html.DropDownListFor(model => model.Type, ViewBag.Types as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "type" })
+                @Html.DropDownListFor(model => model.Type, ViewBag.Types as IEnumerable<SelectListItem>, new { @class = "form-control", id = "type", @readonly = "true", disabled = "disabled" })
                 @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group" id="increment-block">
+                @Html.LabelFor(model => model.Increment)
+                @Html.EditorFor(model => model.Increment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Increment, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.WinnerCount)
-                @Html.EditorFor(model => model.WinnerCount, new { htmlAttributes = new { @class = "form-control", type = "number", min = 1, max = 3 } })
+                @Html.EditorFor(model => model.WinnerCount, new { htmlAttributes = new { @class = "form-control", type = "number", min = 1, max = 3, @readonly = "true" } })
                 @Html.ValidationMessageFor(model => model.WinnerCount, "", new { @class = "text-danger" })
             </div>
 
@@ -79,22 +85,17 @@
         if ($('#type').val() === '0') {
             $('#select-time').css('display', 'none');
         }
+
+        if ($('#type').val() !== '2') {
+            $('#increment-block').css('display', 'none');
+            $('#WinnerCount').removeAttr('readonly');
+        }
     });
 
     tinymce.init({
         selector: 'textarea',
         plugins: 'code'
     });
-
-    $('#type')
-        .on('change',
-            function () {
-                if ($(this).val() === '0') {
-                    $('#select-time').css('display', 'none');
-                } else {
-                    $('#select-time').css('display', 'block');
-                }
-            });
 
     function readURL(input) {
 

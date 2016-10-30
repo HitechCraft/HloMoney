@@ -20,7 +20,8 @@ namespace HloMoney.BL.CQRS.Command
         public override void Handle(ContestCreateCommand command)
         {
             var contestRep = GetRepository<Contest>();
-            
+            var timeIncrRep = GetRepository<TimeIncrement>();
+
             var status = ContestStatus.Started;
 
             if (command.Type == ContestType.Standart)
@@ -28,7 +29,7 @@ namespace HloMoney.BL.CQRS.Command
                 command.EndTime = null;
             }
 
-            contestRep.Add(new Contest
+            var contest = new Contest
             {
                 Description = command.Description,
                 Gift = command.Gift,
@@ -38,8 +39,21 @@ namespace HloMoney.BL.CQRS.Command
                 Status = status,
                 StartTime = DateTime.Now,
                 EndTime = command.EndTime
-            });
-            
+            };
+
+            contestRep.Add(contest);
+
+            if (command.Type == ContestType.CommentTime)
+            {
+                timeIncrRep.Add(new TimeIncrement
+                {
+                    Contest = contest,
+                    Increment = command.Increment
+                });
+
+                timeIncrRep.Dispose();
+            }
+
             contestRep.Dispose();
         }
     }

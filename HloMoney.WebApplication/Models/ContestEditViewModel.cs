@@ -9,7 +9,7 @@
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Описание")]
+        [Display(Name = "Описание конкурса (требования)")]
         public string Description { get; set; }
 
         [Required]
@@ -22,6 +22,9 @@
         [Required]
         [Display(Name = "Кол-во победителей в конкурсе (1 - 3)")]
         public int WinnerCount { get; set; }
+        
+        [Display(Name = "Время, прибавляемое при добавлении комментария (в минутах)")]
+        public float Increment { get; set; }
 
         [Display(Name = "Тип конкурса")]
         public ContestType Type { get; set; }
