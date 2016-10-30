@@ -1,4 +1,4 @@
-USE [HloMoneyNew]
+USE [HloMoney]
 GO
 
 ALTER TABLE [Report]

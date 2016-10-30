@@ -1,4 +1,4 @@
-USE HloMoneyNew
+USE [HloMoney]
 GO
 
 ALTER TABLE [dbo].[Comment]  WITH CHECK ADD  CONSTRAINT [FK_Comment_UserInfo] FOREIGN KEY([Author])

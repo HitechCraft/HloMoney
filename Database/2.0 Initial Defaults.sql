@@ -1,4 +1,4 @@
-USE [HloMoneyNew]
+USE [HloMoney]
 GO
 /****** Object:  Table [dbo].[AspNetRoles]    Script Date: 11.10.2016 14:44:32 ******/
 SET ANSI_NULLS ON

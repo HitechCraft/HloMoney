@@ -1,4 +1,4 @@
-USE [HloMoneyNew]
+USE [HloMoney]
 GO
 
 CREATE TABLE [dbo].[UserInfo](
